@@ -21,7 +21,7 @@
                     <div class="div-keyword-input"><input class="form-control" name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
                     {#<div class="div-location-input">{{ autoComplete|raw  }}#}
                         {#{{ autoCompleteScript|raw  }}</div>#}
-                    <input type="submit" class="jobnow-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
+                    <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
             </form>
         </p>
@@ -132,8 +132,8 @@
 
     </div>
     <div class="about-us-container">
-        <div class="container jobnow-container">
-            <div class="jobnow-description fadeIn animated">
+        <div class="container altea-container">
+            <div class="altea-description fadeIn animated">
                 <div style="display: -webkit-inline-box;">
                     <img class="about-us-icon" src="{{asset('images/search.svg')}}"><h3>{{ 'header.about.title'|trans }}</h3>
                 </div>
@@ -147,7 +147,7 @@
         </div>
     </div>
     {% if ads is not empty %}
-        <div class="container jobnow-container container">
+        <div class="container altea-container container">
             <h1 class="featured-offer text-center">{{ 'homepage.ourPartners'|trans }}</h1>
             <ul class="ads-list-hompeage" id="myUL">
                 {% for ad in ads %}
@@ -188,7 +188,7 @@
             margin-right: 20px;
             margin-bottom: 20px;
         }
-        .jobnow-description{
+        .altea-description{
             color: white;
             margin-top: 60px;
             margin-bottom: 60px;
@@ -229,7 +229,7 @@
 
         .homepage-jumbotron::after{
             content: '';
-            background-image:url({{asset('images/jobnow-home.jpg')}});
+            background-image:url({{asset('images/altea-home.jpg')}});
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

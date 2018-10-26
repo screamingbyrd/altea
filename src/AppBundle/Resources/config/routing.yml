@@ -1,7 +1,7 @@
-jobnow_home:
+altea_home:
     path: "/"
     defaults: { _controller: AppBundle:App:index }
-jobnow_contact:
+altea_contact:
     locales:
         en: "/contact"
         fr: "/contacter"
@@ -11,27 +11,27 @@ share_by_mail:
         en: "/share-by-mai"
         fr: "/partager-par-mail"
     defaults: { _controller: AppBundle:Contact:shareByMail }
-jobnow_credit:
+altea_credit:
     locales:
         en: "/employer/credit"
         fr: "/employeur/credit"
     defaults: { _controller: AppBundle:Credit:credit }
-jobnow_bills:
+altea_bills:
     locales:
         en: "/employer/bills"
         fr: "/employeur/facture"
     defaults: { _controller: AppBundle:Credit:bills }
-jobnow_bills_generate:
+altea_bills_generate:
     locales:
         en: "/employer/bills/pdf"
         fr: "/employeur/facture/pdf"
     defaults: { _controller: AppBundle:Credit:generateBill }
-jobnow_estimation_generate:
+altea_estimation_generate:
     locales:
         en: "/employer/estimation/pdf"
         fr: "/employeur/devis/pdf"
     defaults: { _controller: AppBundle:Credit:generateEstimation }
-jobnow_payment:
+altea_payment:
     locales:
         en: "/employer/payment/{id}"
         fr: "/employeur/paiement/{id}"
@@ -104,7 +104,7 @@ delete_favorite:
         en: "/delete-favorite"
         fr: "/supprimer-favori"
     defaults: { _controller: AppBundle:Favorite:delete }
-jobnow_sitemap:
+altea_sitemap:
     path: "/sitemap.xml"
     defaults: { _controller: AppBundle:Sitemap:sitemap }
     requirements: {_format: "xml"}

@@ -198,11 +198,11 @@ class AppController extends Controller
 
         foreach ($arrayNewUser as $mail){
             $message = (new \Swift_Message('Jownow is live !'))
-                ->setFrom('jobnowlu@noreply.lu')
+                ->setFrom('altealu@noreply.lu')
                 ->setTo($mail)
                 ->setBody(
                     $this->renderView(
-                        'AppBundle:Emails:startJobnow.html.twig',
+                        'AppBundle:Emails:startAltea.html.twig',
                         array()
                     ),
                     'text/html'

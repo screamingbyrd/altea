@@ -448,14 +448,14 @@ email:
     new: You have created an email alert
     created:
       title: Your email alert has been created!
-      now: You will now be notified by email as soon as a new ad matching your search criteria is posted on Jobnow.lu.
+      now: You will now be notified by email as soon as a new ad matching your search criteria is posted on Altea.lu.
     send:
       title:
         regular: New jobs are available for this %parameter%
         search: New jobs are available for you
       new: New offers could interest you
   footer:
-    contact: If you wish to contact us, you can send an email to %link_start%contact@jobnow.lu%link_end%
+    contact: If you wish to contact us, you can send an email to %link_start%contact@altea.lu%link_end%
     consult: Click here %link_start%politique de confidentialité%link_end% to consult your rights.
   share:
     title: A friend shared this with you
@@ -511,7 +511,7 @@ searchEmployer:
   type: Search a company
 about:
   let: Let us present ourselves
-  text1: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
+  text1: Altea is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
   text2: The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
   text3: Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
 

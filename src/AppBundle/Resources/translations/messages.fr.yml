@@ -439,14 +439,14 @@ email:
     new: Vous avez créé une alerte email
     created:
       title: Votre alerte email a bien été créée !
-      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
+      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Altea.lu.
     send:
       title:
         regular: De nouveaux emplois sont disponibles pour ces %parameter%
         search: De nouveaux emplois sont disponibles pour vous
       new: De nouvelles offres pourraient vous intéresser
   footer:
-    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%contact@jobnow.lu%link_end%
+    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%contact@altea.lu%link_end%
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
   share:
     title: Un ami a partagé cette offre avec vous
@@ -503,7 +503,7 @@ searchEmployer:
   type: Chercher une entreprise
 about:
   let: Laissez nous nous présenter
-  text1: Jobnow est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
+  text1: Altea est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
   text2: L'équipe est également composée de deux développeurs dédiés, qui sont à l'origine de la construction, de la conception et de l'exécution du site.
   text3: Enfin, notre équipe dévouée de conseillers est là pour répondre à vos questions et vous guider tout au long du processus d'acquisition de crédits pour vos offres d'emploi.
 
