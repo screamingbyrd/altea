@@ -88,9 +88,19 @@ body {
 }
 
 
+@media (max-width: 990px){
+    .navbar-collapse{
+        background-color: #272f3b;
+        border-color: #080808;
+    }
+
+}
 @media (min-width: 1200px){
     .container {
         width: 72% !important;
+    }
+    .navbar-fixed-top{
+        background-size: 100% 100%;
     }
 
     .navbar-default .navbar-nav > li.dropdown:hover > a,
@@ -127,8 +137,12 @@ body {
     }
     .homepage-subtitle{
         margin-bottom: 29px !important;
-        margin-top: 36px;
+        margin-top: 17px;
         font-size: 30px;
+    }
+    .homepage-title{
+        margin-top: 36px;
+        font-size: 40px;
     }
     .dashboard-container{
         display: flex;
@@ -173,10 +187,7 @@ body {
     height: 88px;
     font-size: 18px;
 }
-.navbar-collapse{
-    background-color: #272f3b;
-    border-color: #080808;
-}
+
 
 .navbar-bottom{
     background-color: #272f3b;
@@ -350,15 +361,13 @@ legend{
 
 .altea-button{
     color: #fbfef5;
-    border: solid 1px #e03c14;
     border-radius: 3px;
     padding: 10px 19px;
     display: inline-block;
     font-size: 16px;
     letter-spacing: 1px;
     cursor: pointer;
-    background: #e03c14;
-    box-shadow: inset 0 0 0 0 #d84a24;
+    background: #2b4a9a;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
@@ -367,7 +376,7 @@ legend{
     margin-top: 0;
 }
 .altea-button:hover{
-    box-shadow: inset 1000px 0 0 0 #ff6940;
+    box-shadow: inset 1000px 0 0 0 #192a9a;
     color: white;
 }
 
@@ -426,7 +435,8 @@ legend{
     margin-bottom: 10px;
     display: block;
     position:relative;
-    color: orange;
+    color: #eef1f7;
+    text-shadow:0 4px 0 #242326;
     margin-top: -14px;
     padding-left: 4%;
     padding-right: 4%;

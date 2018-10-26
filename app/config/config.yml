@@ -2,9 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@EmployerBundle/Resources/config/services.yml" }
-    - { resource: "@CandidateBundle/Resources/config/services.yml" }
-    - { resource: "@AdminBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -86,10 +83,10 @@ swiftmailer:
 vich_uploader:
     db_driver: orm
     mappings:
-        employer_image:
-            uri_prefix: /images/employer
-            upload_destination: '%kernel.project_dir%/web/uploads/images/employer'
-            namer: app.employer_image
+        offer_image:
+            uri_prefix: /images/offer
+            upload_destination: '%kernel.project_dir%/web/uploads/images/offer'
+            namer: app.offer_image
 
 
 ivory_google_map:

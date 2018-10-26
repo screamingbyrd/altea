@@ -28,7 +28,6 @@
         "egeloen/google-map-bundle": "^3.0",
         "egeloen/serializer-bundle": "^1.0",
         "friendsofsymfony/ckeditor-bundle": "^1.1",
-        "friendsofsymfony/user-bundle": "^2.1",
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/serializer-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^1.1",

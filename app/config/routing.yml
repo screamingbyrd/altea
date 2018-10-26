@@ -5,27 +5,6 @@ root:
         path: /%locale%/
         permanent: true
 
-employer:
-    resource: "@EmployerBundle/Resources/config/routing.yml"
-    type: "be_simple_i18n"
-    prefix:
-         en: "/{_locale}/employer"
-         fr: "/{_locale}/employeur"
-
-candidate:
-    resource: "@CandidateBundle/Resources/config/routing.yml"
-    type: "be_simple_i18n"
-    prefix:
-        en: "/{_locale}/candidate"
-        fr: "/{_locale}/candidat"
-
-admin:
-    resource: "@AdminBundle/Resources/config/routing.yml"
-    type: "be_simple_i18n"
-    prefix:
-        en: "/{_locale}/admin"
-        fr: "/{_locale}/admin"
-
 app:
     resource: '@AppBundle/Resources/config/routing.yml'
     type: "be_simple_i18n"
@@ -34,23 +13,3 @@ app:
         fr: "/{_locale}/"
     requirements:
       _locale: fr|en
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-    prefix:   /{_locale}/
-
-fos_user_resetting_request:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix:
-        en: "/forgot-password"
-        fr: "/mot-de-passe-oublie"
-
-fos_user_change_password:
-    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix:
-        en: "/change-password"
-        fr: "/changer-mot-de-passe"
-
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /
