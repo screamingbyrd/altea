@@ -19,67 +19,17 @@ legal_page:
         en: "/legal"
         fr: "/legale"
     defaults: { _controller: AppBundle:App:legalPage }
-howitwork_page:
-    locales:
-        en: "/how-it-work"
-        fr: "/guide-utilisation"
-    defaults: { _controller: AppBundle:App:howitworkPage }
-create_notification:
-    locales:
-        en: "/create-notification"
-        fr: "/creation-notification"
-    defaults: { _controller: AppBundle:Notification:create }
-create_search_notification:
-    locales:
-        en: "/create-search-notification"
-        fr: "/creation-notification-recherche"
-    defaults: { _controller: AppBundle:Notification:createSearch }
-delete_notification:
-    locales:
-        en: "/delete-notification/{id}"
-        fr: "/supprimer-notification/{id}"
-    defaults: { _controller: AppBundle:Notification:delete }
-send_notification:
-    locales:
-        en: "/send-notification"
-        fr: "/envoyer-notification"
-    defaults: { _controller: AppBundle:Notification:send }
-send_search_notification:
-    locales:
-        en: "/send-search-notification"
-        fr: "/envoyer-notification-recherche"
-    defaults: { _controller: AppBundle:Notification:sendSearch }
-notification_already_exist:
-    locales:
-        en: "/notification-already-exist"
-        fr: "/notification-existe-deja"
-    defaults: { _controller: AppBundle:Notification:checkNotificationExist }
-create_favorite:
-    locales:
-        en: "/create-favorite"
-        fr: "/creation-favori"
-    defaults: { _controller: AppBundle:Favorite:create }
-delete_favorite:
-    locales:
-        en: "/delete-favorite"
-        fr: "/supprimer-favori"
-    defaults: { _controller: AppBundle:Favorite:delete }
 altea_sitemap:
     path: "/sitemap.xml"
     defaults: { _controller: AppBundle:Sitemap:sitemap }
     requirements: {_format: "xml"}
-user_already_exist:
-    locales:
-        en: "/user-already-exist"
-        fr: "/utilisateur-existe-deja"
-    defaults: { _controller: AppBundle:App:checkUserAlreadyExist }
-vat_exist:
-    locales:
-        en: "/check-vat"
-        fr: "/verifier-tva"
-    defaults: { _controller: AppBundle:App:checkVatNumber }
 send_start:
     locales:
         en: "/send-start"
         fr: "/envoyer-mail-debut"
     defaults: { _controller: AppBundle:App:sendStartMail }
+search_page:
+    locales:
+        en: "/search"
+        fr: "/chercher"
+    defaults: { _controller: AppBundle:Offer:searchPage }

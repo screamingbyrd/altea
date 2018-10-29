@@ -27,6 +27,7 @@
 }
 
 #myUL li .offer-element {
+    cursor: pointer;
     border: 1px solid #ddd;
     background-color: white;
     font-size: 18px;
@@ -64,9 +65,6 @@
     display: flex !important;
 }
 
-#myUL li .offer-element:hover:not(.ad) {
-    transform: translate(1em,0);
-}
 .ad {
     webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.5) !important;
     -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.5) !important;
@@ -102,7 +100,7 @@
 #keyword-input, #location-input {
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 100%;
+    width: 10%;
     font-size: 16px;
     padding: 12px 20px 12px 13px;
     border: 1px solid #ddd;
@@ -110,7 +108,15 @@
     margin-right: -4px;
     min-width: 130px;
 }
-
+.container-search{
+    width: 95% !important;
+    min-height: 100% !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: myFirstFont,sans-serif !important;
+}
 .share-container-offer{
     margin-top: 15px;
     display: inline-flex;

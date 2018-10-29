@@ -24,8 +24,26 @@ class AppController extends Controller
     public function indexAction(Request $request)
     {
 
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        $offers = $offerRepository->findAll();
+
+        $typeArray = $cityArray = array();
+
+        foreach ($offers as $offer){
+            $typeArray[$offer->getType()][] = 1;
+            $cityArray[$offer->getCity()][] = 1;
+        }
+        $typeArray = array_keys($typeArray);
+        $cityArray = array_keys($cityArray);
 
         return $this->render('AppBundle:Default:index.html.twig', array(
+            'cities' => $cityArray,
+            'types' => $typeArray
         ));
 
     }

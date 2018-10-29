@@ -10,12 +10,35 @@
         <h3 class="homepage-title">{{ 'homepage.title'|trans }}</h3>
         <h3 class="homepage-subtitle">{{ 'homepage.subtitle'|trans }}</h3>
         <p>
-        <form method="GET" action="#" id="search-offer-homepage">
+        <form method="GET" action="{{ path('search_page') }}" id="search-offer-homepage">
             <div class="homepage-search-bar search-bar">
+                <div class="checkbox-home-container">
+                    <div style="display: flex;">
+                        <div class="div-sell-input"><input type="checkbox"  value="1" name="sell"> Vente</div>
+                        <div class="div-rent-input"><input type="checkbox"  value="1" name="rent"> Location</div>
+                    </div>
+                    <div class="div-rent-input"><input type="checkbox"  value="1" name="new"> Bien neufs</div>
+                </div>
 
-                <div class="div-keyword-input"><input class="form-control" name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
-                {#<div class="div-location-input">{{ autoComplete|raw  }}#}
-                {#{{ autoCompleteScript|raw  }}</div>#}
+                <div class="select-home-container">
+                    <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
+                        <option value="" disabled selected>Type de bien</option>
+                        {% for type in types %}
+                            <option value="{{ type }}">{{ type|trans }}</option>
+                        {% endfor %}
+                    </select>
+                    <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
+                        <option value="" disabled selected>Ville</option>
+                        {% for city in cities %}
+                            <option value="{{ city }}">{{ city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div style="display: flex; margin-bottom: 10px; justify-content: center;">
+                    <div class="div-price-input"><div class="from-to">De </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                    <div class="div-price-input"><div class="from-to"> à </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                </div>
                 <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
             </div>
         </form>

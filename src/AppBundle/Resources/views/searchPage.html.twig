@@ -1,0 +1,422 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block title %}
+    {{ parent() }} - {{ 'offer.search.title' | trans }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron homepage-jumbotron">
+        <h3 class="homepage-title">{{ 'homepage.title'|trans }}</h3>
+        <h3 class="homepage-subtitle">{{ 'homepage.subtitle'|trans }}</h3>
+        <p>
+        <form method="GET" action="{{ path('search_page') }}" id="search-offer-homepage">
+            <div class="homepage-search-bar search-bar">
+                <div class="checkbox-home-container">
+                    <div style="display: flex;">
+                        <div class="div-sell-input"><input type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell"> Vente</div>
+                        <div class="div-rent-input"><input type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent"> Location</div>
+                    </div>
+                    <div class="div-rent-input"><input type="checkbox" value="1" {% if new %}checked{% endif %} name="new"> Bien neufs</div>
+                </div>
+
+                <div class="select-home-container">
+                    <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
+                        <option value="" selected>Type de bien</option>
+                        {% for type in types %}
+                            <option value="{{ type }}" {% if type == givenType %}selected{% endif %}>{{ type|trans }}</option>
+                        {% endfor %}
+                    </select>
+                    <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
+                        <option value="" selected>Ville</option>
+                        {% for city in cities %}
+                            <option value="{{ city }}" {% if city == givenCity %}selected{% endif %}>{{ city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div style="display: flex; margin-bottom: 10px; justify-content: center;">
+                    <div class="div-price-input"><div class="from-to">De </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                    <div class="div-price-input"><div class="from-to"> à </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                </div>
+                <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
+            </div>
+        </form>
+    </div>
+
+    <div class="container-search">
+
+        <div class="">
+            <ul id="myUL">
+                {% if data is not defined or data|length == 0%}
+                    <li class="no-offer search-result animated fadeIn">
+                        <div>Sorry but there is no pro for this search</div>
+
+                    </li>
+                {% else %}
+                    <span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
+                    <div class="row display-number">
+                        <div class="col-md-6">
+                            {{ numberOfItem }} / {{ countResult }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 row composition-list">
+                            {% for pro in data %}
+                                <li class="search-result animated fadeIn col-md-4">
+            <span class='offer-element' data-href="#">
+                {#{% if (pro.frontImages.first != false and pro.frontImages.first.imageName is not null and pro.frontImages|length > 1) or (pro.residence.frontImages.first != false and pro.residence.frontImages.first.imageName is not null and pro.residence.frontImages|length > 1)%}#}
+
+                    {#<div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">#}
+                    {#<!-- Indicators -->#}
+                    {#<ol class="carousel-indicators">#}
+                        {#{% set i = 0 %}#}
+                        {#{% for image in pro.frontImages %}#}
+                            {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
+                            {#{% set i = i + 1 %}#}
+                        {#{% endfor %}#}
+                        {#{% for image in pro.residence.frontImages %}#}
+                            {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
+                            {#{% set i = i + 1 %}#}
+                        {#{% endfor %}#}
+                    {#</ol>#}
+
+                        {#<!-- Wrapper for slides -->#}
+                    {#<div class="carousel-inner">#}
+                        {#{% set i = 0 %}#}
+                        {#{% for image in pro.frontImages %}#}
+                            {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
+                                {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
+                            {#</div>#}
+                            {#{% set i = i + 1 %}#}
+                        {#{% endfor %}#}
+                        {#{% for image in pro.residence.frontImages %}#}
+                            {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
+                                {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
+                            {#</div>#}
+                            {#{% set i = i + 1 %}#}
+                        {#{% endfor %}#}
+                    {#</div>#}
+
+                        {#<!-- Left and right controls -->#}
+                    {#<a class="carousel-control-prev" href="#myCarousel-{{ pro.id }}" data-slide="prev">#}
+                        {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+                        {#<span class="sr-only">Previous</span>#}
+                    {#</a>#}
+                    {#<a class="carousel-control-next" href="#myCarousel-{{ pro.id }}" data-slide="next">#}
+                        {#<span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+                        {#<span class="sr-only">Next</span>#}
+                    {#</a>#}
+                {#</div>#}
+                {#{% else %}#}
+                    {#{% if pro.frontImages.first != false and pro.frontImages.first.imageName is not null %}#}
+                        {#{% set image =  'uploads/images' ~ vich_uploader_asset(pro.frontImages.first, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage') %}#}
+                    {#{% else %}#}
+                        {% set image = 'images/default_cover_image6.jpg' %}
+                    {#{% endif %}#}
+                    <div class="background-pro-in-offer-search" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                    </div>
+                {#{% endif %}#}
+                <div class="offer-search-element">
+                    <div class="offer-element-details">
+                        <div class="offer-element-title">{{ pro.type }}</div>
+                    </div>
+                </div>
+            </span>
+                                </li>
+                            {% endfor %}
+                        </div>
+                        <div class="search-map shadow-box col-md-4 animated fadeIn">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+
+                    <script>
+
+                        {% if location|length > 0 %}
+
+                        // Initialize and add the map
+                        function initMap() {
+                            // The location of Uluru
+                            var location = {lat: {{ location|first[0] }}, lng: {{ location|first[1] }}};
+                            // The map, centered at Uluru
+                            var map = new google.maps.Map(
+                                document.getElementById('map'), {zoom: 17, center: location, mapTypeControl: false, fullscreenControl: false});
+                            // The marker, positioned at Uluru
+
+                            var bounds = new google.maps.LatLngBounds();
+                            var infoWindow = new google.maps.InfoWindow();
+                            {% for position in location %}
+                            {% if position[5] is defined %}
+                            var marker = new google.maps.Marker({position: {lat: {{ position[0] }}, lng: {{ position[1] }}}, map: map});
+                            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                return function() {
+                                    {% if position[5] != 'image' %}
+                                    {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AI\\GestionBundle\\Entity\\Image') %}
+                                    {% else %}
+                                    {% set image = 'images/default_cover_image6.jpg' %}
+                                    {% endif %}
+
+                                    var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
+                                    infoWindow.setContent(content);
+                                    infoWindow.open(map, marker);
+                                }
+                            })(marker, i));
+                            bounds.extend({lat: {{ position[0] }}, lng: {{ position[1] }}});
+                            {% endif %}
+                            {% endfor %}
+                            {% if location|length > 1 %}
+                            map.fitBounds(bounds);
+                            {% endif %}
+                        }
+
+                        {% endif %}
+
+                    </script>
+                    <!--Load the API from the specified URL
+                    * The async attribute allows the browser to render the page while the API loads
+                    * The key parameter will contain your own API key (which is not needed for this tutorial)
+                    * The callback parameter executes the initMap() function
+                    -->
+                    <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc&callback=initMap">
+                    </script>
+                    <style>
+                        .pro-title-map{
+                            margin-top: 5px;
+                            font-size: 15px;
+                            margin-bottom: 1px;
+                        }
+                        .pro-image-map{
+                            width: 200px;
+                        }
+                        #map {
+                            height: 400px;  /* The height is 400 pixels */
+                            width: 100%;  /* The width is the width of the web page */
+                        }
+                    </style>
+                {% endif %}
+
+                <script>
+                    $(".offer-element").on("mouseenter ", function(){
+                        $(this).find('.layer-offer-element').removeClass('fadeIn').addClass('fadeOut');
+                    });
+                    $(".offer-element").on("mouseleave ", function(){
+                        $(this).find('.layer-offer-element').removeClass('fadeOut').addClass('fadeIn');
+                    });
+
+                    $(document).on("click",".offer-element",function(e) {
+                        if(!($(e.target).hasClass('carousel-control-prev') || $(e.target).hasClass('carousel-control-next') || $(e.target).hasClass('carousel-control-next-icon')|| $(e.target).hasClass('carousel-control-prev-icon')|| $(e.target).hasClass('carousel-dot'))){
+                            window.location.href = $(this).data('href');
+                        }
+                    });
+
+
+                    function detectmob() {
+                        if( navigator.userAgent.match(/Android/i)
+                            || navigator.userAgent.match(/webOS/i)
+                            || navigator.userAgent.match(/iPhone/i)
+                            || navigator.userAgent.match(/iPad/i)
+                            || navigator.userAgent.match(/iPod/i)
+                            || navigator.userAgent.match(/BlackBerry/i)
+                            || navigator.userAgent.match(/Windows Phone/i)
+                        ){
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+
+                    var featuredOfferTop = $('.search-map').offset().top;
+                    var featuredOfferLeft = $('.search-map').offset().left;
+                    var featuredOfferWidth = $('.search-map').outerWidth();
+                    $(window).scroll(function() {
+                        var currentScroll = $(window).scrollTop();
+                        if (currentScroll +105 >= featuredOfferTop && detectmob() == false) {
+                            $('.search-map').css({
+                                position: 'fixed',
+                                top: '105px',
+                                left: featuredOfferLeft,
+                                width: featuredOfferWidth,
+                            });
+                        } else {
+                            $('.search-map').css({
+                                position: 'static'
+                            });
+                        }
+                    });
+
+                </script>
+
+            </ul>
+
+        </div>
+
+        <div id="paginator-offer">
+            {% if total > 0 %}
+                {% for i in 1..total %}
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'row': i})) }}" class="offer-page-link {% if page == i %}selected-page{% endif %}">{{ i }}</a>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {#<div class="compare-offers">#}
+        {#<div class="header-compare">#}
+        {#<div class="title-compare">{{ 'searchPage.compareTitle'|trans }}  <i class="fas fa-plus-square icon-open-compare"></i></div>#}
+        {#<div class="list-to-compare" id="droppable">#}
+        {#<div class="drop-here">{{ 'searchPage.dropHere'|trans }}</div>#}
+        {#</div>#}
+        {#<div class="compare-button-container"><button class="btn btn-success compare-button" value="">{{ 'searchPage.compare'|trans }}</button> </div>#}
+        {#</div>#}
+
+        {#</div>#}
+
+        {#<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-comparison">#}
+        {#<div class="modal-dialog">#}
+        {#<div class="modal-content">#}
+        {#<div class="modal-header">#}
+        {#<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+        {#<h4 class="modal-title" id="myModalLabel">{{ 'searchPage.compareTitle'|trans }}</h4>#}
+        {#</div>#}
+        {#<div class="table-comparison">#}
+
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+        <style>
+            .homepage-jumbotron::after{
+                content: '';
+                background-image:url({{asset('images/7_web.jpg')}});
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                position:absolute;
+                z-index: -1;
+            }
+            .title-compare{
+                margin-bottom: 9px;
+                color: white;
+                padding-top: 0;
+                cursor:pointer;
+            }
+            .compare-offers{
+                position: fixed;
+                bottom: 20px;
+                right: 50px;
+                width: 30%;
+            }
+            .header-compare{
+                background: #272f3b;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            .list-to-compare{
+                height: 500px;
+                background-color: white;
+                color: black;
+                display: none;
+            }
+            .offer-to-compare{
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+            }
+            .hover-offer-comparison{
+                background-color: #1F80F0;
+            }
+            .icon-open-compare{
+                float: right;
+            }
+            .drop-here{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 25px;
+            }
+            .remove-offer{
+                position: absolute;
+                right: 30px;
+            }
+            .compare-button-container{
+                width: 100%;
+                display: none;
+                background-color: #272f3b;
+                height: 50px;
+            }
+            .compare-button{
+                margin-top: 14px;
+            }
+            .compare-offer-logo{
+                width: 50px;
+                height: 50px;
+            }
+            .compare-offer-title{
+                margin-left: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 38px;
+            }
+            .modal-dialog{
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) !important;
+                text-align:center;
+                width: 80%;
+            }
+            .modal-content{
+                display:inline-block;
+                background-color: #21282B;
+                color: white;
+            }
+            .table-comparison thead th{
+                text-align: center;
+            }
+            .table-comparison td{
+                padding-left: 10px;
+                padding-right: 10px;
+                border: 1px white;
+                margin-bottom: 10px;
+            }
+            .table-comparison table{
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+                border-collapse: separate;
+                border-spacing: 14px 14px;
+            }
+            .row
+        </style>
+
+        <script>
+
+            // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+            function myFunction() {
+                if (($(".navbar-bottom").offset().top) <= ($(window).scrollTop() + $(window).height()) ) {
+                    if(!$(".compare-offers").hasClass('sticky')){
+                        $(".compare-offers").css("bottom", (20+ window.scrollY + window.innerHeight - $(".navbar-bottom").offset().top));
+                    }
+
+                }else{
+                    $(".compare-offers").css("bottom", "20px");
+                }
+            }
+
+
+        </script>
+    </div>
+
+{% endblock %}

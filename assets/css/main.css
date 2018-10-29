@@ -163,7 +163,7 @@ body {
         margin-top: 40px;
     }
     .homepage-search-bar{
-        width: 50% !important;
+        width: 80% !important;
     }
     .choose-featured-offer{
         width: 35%;
@@ -442,6 +442,15 @@ legend{
     padding-right: 4%;
 }
 
+@media screen and (max-width:1403px) and (min-width:494px){
+    .homepage-search-bar{
+        display: block;
+        height: 230px !important;
+    }
+    .select-home-container{
+        width: 100% !important;
+    }
+}
 @media screen and (max-device-width: 480px){
     .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .employer-jumbotron{
         padding: 0;
@@ -517,7 +526,14 @@ legend{
     }
     .homepage-search-bar{
         display: block;
-        height: 170px;
+        height: 340px;
+    }
+    .select-home-container{
+        width: 100% !important;
+        display: block !important;
+    }
+    .checkbox-home-container{
+        display: block !important;
     }
     .div-keyword-input{
         width: 100% !important;
@@ -556,7 +572,8 @@ legend{
         margin-top: 10px !important;
     }
     .jumbotron{
-        padding: 0 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 25px !important;
     }
     .faq-button{
         width: 43% !important;
@@ -613,13 +630,40 @@ legend{
     padding-top: 6px;
 }
 
-.homepage-jumbotron .div-keyword-input{
-    color: #333;
+.input-price-home{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.from-to{
+    margin-top: 9px;
+}
+
+.homepage-jumbotron .div-price-input{
+    color: white;
+    border-radius: 4px;
+    height:43px;
+    width: 170px;
+    display: flex;
+}
+.homepage-jumbotron .div-sell-input{
     margin-right: 1%;
     border-radius: 4px;
     height:43px;
-    width: 37%;
+    width: 80px;
     margin-left: 10px;
+    margin-top: 9px;
+    color: white;
+
+}
+.homepage-jumbotron .div-rent-input{
+    margin-right: 1%;
+    border-radius: 4px;
+    height:43px;
+    width: 119px;
+    margin-left: 10px;
+    margin-top: 9px;
+    color: white;
 }
 .homepage-jumbotron .div-location-input{
     color: #333;
@@ -628,16 +672,23 @@ legend{
     height: 43px;
     width: 37%;
 }
+.select-home-container{
+    width: 40%;
+    display: flex;
+}
+.checkbox-home-container{
+    display: flex;
+}
 .homepage-tag {
     height: 43px;
     background-position: 10px 12px;
     background-repeat: no-repeat;
     width: 50%;
+    margin-right: 10px;
     font-size: 16px;
     padding: 8px 20px 8px 13px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
-    margin-right: -4px;
     min-width: 130px;
     display: block;
     line-height: 1.42857143;
@@ -663,6 +714,7 @@ legend{
     font-size: 16px;
     padding: 11px 20px 12px 13px;
     border: 1px solid #000000;
+    margin-left: 10px;
 }
 .background-offer{
     border-top-left-radius: 3px;
