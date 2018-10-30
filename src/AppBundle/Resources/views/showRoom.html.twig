@@ -119,6 +119,50 @@
                 <div class="offer-container-price">
                     <h2>{{ offer.price }}€ (All-in/Month)</h2>
                 </div>
+                <h3>Contacter l'agence</h3>
+                <form method="post" action="{{ path('offer_contact') }}" class="form-horizontal clearfix">
+                    <input type="hidden" value="{{ offer.id }}" name="offerId" id="type-input">
+                    <div class="container-radio-contact" style="margin-left: 40px">
+                        <div>
+                            <input type="radio" id="visit"
+                                   name="type" value="visit" checked />
+                            <label for="visit">Visite</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="info"
+                                   name="type" value="info" />
+                            <label for="info">Infomation</label>
+                        </div>
+                    </div>
+                    <table style="width: 100%;">
+                        <tr>
+                            <th class="label-contact-us">
+                                <label>{{ 'contact.name'|trans }}</label>
+                            </th>
+                            <td class="td-contact-us">
+                                <input class="form-control" name="name" type="text" id="name-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="label-contact-us">
+                                <label>{{ 'contact.email'|trans }}</label>
+                            </th>
+                            <td class="td-contact-us">
+                                <input class="form-control" name="email" type="text" id="email-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="label-contact-us">
+                                <label>{{ 'contact.message'|trans }}</label>
+                            </th>
+                            <td class="td-contact-us">
+                                <textarea  style="resize: vertical" class="form-control" name="message" id="message-input"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" class="altea-button send-contact" value="{{ 'email.send' | trans }}">
+
+                </form>
             </div>
         </div>
     </div>
@@ -159,5 +203,10 @@
             }
         });
     </script>
+    <style>
+        .td-contact-us{
+            width: 57% !important;
+        }
+    </style>
 
 {% endblock %}

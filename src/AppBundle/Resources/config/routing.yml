@@ -38,3 +38,18 @@ show_offer:
         en: "/offer"
         fr: "/offre"
     defaults: { _controller: AppBundle:Offer:show }
+contact_us:
+    locales:
+        en: "/contact-us"
+        fr: "/contacter-nous"
+    defaults: { _controller: AppBundle:Contact:contactUsPage }
+altea_contact:
+    locales:
+        en: "/contact"
+        fr: "/contacter"
+    defaults: { _controller: AppBundle:Contact:contact }
+offer_contact:
+    locales:
+        en: "/offer-contact"
+        fr: "/offre-contacter"
+    defaults: { _controller: AppBundle:Contact:contactOffer }

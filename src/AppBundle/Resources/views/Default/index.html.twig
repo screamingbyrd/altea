@@ -14,10 +14,10 @@
             <div class="homepage-search-bar search-bar">
                 <div class="checkbox-home-container">
                     <div style="display: flex;">
-                        <div class="div-sell-input"><input type="checkbox"  value="1" name="sell">{{ 'sell'|trans }}</div>
-                        <div class="div-rent-input"><input type="checkbox"  value="1" name="rent">{{ 'rent'|trans }}</div>
+                        <div class="div-sell-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="sell">{{ 'sell'|trans }}</div>
+                        <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="rent">{{ 'rent'|trans }}</div>
                     </div>
-                    <div class="div-rent-input"><input type="checkbox"  value="1" name="new">{{ 'new'|trans }}</div>
+                    <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="new">{{ 'new'|trans }}</div>
                 </div>
 
                 <div class="select-home-container">
@@ -193,6 +193,18 @@
             z-index: -1;
         }
     </style>
+    <script>
+        $(document).on("click",".offer-element",function(e) {
+            if(!($(e.target).hasClass('carousel-control-prev') || $(e.target).hasClass('carousel-control-next') || $(e.target).hasClass('carousel-control-next-icon')|| $(e.target).hasClass('carousel-control-prev-icon')|| $(e.target).hasClass('carousel-dot'))){
+                window.location.href = $(this).data('href');
+            }
+        });
+        $('.checkbox-div').on('click', function () {
+            let checkbox = $(this).children('input');
+            let checked = checkbox.attr('checked');
+            checkbox.attr('checked', !checked);
+        })
+    </script>
 
 {% endblock %}
 

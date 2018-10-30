@@ -13,10 +13,10 @@
             <div class="homepage-search-bar search-bar">
                 <div class="checkbox-home-container">
                     <div style="display: flex;">
-                        <div class="div-sell-input"><input type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell">{{ 'sell'|trans }}</div>
-                        <div class="div-rent-input"><input type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent">{{ 'rent'|trans }}</div>
+                        <div class="div-sell-input checkbox-div"><input class="checkbox-input-search" type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell">{{ 'sell'|trans }}</div>
+                        <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent">{{ 'rent'|trans }}</div>
                     </div>
-                    <div class="div-rent-input"><input type="checkbox" value="1" {% if new %}checked{% endif %} name="new">{{ 'new'|trans }}</div>
+                    <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox" value="1" {% if new %}checked{% endif %} name="new">{{ 'new'|trans }}</div>
                 </div>
 
                 <div class="select-home-container">
@@ -212,6 +212,11 @@
                         }
                     });
 
+                    $('.checkbox-div').on('click', function () {
+                        let checkbox = $(this).children('input');
+                        let checked = checkbox.attr('checked');
+                        checkbox.attr('checked', !checked);
+                    });
 
                     function detectmob() {
                         if( navigator.userAgent.match(/Android/i)
