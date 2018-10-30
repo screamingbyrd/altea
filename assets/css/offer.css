@@ -37,7 +37,6 @@
     transition: ease-out 0.7s;
     margin-bottom: 3%;
     width: 96%;
-    display: flex;
     align-items: center;
     border-radius: 3px;
     webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
@@ -555,8 +554,12 @@
     .search-result{
         position: relative;
         min-height: 1px;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .composition-list{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
     .apply-button, .submit-apply{
         width: 100% !important;
@@ -736,15 +739,20 @@
 .no-offer-alert{
     margin-top: 20px;
 }
-.background-employer-in-offer-search{
-    min-height: 140px;
-    width: 30%;
+.background-pro-in-offer-search{
+    min-height: 200px;
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
     text-align: center;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
+}
+
+.image-search-pro{
+    height: 200px !important;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 .background-employer-in-offer-search .layer{
     border-top-right-radius: 0;

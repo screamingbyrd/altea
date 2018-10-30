@@ -41,9 +41,28 @@ class AppController extends Controller
         $typeArray = array_keys($typeArray);
         $cityArray = array_keys($cityArray);
 
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offers = $offerRepository->findAll();
+
+        shuffle($offers);
+
+        $offerArray = array();
+
+        for($i = 0; $i <= 3; $i++){
+            if(isset($offers[$i])){
+                $offerArray[] = $offers[$i];
+            }
+
+        }
+
         return $this->render('AppBundle:Default:index.html.twig', array(
             'cities' => $cityArray,
-            'types' => $typeArray
+            'types' => $typeArray,
+            'offerArray' => $offerArray
         ));
 
     }

@@ -61,7 +61,14 @@ class Offer
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="string", length=255, nullable=true)
+     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     */
+    private $location;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price", type="integer", length=255, nullable=true)
      */
     private $price;
 
@@ -173,7 +180,7 @@ class Offer
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getPrice()
     {
@@ -181,7 +188,7 @@ class Offer
     }
 
     /**
-     * @param string $price
+     * @param int $price
      * @return Offer
      */
     public function setPrice($price)
@@ -205,6 +212,24 @@ class Offer
     public function setTransaction($transaction)
     {
         $this->transaction = $transaction;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $location
+     * @return Offer
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
         return $this;
     }
 

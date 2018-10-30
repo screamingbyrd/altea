@@ -23,6 +23,8 @@ class OfferController extends Controller
     public function searchPageAction(Request $request){
         $type = $request->get('type');
         $city = $request->get('city');
+        $from = $request->get('from');
+        $to = $request->get('to');
         $rent = $request->get('rent');
         $rent = isset($rent)?1:0;
         $sell = $request->get('sell');
@@ -74,7 +76,15 @@ class OfferController extends Controller
             $searchArray['transaction'] = $transactionArray;
         }
 
-        $finalData = $offerRepository->findBy($searchArray);
+        if(isset($from) and $from != ''){
+            $searchArray['from'] = $from;
+        }
+
+        if(isset($to) and $to != ''){
+            $searchArray['to'] = $to;
+        }
+
+        $finalData = $offerRepository->searchOffer($searchArray);
 
         $locationArray =array();
 
@@ -83,17 +93,17 @@ class OfferController extends Controller
 
         $finalArray = array_slice($finalData, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
-//        foreach ($finalArray as $composition){
-//            $address = $composition->getResidence()->getAdresse();
-//            if($address != ''){
-//                $marker = $this->get('app.find_latlong')->geocode($address);
-//                $marker[] = $composition->getLibelle();
-//                $marker[] = ' url ';
-//                $marker[] = 'image';
-//                $marker[] = '0123';
-//                $locationArray[$composition->getId()] = $marker;
-//            }
-//        }
+        foreach ($finalArray as $offer){
+            $address = $offer->getLocation();
+            if($address != ''){
+                $marker = $this->get('app.find_latlong')->geocode($address);
+                $marker[] = $this->get('translator')->trans($offer->getType());
+                $marker[] = ' url ';
+                $marker[] = 'image';
+                $marker[] = '0123';
+                $locationArray[$offer->getId()] = $marker;
+            }
+        }
 
         $totalPage = ceil ($countResult / $numberOfItem);
 
@@ -112,6 +122,8 @@ class OfferController extends Controller
                 'rent' => $rent,
                 'sell' => $sell,
                 'new' => $new,
+                'from' => $from,
+                'to' => $to,
             )
         );
     }

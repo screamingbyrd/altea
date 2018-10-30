@@ -14,21 +14,21 @@
             <div class="homepage-search-bar search-bar">
                 <div class="checkbox-home-container">
                     <div style="display: flex;">
-                        <div class="div-sell-input"><input type="checkbox"  value="1" name="sell"> Vente</div>
-                        <div class="div-rent-input"><input type="checkbox"  value="1" name="rent"> Location</div>
+                        <div class="div-sell-input"><input type="checkbox"  value="1" name="sell">{{ 'sell'|trans }}</div>
+                        <div class="div-rent-input"><input type="checkbox"  value="1" name="rent">{{ 'rent'|trans }}</div>
                     </div>
-                    <div class="div-rent-input"><input type="checkbox"  value="1" name="new"> Bien neufs</div>
+                    <div class="div-rent-input"><input type="checkbox"  value="1" name="new">{{ 'new'|trans }}</div>
                 </div>
 
                 <div class="select-home-container">
                     <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
-                        <option value="" disabled selected>Type de bien</option>
+                        <option value="" disabled selected>{{ 'offer.type'|trans }}</option>
                         {% for type in types %}
                             <option value="{{ type }}">{{ type|trans }}</option>
                         {% endfor %}
                     </select>
                     <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
-                        <option value="" disabled selected>Ville</option>
+                        <option value="" disabled selected>{{ 'offer.city'|trans }}</option>
                         {% for city in cities %}
                             <option value="{{ city }}">{{ city }}</option>
                         {% endfor %}
@@ -36,12 +36,81 @@
                 </div>
 
                 <div style="display: flex; margin-bottom: 10px; justify-content: center;">
-                    <div class="div-price-input"><div class="from-to">De </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
-                    <div class="div-price-input"><div class="from-to"> à </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                    <div class="div-price-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                    <div class="div-price-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
                 </div>
                 <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
             </div>
         </form>
+    </div>
+
+    <div class="container">
+        <ul id="myUL">
+        {% for offer in offerArray %}
+            <li class="search-result col-md-4">
+            <span class='offer-element' data-href="#">
+                {#{% if (pro.frontImages.first != false and pro.frontImages.first.imageName is not null and pro.frontImages|length > 1) or (pro.residence.frontImages.first != false and pro.residence.frontImages.first.imageName is not null and pro.residence.frontImages|length > 1)%}#}
+
+                {#<div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">#}
+                {#<!-- Indicators -->#}
+                {#<ol class="carousel-indicators">#}
+                {#{% set i = 0 %}#}
+                {#{% for image in pro.frontImages %}#}
+                {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
+                {#{% set i = i + 1 %}#}
+                {#{% endfor %}#}
+                {#{% for image in pro.residence.frontImages %}#}
+                {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
+                {#{% set i = i + 1 %}#}
+                {#{% endfor %}#}
+                {#</ol>#}
+
+                {#<!-- Wrapper for slides -->#}
+                {#<div class="carousel-inner">#}
+                {#{% set i = 0 %}#}
+                {#{% for image in pro.frontImages %}#}
+                {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
+                {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
+                {#</div>#}
+                {#{% set i = i + 1 %}#}
+                {#{% endfor %}#}
+                {#{% for image in pro.residence.frontImages %}#}
+                {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
+                {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
+                {#</div>#}
+                {#{% set i = i + 1 %}#}
+                {#{% endfor %}#}
+                {#</div>#}
+
+                {#<!-- Left and right controls -->#}
+                {#<a class="carousel-control-prev" href="#myCarousel-{{ pro.id }}" data-slide="prev">#}
+                {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+                {#<span class="sr-only">Previous</span>#}
+                {#</a>#}
+                {#<a class="carousel-control-next" href="#myCarousel-{{ pro.id }}" data-slide="next">#}
+                {#<span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+                {#<span class="sr-only">Next</span>#}
+                {#</a>#}
+                {#</div>#}
+                {#{% else %}#}
+                {#{% if pro.frontImages.first != false and pro.frontImages.first.imageName is not null %}#}
+                {#{% set image =  'uploads/images' ~ vich_uploader_asset(pro.frontImages.first, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage') %}#}
+                {#{% else %}#}
+                {% set image = 'images/default_cover_image6.jpg' %}
+                {#{% endif %}#}
+                <div class="background-pro-in-offer-search" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                                    </div>
+                {#{% endif %}#}
+                <div class="offer-search-element">
+                    <div class="offer-element-details">
+                        <div class="offer-element-title">{{ offer.type|trans }}</div>
+                        <div class="offer-element-title">{{ offer.price }} €</div>
+                    </div>
+                </div>
+            </span>
+            </li>
+        {% endfor %}
+        </ul>
     </div>
 
     <div class="about-us-container">

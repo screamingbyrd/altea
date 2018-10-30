@@ -3,6 +3,10 @@ no: non
 or: ou
 to: au
 
+sell: Vente
+rent: Location
+new: Bien neufs
+
 job: Emploi
 
 title:
@@ -38,42 +42,13 @@ how:
   title: Une explication est toujours mieux
   employers: Parce que nous pensons que le recrutement devrait être une tâche facile, nous vous avons simplifié les choses! Notre plateforme est conçue pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour un poste vacant, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? L’offre d’emploi vous permet de choisir des tags pour affiner votre réserve de candidats et d’assurer des candidats correspondant à votre offre d’emploi, ce qui facilitera le choix du candidat approprié.
   candidates: Parce que trouver un nouveau job peut être stressant, nous vous avons simplifié les choses ! Notre plateforme est conçu pour vous aider à trouver le poste idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez complété votre profil, vous n'avez plus qu'à postuler aux offres qui vous correspondent !
+
 header:
-  register: S'inscrire
-  how: Guide d'utilisation
-  findjob: Trouver un travail
-  profile: Mon compte
-  logout: Déconnexion
-  candidates:
-    title: Espace Candidat
-    findJob: Trouver un travail
-    companies: Découvrir les entreprises
-    submit: Envoyer votre CV
-    profile: Mon profil
-    dashboard:
-      alert: Mes Notifications
-      applied: Mes candidatures
-      favorites: Mes favoris
-    register: Candidat
-  employers:
-    title: Espace Employeur
-    post: Poster une offre
-    edit: Editer une offre
-    findCandidate: Trouver un candidat
-    pricing: Acheter des crédits
-    dashboard: Tableau de bord
-    register: Employeur
   about:
     title: A propos de nous
     faq: FAQ
     privacy: Politique de confidentialité
     terms: Mentions légales
-  login:
-    title: Connexion
-  language:
-    title: Changer de langue
-    french: Français
-    english: Anglais
 
 form:
   registration:
@@ -261,90 +236,10 @@ slot:
     success: Le slot à bien été vidé
 
 offer:
-  title: Titre
-  titlePH: Votre titre
-  posted: Ajouté le
-  companyPage: Page de l'entreprise
-  tag: Catégorie(s)
-  tagInfo: Sélectionnez tous les domaines d’activité auxquels le poste à pourvoir est rattaché
-  tagPH: Domaine(s) de compétence(s)
-  location: Adresse
-  locationInfo: Pas uniquement le siège social de votre entreprise mais bien le lieu où se trouve le poste
-  locationPH: Indiquez un lieu
-  description: Description
-  descriptionInfo: Soyez bref mais précis, mettez en avant les valeurs de l’entreprise et les avantages du poste tout en insistant sur les missions
-  contract: Type de contrat
-  contractPH:  Choisissez le type de contrat
-  exp: Expérience professionelle
-  expPH: Expérience requise
-  available: Date de disponibilité
-  availablePH: Date de début souhaitée
-  diploma: Diplôme
-  diplomaPH:  Niveau d'études requis
-  wage: Salaire
-  wagePH: Choisissez un salaire
-  benefits: Avantages
-  benefitsPH: Avantage(s) offert(s)
-  license: Permis
-  licensePH: Permis de conduire requis
-  languages: Langues
-  languagesPH: Langue(s) requise(s)
-  image: Image pour votre offre
-  submit: Soumettre
-  save: Enregistrer
-  option: Plus de précision (facultatif)
-  about: À propos de cette offre
-  jobDescription: Description de l'offre
-  sorry: Désolé, cette offre à été archivée
-  hereSomeSimilar: Voici quelques offres similaires qui pourraient vous intéresser:
-  similarOffer: Offres similaires
-  watchSimilar: Voir toutes les offres similaires
-  experience: Expérience
-  startDate: Date de début
-  candidatesList: Candidats qui ont postulé à cette offre
-  link: Lien de redirection
-  linkPH: "ex : www.votresiteweb.com/recrutement"
-  linkInfo: Si vous voulez redirigez vers votre plateforme de recrutement interne
-  inSlot: Dans un slot
-  notCommunicated: Non communiqué
-
-  share: Partager
-  shareByMail: Partager cette annonce
-  yourMail: Votre adresse email
-  friendMail: Adresse email de votre ami(e)
-  shared: L'offre à bien été partagé !
-
-  search:
-    title: Recherche d'offres
-  delete:
-      sure: Êtes-vous sûr de vouloir archiver cette offre ?
-  activate:
-      sure: Êtes-vous sûr vouloir activer / prolonger cette offre? Cela vous coûtera %credit% crédit(s).
-      sureMultiple: Êtes-vous sûr de vouloir activer / prolonger ces offre ? Cela vous coûtera %credit% crédit(s).
-  boost:
-      sure: Êtes-vous sûr de vouloir booster vos offres ? Cela vous coûtera %credit% crédit(s). Pensez à désarchiver et activer les offres que vous souhaitez bootser.
-  endDate: Date de fin :
-  archived: Archivée
-  apply:
-    title: Postuler
-    close: Fermer
-    addCV: Ajouter votre CV :
-    addCoverLetter: Ajouter votre Lettre de motivation :
-    coverLetter: Lettre de motivation (optionelle)
-    send: Envoyer votre CV
-    already: Vous avez déja postulé à cette offre
-    message: Lettre de motivation
-    cv: CV
-  countView: Vues
-  countContact: Candidatures
-
-  applied:
-    success: Vous avez bien postulé à l'offre %title% !
-    candidate: Vous avez postulez à l'offre
-    employer: Un candidat a postulé à cette offre :
-
-  carousel:
-    activate: Une fois votre offre créée vous pouvez dépenser 1 crédit pour la mettre en ligne pendant 2 mois en cliquant sur Activer/Prolonger.
+  type: Type de bien
+  city: Ville
+  from: De
+  to: à
 
 candidate:
   delete:
@@ -602,143 +497,15 @@ bill:
   downloadEstimation: Télécharger un devis
   estimation: Devis
 
-admin:
-  title: Administrateur
-  dashboard:
-    employerList: Liste des employeurs
-    candidateList: Liste des candidats
-    adList: Liste des pubs
-    createAd: Créer une pub
-    stat: Statistique
-    offerList: Liste des offres
-    adminList: Liste des admins
-    totalActiveOffers: Total offre active:
-    totalEmployers: Total employeurs:
-    totalCandidates: Total candidats:
-    totalSlots: Total slot:
-  adminList:
-    addAdmin:  Ajouter un admin
-    enter: Entrer l'email d'un utilisateur existant
-    doNotExist: Cet utilisateur n'existe pas
-    sure: Êtes-vous sûr de vouloir effacer cet administrateur ?
-  ads:
-    showArchived: Montrer les pubs archivées
-    hideArchived: Cacher les pubs archivées
-    archiveUnarchive: Archiver / Désarchiver
-    form:
-      edit: Editer la pub
-      title: Titre de la pub
-      link: Lien
-      logo: Logo
-      image: Image
-  enterMail: Entrer un email
-  enterCompnay: Entrer un nom de société
-  enterTitle: Entrer un titre
-  sureCandidate: Êtes-vous sûr de vouloir effacer ce candidat ?
-  sureEmployer: Êtes-vous sûr de vouloir effacer cet employeur ?
-  offerList:
-    totalNonVerifiedOffer: Total offres actives non-vérifiée
-    nonArchivedOffers: Offres non archivées
-    archivedOffers: Offres archivées
-    showAll: Toutes les offres
-    showActive: Offres actives
-    showNotValidated: Offres actives non-validées
-    creationDate: Date de création
-    valid: Valide
-    invalid: Invalide
-    sureArchive: Êtes-vous sûr de vouloir archiver/désarchiver cette offre ?
-    whyInvalid: Pourquoi cette offre n'est-elle pas valide ?
-  log:
-    nbrActive: Nombre d'offres actives
-    nbrEmployer: Nombre d'employeurs
-    nbrCandidate: Nombre de candidats
-    total: Total
-    monthly: Mensuel
-    totalCredit: Nombre total de crédit(s)
-    monthlyCredit: Nombre de crédit(s) par mois
-    selected: Valeur choisie
-  addCredit:
-    title: Ajouter des crédits
-    price: Prix
-    subject: Crédits ajoutés à votre compte
-    creditsAdded: Suite à votre virement %credits% crédits ont été ajoutés à votre compte, vous trouverez ci-joint votre facture.
-
-
-
-tag:
-  accounting: Comptabilité et Finance
-  admin: Admin / Secrétariat
-  advertising: Publicité
-  automotive: Automobile
-  banking: Bancaire
-  biotech: Biotech / Pharmaceutique
-  customerService: Service Clients
-  education: Éducation
-  engineering: Ingénierie
-  environmental: Science environnementale
-  events: Événements
-  facilities: Entretien des installations
-  gov: Gov / Militaire
-  hr: RH et recrutement
-  hospitality: Hôtellerie / Restaurant
-  insurance: Assurance
-  legal: Légal
-  marketing: Marketing / PR
-  nonprofit: Non-lucratif et Fonds
-  oil: Pétrole / Energie
-  real: Immobilier
-  retail: Vente au détail
-  salon: Salon / Beauté / Fitness
-  telecommunications: Télécommunications
-  tv: TV / Film / Musiciens
-  vet: Vétérinaire et soin des animaux
-  work: Travail à domicile
-  analysis: Analyse / Gestion de projet
-  aviation: Aviation
-  call: Centre d'appel
-  consulting: Conseil / Audit / Fiscalité
-  financial: Services financiers
-  freelance: Free-lance
-  graduate: Diplômé
-  investments: Fonds d'investissement
-  media: Médias / nouveaux médias
-  miscellaneous: Divers
-  multi: Services multilingues / linguistiques
-  property: Propriété / Auctioneering
-  purchasing: Achat
-  security: Sécurité
-  senior: Management exécutif
-  travel: Voyage / Tourisme
-  warehouse: Entrepôt / Logistique / Livraison
-  internship: Stage
-  building: Construction de bâtiments / métiers spécialisés
-  business: Business / Gestion stratégique
-  customerSupport: Soutien à la clientèle / Service à la clientèle
-  creative: Design créatif
-  editorial: Éditorial / Rédaction
-  it: Informatique / Développement de logiciels
-  installation: Installation / Maintenance / Réparation
-  medical: Médical / Santé
-  production: Production / Opérations
-  project: Gestion de projet / software
-  quality: Assurance qualité / sécurité
-  rd: R&D/Science
-  sales: Ventes / Développement des affaires
-  security: Sécurité / Services de protection
-  training: Formation / Instruction
-  other: Autre
-  architecture: Architecture et Ingénierie
-  arts: Arts, design et médias
-  businessFinance: Opérations commerciales et financières
-  community: Service communautaire et social
-  farming: Agriculture, pêche et foresterie
-  life: Vie, physique et sciences sociales
-  personal: Soins personnels et service
-  technology: Technologie
-  transportation: Transport et déménagement
-
-language:
-  fr: Français
-  en: Anglais
-  de: Allemand
-  lu: Luxembourgeois
+type:
+  flat: Appartement
+  house: Maison
+  ground: Terrain
+  property: Immeuble de rapport
+  garage: Garage
+  residence: Residence
+  commerce: Commerce
+  office: Bureau
+  warehouse: Entrepot
+  hotel: Restauration / Hotellerie
+  business: Fond de commerce

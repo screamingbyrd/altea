@@ -13,21 +13,21 @@
             <div class="homepage-search-bar search-bar">
                 <div class="checkbox-home-container">
                     <div style="display: flex;">
-                        <div class="div-sell-input"><input type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell"> Vente</div>
-                        <div class="div-rent-input"><input type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent"> Location</div>
+                        <div class="div-sell-input"><input type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell">{{ 'sell'|trans }}</div>
+                        <div class="div-rent-input"><input type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent">{{ 'rent'|trans }}</div>
                     </div>
-                    <div class="div-rent-input"><input type="checkbox" value="1" {% if new %}checked{% endif %} name="new"> Bien neufs</div>
+                    <div class="div-rent-input"><input type="checkbox" value="1" {% if new %}checked{% endif %} name="new">{{ 'new'|trans }}</div>
                 </div>
 
                 <div class="select-home-container">
                     <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
-                        <option value="" selected>Type de bien</option>
+                        <option value="" selected>{{ 'offer.type'|trans }}</option>
                         {% for type in types %}
                             <option value="{{ type }}" {% if type == givenType %}selected{% endif %}>{{ type|trans }}</option>
                         {% endfor %}
                     </select>
                     <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
-                        <option value="" selected>Ville</option>
+                        <option value="" selected>{{ 'offer.city'|trans }}</option>
                         {% for city in cities %}
                             <option value="{{ city }}" {% if city == givenCity %}selected{% endif %}>{{ city }}</option>
                         {% endfor %}
@@ -35,8 +35,8 @@
                 </div>
 
                 <div style="display: flex; margin-bottom: 10px; justify-content: center;">
-                    <div class="div-price-input"><div class="from-to">De </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
-                    <div class="div-price-input"><div class="from-to"> à </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                    <div class="div-price-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" value="{{ from }}" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                    <div class="div-price-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" value="{{ to }}" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
                 </div>
                 <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
             </div>
@@ -60,69 +60,70 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-8 row composition-list">
+                    <div class="">
+                        <div class="col-md-8  composition-list">
                             {% for pro in data %}
-                                <li class="search-result animated fadeIn col-md-4">
-            <span class='offer-element' data-href="#">
-                {#{% if (pro.frontImages.first != false and pro.frontImages.first.imageName is not null and pro.frontImages|length > 1) or (pro.residence.frontImages.first != false and pro.residence.frontImages.first.imageName is not null and pro.residence.frontImages|length > 1)%}#}
+                                <li class="search-result col-md-4">
+                                    <span class='offer-element' data-href="#">
+                                        {#{% if (pro.frontImages.first != false and pro.frontImages.first.imageName is not null and pro.frontImages|length > 1) or (pro.residence.frontImages.first != false and pro.residence.frontImages.first.imageName is not null and pro.residence.frontImages|length > 1)%}#}
 
-                    {#<div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">#}
-                    {#<!-- Indicators -->#}
-                    {#<ol class="carousel-indicators">#}
-                        {#{% set i = 0 %}#}
-                        {#{% for image in pro.frontImages %}#}
-                            {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
-                            {#{% set i = i + 1 %}#}
-                        {#{% endfor %}#}
-                        {#{% for image in pro.residence.frontImages %}#}
-                            {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
-                            {#{% set i = i + 1 %}#}
-                        {#{% endfor %}#}
-                    {#</ol>#}
+                                            {#<div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">#}
+                                            {#<!-- Indicators -->#}
+                                            {#<ol class="carousel-indicators">#}
+                                                {#{% set i = 0 %}#}
+                                                {#{% for image in pro.frontImages %}#}
+                                                    {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
+                                                    {#{% set i = i + 1 %}#}
+                                                {#{% endfor %}#}
+                                                {#{% for image in pro.residence.frontImages %}#}
+                                                    {#<li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>#}
+                                                    {#{% set i = i + 1 %}#}
+                                                {#{% endfor %}#}
+                                            {#</ol>#}
 
-                        {#<!-- Wrapper for slides -->#}
-                    {#<div class="carousel-inner">#}
-                        {#{% set i = 0 %}#}
-                        {#{% for image in pro.frontImages %}#}
-                            {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
-                                {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
-                            {#</div>#}
-                            {#{% set i = i + 1 %}#}
-                        {#{% endfor %}#}
-                        {#{% for image in pro.residence.frontImages %}#}
-                            {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
-                                {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
-                            {#</div>#}
-                            {#{% set i = i + 1 %}#}
-                        {#{% endfor %}#}
-                    {#</div>#}
+                                                {#<!-- Wrapper for slides -->#}
+                                            {#<div class="carousel-inner">#}
+                                                {#{% set i = 0 %}#}
+                                                {#{% for image in pro.frontImages %}#}
+                                                    {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
+                                                        {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
+                                                    {#</div>#}
+                                                    {#{% set i = i + 1 %}#}
+                                                {#{% endfor %}#}
+                                                {#{% for image in pro.residence.frontImages %}#}
+                                                    {#<div class="carousel-item {% if i == 0 %}active{% endif %}">#}
+                                                        {#<img class="image-search-pro" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">#}
+                                                    {#</div>#}
+                                                    {#{% set i = i + 1 %}#}
+                                                {#{% endfor %}#}
+                                            {#</div>#}
 
-                        {#<!-- Left and right controls -->#}
-                    {#<a class="carousel-control-prev" href="#myCarousel-{{ pro.id }}" data-slide="prev">#}
-                        {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-                        {#<span class="sr-only">Previous</span>#}
-                    {#</a>#}
-                    {#<a class="carousel-control-next" href="#myCarousel-{{ pro.id }}" data-slide="next">#}
-                        {#<span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-                        {#<span class="sr-only">Next</span>#}
-                    {#</a>#}
-                {#</div>#}
-                {#{% else %}#}
-                    {#{% if pro.frontImages.first != false and pro.frontImages.first.imageName is not null %}#}
-                        {#{% set image =  'uploads/images' ~ vich_uploader_asset(pro.frontImages.first, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage') %}#}
-                    {#{% else %}#}
-                        {% set image = 'images/default_cover_image6.jpg' %}
-                    {#{% endif %}#}
-                    <div class="background-pro-in-offer-search" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
-                    </div>
-                {#{% endif %}#}
-                <div class="offer-search-element">
-                    <div class="offer-element-details">
-                        <div class="offer-element-title">{{ pro.type }}</div>
-                    </div>
-                </div>
-            </span>
+                                                {#<!-- Left and right controls -->#}
+                                            {#<a class="carousel-control-prev" href="#myCarousel-{{ pro.id }}" data-slide="prev">#}
+                                                {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+                                                {#<span class="sr-only">Previous</span>#}
+                                            {#</a>#}
+                                            {#<a class="carousel-control-next" href="#myCarousel-{{ pro.id }}" data-slide="next">#}
+                                                {#<span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+                                                {#<span class="sr-only">Next</span>#}
+                                            {#</a>#}
+                                        {#</div>#}
+                                        {#{% else %}#}
+                                            {#{% if pro.frontImages.first != false and pro.frontImages.first.imageName is not null %}#}
+                                                {#{% set image =  'uploads/images' ~ vich_uploader_asset(pro.frontImages.first, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage') %}#}
+                                            {#{% else %}#}
+                                                {% set image = 'images/default_cover_image6.jpg' %}
+                                            {#{% endif %}#}
+                                            <div class="background-pro-in-offer-search" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                                            </div>
+                                        {#{% endif %}#}
+                                        <div class="offer-search-element">
+                                            <div class="offer-element-details">
+                                                <div class="offer-element-title">{{ pro.type|trans }}</div>
+                                                <div class="offer-element-title">{{ pro.price }} €</div>
+                                            </div>
+                                        </div>
+                                    </span>
                                 </li>
                             {% endfor %}
                         </div>
@@ -147,26 +148,26 @@
                             var bounds = new google.maps.LatLngBounds();
                             var infoWindow = new google.maps.InfoWindow();
                             {% for position in location %}
-                            {% if position[5] is defined %}
-                            var marker = new google.maps.Marker({position: {lat: {{ position[0] }}, lng: {{ position[1] }}}, map: map});
-                            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                                return function() {
-                                    {% if position[5] != 'image' %}
-                                    {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AI\\GestionBundle\\Entity\\Image') %}
-                                    {% else %}
-                                    {% set image = 'images/default_cover_image6.jpg' %}
-                                    {% endif %}
+                                {% if position[5] is defined %}
+                                    var marker = new google.maps.Marker({position: {lat: {{ position[0] }}, lng: {{ position[1] }}}, map: map});
+                                    google.maps.event.addListener(marker, 'click', (function(marker) {
+                                        return function() {
+                                            {% if position[5] != 'image' %}
+                                            {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AI\\GestionBundle\\Entity\\Image') %}
+                                            {% else %}
+                                            {% set image = 'images/default_cover_image6.jpg' %}
+                                            {% endif %}
 
-                                    var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
-                                    infoWindow.setContent(content);
-                                    infoWindow.open(map, marker);
-                                }
-                            })(marker, i));
-                            bounds.extend({lat: {{ position[0] }}, lng: {{ position[1] }}});
-                            {% endif %}
+                                            var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
+                                            infoWindow.setContent(content);
+                                            infoWindow.open(map, marker);
+                                        }
+                                    })(marker));
+                                    bounds.extend({lat: {{ position[0] }}, lng: {{ position[1] }}});
+                                {% endif %}
                             {% endfor %}
                             {% if location|length > 1 %}
-                            map.fitBounds(bounds);
+                                map.fitBounds(bounds);
                             {% endif %}
                         }
 
@@ -247,6 +248,15 @@
                         }
                     });
 
+                    window.onload = function() {
+                        if(detectmob()){
+                            let $el = $('.homepage-jumbotron');
+                            let bottom = $el.position().top + $el.outerHeight(true) - 60;
+                            $('html, body').animate({
+                                scrollTop: bottom
+                            }, 500);
+                        }
+                    };
                 </script>
 
             </ul>

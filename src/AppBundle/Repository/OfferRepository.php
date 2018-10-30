@@ -11,18 +11,32 @@ namespace AppBundle\Repository;
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function getNotificationOffers($notification)
+    public function searchOffer($params)
     {
-        $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.archived = 0 and (o.startDate > :date OR (o.creationDate > :date AND o.slot is not null))')
-            ->setParameter('date', $notification->getDate());
 
-        if($notification->getTypeNotification() == 'notification.employer'){
-            $query->andWhere('o.employer = :employer')
-            ->setParameter('employer', $notification->getElementId());
-        }elseif ($notification->getTypeNotification() == 'notification.tag'){
-            $query->andWhere(':tag MEMBER OF o.tag')
-            ->setParameter('tag', $notification->getElementId());
+        $query = $this->createQueryBuilder('o');
+
+        if(isset($params['type'])){
+            $query->andWhere('o.type = :type');
+            $query->setParameter('type', $params['type']);
+        }
+        if(isset($params['city'])){
+            $query->andWhere('o.city = :city');
+            $query->setParameter('city', $params['city']);
+        }
+        if(isset($params['from'])){
+            $query->andWhere('o.price >= :from');
+            $query->setParameter('from', $params['from']);
+        }
+
+        if(isset($params['to'])){
+            $query->andWhere('o.price < :to');
+            $query->setParameter('to', $params['to']);
+        }
+
+        if(isset($params['transaction'])){
+            $query->andWhere('o.transaction IN (:array)');
+            $query->setParameter('array', $params['transaction']);
         }
 
         $offers = $query->getQuery()->getResult();
@@ -30,67 +44,4 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
         return $offers;
     }
 
-    public function getOfferTags($id)
-    {
-        $query = $this->createQueryBuilder('o')->select('t.name')->distinct();
-        $query->innerJoin('o.tag', 't')->andWhere('o.archived  = false and o.employer = :employer')
-            ->setParameter('employer', $id)
-            ->orderBy('t.name', 'asc');
-
-        $tags = $query->getQuery()->getResult();
-
-        return $tags;
-    }
-
-    public function getActiveOffers()
-    {
-        $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.archived = 0 and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))');
-
-        $offers = $query->getQuery()->getResult();
-
-        return $offers;
-    }
-
-    public function countOffersInSlot($employer)
-    {
-        $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.employer = :employer and o.archived = 0 and o.slot is not null')
-            ->setParameter('employer', $employer);
-
-        $offers = $query->getQuery()->getResult();
-
-        return count($offers);
-    }
-
-    public function countActiveOffer($employer)
-    {
-        $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.employer = :employer and o.archived = 0 and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))')
-            ->setParameter('employer', $employer);
-
-        $offers = $query->getQuery()->getResult();
-
-        return count($offers);
-    }
-
-    public function countTotalActiveOffer()
-    {
-        $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.archived = 0 and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))');
-
-        $offers = $query->getQuery()->getResult();
-
-        return count($offers);
-    }
-
-    public function countTotalNotValidatedActiveOffer()
-    {
-        $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.archived = 0 and o.validated is null and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))');
-
-        $offers = $query->getQuery()->getResult();
-
-        return count($offers);
-    }
 }
