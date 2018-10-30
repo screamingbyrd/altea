@@ -110,8 +110,8 @@
 .container-search{
     width: 95% !important;
     min-height: 100% !important;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
+    padding-right: 0 ;
+    padding-left: 0;
     margin-right: auto;
     margin-left: auto;
     font-family: myFirstFont,sans-serif !important;
@@ -180,6 +180,11 @@
     margin-right: 3%;
     margin-bottom: 0;
     width: 100%;
+    padding: 5px;
+}
+.offer-element-description{
+    height: 100px;
+    overflow: hidden;
 }
 .offer-item-experience{
     float: right;
@@ -314,224 +319,15 @@
 
 #paginator-offer a:hover:not(.active) {background-color: #ddd !important;}
 
-#loading {
-    width: 100%;
-    height: 100%;
-    opacity: 0.7;
-    background-color: #fff;
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.lds-default {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-}
-.lds-default div {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: #333;
-    border-radius: 50%;
-    animation: lds-default 1.2s linear infinite;
-}
-.lds-default div:nth-child(1) {
-    animation-delay: 0s;
-    top: 29px;
-    left: 53px;
-}
-.lds-default div:nth-child(2) {
-    animation-delay: -0.1s;
-    top: 18px;
-    left: 50px;
-}
-.lds-default div:nth-child(3) {
-    animation-delay: -0.2s;
-    top: 9px;
-    left: 41px;
-}
-.lds-default div:nth-child(4) {
-    animation-delay: -0.3s;
-    top: 6px;
-    left: 29px;
-}
-.lds-default div:nth-child(5) {
-    animation-delay: -0.4s;
-    top: 9px;
-    left: 18px;
-}
-.lds-default div:nth-child(6) {
-    animation-delay: -0.5s;
-    top: 18px;
-    left: 9px;
-}
-.lds-default div:nth-child(7) {
-    animation-delay: -0.6s;
-    top: 29px;
-    left: 6px;
-}
-.lds-default div:nth-child(8) {
-    animation-delay: -0.7s;
-    top: 41px;
-    left: 9px;
-}
-.lds-default div:nth-child(9) {
-    animation-delay: -0.8s;
-    top: 50px;
-    left: 18px;
-}
-.lds-default div:nth-child(10) {
-    animation-delay: -0.9s;
-    top: 53px;
-    left: 29px;
-}
-.lds-default div:nth-child(11) {
-    animation-delay: -1s;
-    top: 50px;
-    left: 41px;
-}
-.lds-default div:nth-child(12) {
-    animation-delay: -1.1s;
-    top: 41px;
-    left: 50px;
-}
-@keyframes lds-default {
-    0%, 20%, 80%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.5);
-    }
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.page-subtitle{
-    text-align: center;
-    font-size: 18px;
-}
-.job-title, .updated-date, .offer-company-name{
-    display: inline-block;
-    padding: 20px;
-}
-.candidate-body{
-    text-align: center;
-    height:  300px;
-}
-.nav-candidate{
-    display: inline-block;
-}
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-    color: #ea3222;
-    background-color: #fff;
-}
 .sticky{
     position: sticky;
 }
-.apply-div-form {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    background: #333;
-    padding: 8px;
-    left: 0;
-    text-align: center;
-    z-index: 1040;
-}
-.inside-offer-apply{
-    display: inline-block;
-    width: 100%;
-}
-.inside-offer-apply-cv{
-    display: flex;
-    align-items: center;
-}
-#cv, #cover-file{
-    padding: 15px;
-    max-width: 340px;
-}
-#comment-input{
-    width: 100%;
-    margin-bottom: 10px;
-    color: #333;
-}
-.submit-apply{
-    margin-bottom: 10px;
-}
-.button-company-name{
-    color: orange !important;
-}
-.tag-offer{
-    margin-right: 5px;
-}
-.tag-offer i{
-    margin-right: 3px;
+
+.search-result{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
-.floating-employer{
-    -webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
-    -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
-    box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
-    -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false;
-    -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
-    -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding-right: 0;
-    padding-left: 0;
-    text-align: center;
-    margin-bottom: 23px;
-}
-.floating-employer .altea-button{
-    margin-bottom: 20px;
-    width: 88%;
-}
-.header-floating-employer{
-    background: #272f3b;
-    color: white;
-    padding: 15px;
-    font-size: 26px;
-    text-align: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.hr-floating-employer{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-top: 1px solid #d4d3d3;
-}
-.floating-employer-logo{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 27%;
-    margin-top: 10px;
-}
-.floating-employer-description{
-    padding: 20px;
-}
-.offer-employer-description{
-    max-height: 200px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-.add-to-favorite{
-    color: orange !important;
-    text-decoration: none !important;
-}
 @media screen and (min-device-width: 481px)and (max-device-width: 992px){
     .cover-letter-offer-title{
         width: 275px;
@@ -699,6 +495,10 @@
     .about-the-offer b{
         color: black !important;
     }
+    .container-search{
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
 }
 
 #employer-input{
@@ -736,6 +536,48 @@
 .search-input-container .col-md-2{
     padding-left: 0;
 }
+
+
+.container-show-offer{
+    margin-bottom: 200px;
+}
+
+.image-room-show{
+    height: 650px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.background-show-offer{
+    min-height: 650px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
+.floorplan-container{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.floorplan-container h3{
+    text-align: initial;
+}
+
+.specification-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.map-show-offer{
+    width: 100%;
+    height: 500px;
+}
+
+
 .no-offer-alert{
     margin-top: 20px;
 }

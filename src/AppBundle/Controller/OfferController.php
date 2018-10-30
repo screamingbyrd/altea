@@ -128,5 +128,31 @@ class OfferController extends Controller
         );
     }
 
+    public function showAction(Request $request){
+        $id = $request->get('id');
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $session = $request->getSession();
+        if(!isset($offer)){
+            $translated = $this->get('translator')->trans('redirect.candidate');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('altea_home');
+        }
+
+        $location = $this->get('app.find_latlong')->geocode($offer->getLocation());
+
+        return $this->render('AppBundle::showRoom.html.twig',
+            array(
+                'offer' => $offer,
+                'location' => $location
+            )
+        );
+    }
 
 }

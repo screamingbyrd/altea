@@ -44,11 +44,11 @@
         </form>
     </div>
 
-    <div class="container">
+    <div class="container container-home-offer">
         <ul id="myUL">
         {% for offer in offerArray %}
-            <li class="search-result col-md-4">
-            <span class='offer-element' data-href="#">
+            <li class="search-result col-md-3">
+            <span class='offer-element' data-href="{{ path('show_offer', {'id':offer.id}) }}">
                 {#{% if (pro.frontImages.first != false and pro.frontImages.first.imageName is not null and pro.frontImages|length > 1) or (pro.residence.frontImages.first != false and pro.residence.frontImages.first.imageName is not null and pro.residence.frontImages|length > 1)%}#}
 
                 {#<div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">#}
@@ -99,12 +99,13 @@
                 {% set image = 'images/default_cover_image6.jpg' %}
                 {#{% endif %}#}
                 <div class="background-pro-in-offer-search" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
-                                    </div>
+                </div>
                 {#{% endif %}#}
                 <div class="offer-search-element">
                     <div class="offer-element-details">
                         <div class="offer-element-title">{{ offer.type|trans }}</div>
                         <div class="offer-element-title">{{ offer.price }} €</div>
+                        <div class="offer-element-description">{{ offer.description }}</div>
                     </div>
                 </div>
             </span>

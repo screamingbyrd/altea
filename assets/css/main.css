@@ -99,6 +99,9 @@ body {
     .container {
         width: 72% !important;
     }
+    .container-home-offer{
+        width: 85% !important;
+    }
     .navbar-fixed-top{
         background-size: 100% 100%;
     }

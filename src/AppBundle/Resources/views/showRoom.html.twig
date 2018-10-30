@@ -1,0 +1,163 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - {{ 'offer.search.title' | trans }}
+{% endblock %}
+
+{% block body %}
+
+    {% if (offer.frontImages.first is defined and offer.frontImages.first != false and offer.frontImages.first.imageName is not null and offer.frontImages|length > 1) %}
+
+        <div id="myCarousel-{{ offer.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% set i = 0 %}
+                {% for image in offer.frontImages %}
+                    <li data-target="#myCarousel-{{ offer.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>
+                    {% set i = i + 1 %}
+                {% endfor %}
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                {% set i = 0 %}
+                {% for image in offer.frontImages %}
+                    <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                        <img class="image-room-show" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">
+                    </div>
+                    {% set i = i + 1 %}
+                {% endfor %}
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#myCarousel-{{ offer.id }}" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel-{{ offer.id }}" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    {% else %}
+        {% if offer.frontImages.first is defined and offer.frontImages.first != false and offer.frontImages.first.imageName is not null %}
+            {% set image =  'uploads/images' ~ vich_uploader_asset(offer.frontImages.first, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage') %}
+        {% else %}
+            {% set image = 'images/default_cover_image6.jpg' %}
+        {% endif %}
+        <div class="background-show-offer" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+        </div>
+    {% endif %}
+
+    <div class="container container-show-offer">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="offer-container-title">
+                    <h1>{{ offer.type|trans }} à {{ offer.city }}</h1>
+                </div>
+                <div class="row offer-container-title">
+                    <div class="col-md-6">
+                        <h3>Détails de la résidence</h3>
+                        <div>{{ offer.description }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Détails de la chambre</h3>
+                        <div>Chaque chambre est équipée d'au moins</div>
+                        <ul>
+                            <li>1 lit et 1 table de nuit</li>
+                            <li>2 couettes (hiver et été), 1 oreiller, 1 protège-matelas</li>
+                            <li>1 Bureau,  1 chaise, 1 poubelle</li>
+                            <li>Armoire</li>
+                            <li>TV à écran plat</li>
+                            <li>Kit de bienvenue gratuit à l'arrivée</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="specification-container">
+                    <h3>Spécification</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                Internet wifi en haut débit
+                            </div>
+                            <div>
+                                Grande TV LCD
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+
+                            <div>Mobilier moderne et neuf</div>
+                        </div>
+                    </div>
+                </div>
+                {% if location[0] is defined %}
+                    <div id="map" class="map-show-offer"></div>
+                    <script>
+                        // Initialize and add the map
+                        function initMap() {
+                            // The location of Uluru
+                            var location = {lat: {{ location[0] }}, lng: {{ location[1] }}};
+                            // The map, centered at Uluru
+                            var map = new google.maps.Map(
+                                document.getElementById('map'), {zoom: 17, center: location, mapTypeControl: false, fullscreenControl: false});
+                            // The marker, positioned at Uluru
+                            var marker = new google.maps.Marker({position: location, map: map});
+                        }
+                    </script>
+                    <!--Load the API from the specified URL
+                    * The async attribute allows the browser to render the page while the API loads
+                    * The key parameter will contain your own API key (which is not needed for this tutorial)
+                    * The callback parameter executes the initMap() function
+                    -->
+                    <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc&callback=initMap">
+                    </script>
+                {% endif %}
+            </div>
+            <div class="col-sm-4 reservation-container">
+                <div class="offer-container-price">
+                    <h2>{{ offer.price }}€ (All-in/Month)</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function detectmob() {
+            if( navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)
+            ){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        var featuredOfferTop = $('.reservation-container').offset().top;
+        var featuredOfferLeft = $('.reservation-container').offset().left;
+        var featuredOfferWidth = $('.reservation-container').outerWidth();
+        $(window).scroll(function() {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll + 50 >= featuredOfferTop && detectmob() == false) {
+                $('.reservation-container').css({
+                    position: 'fixed',
+                    top: '50px',
+                    left: featuredOfferLeft,
+                    width: featuredOfferWidth,
+                });
+            } else {
+                $('.reservation-container').css({
+                    position: 'static'
+                });
+            }
+        });
+    </script>
+
+{% endblock %}
