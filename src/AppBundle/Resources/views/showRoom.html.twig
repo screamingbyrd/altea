@@ -52,47 +52,21 @@
     <div class="container container-show-offer">
         <div class="row">
             <div class="col-sm-8">
-                <div class="offer-container-title">
-                    <h1>{{ offer.type|trans }} à {{ offer.city }}</h1>
-                </div>
-                <div class="row offer-container-title">
-                    <div class="col-md-6">
-                        <h3>Détails de la résidence</h3>
-                        <div>{{ offer.description }}</div>
+                <div class="shadow-box">
+                    <div class="offer-container-title">
+                        <h1>{{ offer.type|trans }} à {{ offer.city }}</h1>
                     </div>
-                    <div class="col-md-6">
-                        <h3>Détails de la chambre</h3>
-                        <div>Chaque chambre est équipée d'au moins</div>
-                        <ul>
-                            <li>1 lit et 1 table de nuit</li>
-                            <li>2 couettes (hiver et été), 1 oreiller, 1 protège-matelas</li>
-                            <li>1 Bureau,  1 chaise, 1 poubelle</li>
-                            <li>Armoire</li>
-                            <li>TV à écran plat</li>
-                            <li>Kit de bienvenue gratuit à l'arrivée</li>
-                        </ul>
+                    <div class="offer-container-title">
+                            <h3>Détails de la résidence</h3>
+                            <div>{{ offer.description }}</div>
                     </div>
                 </div>
-                <div class="specification-container">
-                    <h3>Spécification</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div>
-                                Internet wifi en haut débit
-                            </div>
-                            <div>
-                                Grande TV LCD
-                            </div>
-                        </div>
-                        <div class="col-md-6">
 
-
-                            <div>Mobilier moderne et neuf</div>
-                        </div>
-                    </div>
-                </div>
                 {% if location[0] is defined %}
-                    <div id="map" class="map-show-offer"></div>
+                    <div class="shadow-box">
+                        <div id="map" class="map-show-offer"></div>
+                    </div>
+
                     <script>
                         // Initialize and add the map
                         function initMap() {
@@ -116,53 +90,56 @@
                 {% endif %}
             </div>
             <div class="col-sm-4 reservation-container">
-                <div class="offer-container-price">
+                <div class="offer-container-price shadow-box">
                     <h2>{{ offer.price }}€ (All-in/Month)</h2>
                 </div>
-                <h3>Contacter l'agence</h3>
-                <form method="post" action="{{ path('offer_contact') }}" class="form-horizontal clearfix">
-                    <input type="hidden" value="{{ offer.id }}" name="offerId" id="type-input">
-                    <div class="container-radio-contact" style="margin-left: 40px">
-                        <div>
-                            <input type="radio" id="visit"
-                                   name="type" value="visit" checked />
-                            <label for="visit">Visite</label>
+                <div class="shadow-box">
+                    <h3>Contacter l'agence</h3>
+                    <form method="post" action="{{ path('offer_contact') }}" class="form-horizontal clearfix">
+                        <input type="hidden" value="{{ offer.id }}" name="offerId" id="type-input">
+                        <div class="container-radio-contact" style="margin-left: 40px">
+                            <div>
+                                <input type="radio" id="visit"
+                                       name="type" value="visit" checked />
+                                <label for="visit">Visite</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="info"
+                                       name="type" value="info" />
+                                <label for="info">Infomation</label>
+                            </div>
                         </div>
-                        <div>
-                            <input type="radio" id="info"
-                                   name="type" value="info" />
-                            <label for="info">Infomation</label>
-                        </div>
-                    </div>
-                    <table style="width: 100%;">
-                        <tr>
-                            <th class="label-contact-us">
-                                <label>{{ 'contact.name'|trans }}</label>
-                            </th>
-                            <td class="td-contact-us">
-                                <input class="form-control" name="name" type="text" id="name-input">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="label-contact-us">
-                                <label>{{ 'contact.email'|trans }}</label>
-                            </th>
-                            <td class="td-contact-us">
-                                <input class="form-control" name="email" type="text" id="email-input">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="label-contact-us">
-                                <label>{{ 'contact.message'|trans }}</label>
-                            </th>
-                            <td class="td-contact-us">
-                                <textarea  style="resize: vertical" class="form-control" name="message" id="message-input"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="submit" class="altea-button send-contact" value="{{ 'email.send' | trans }}">
+                        <table style="width: 100%;">
+                            <tr>
+                                <th class="label-contact-us">
+                                    <label>{{ 'contact.name'|trans }}</label>
+                                </th>
+                                <td class="td-contact-us">
+                                    <input class="form-control" name="name" type="text" id="name-input">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="label-contact-us">
+                                    <label>{{ 'contact.email'|trans }}</label>
+                                </th>
+                                <td class="td-contact-us">
+                                    <input class="form-control" name="email" type="text" id="email-input">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="label-contact-us">
+                                    <label>{{ 'contact.message'|trans }}</label>
+                                </th>
+                                <td class="td-contact-us">
+                                    <textarea  style="resize: vertical" class="form-control" name="message" id="message-input"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="submit" class="altea-button send-contact" value="{{ 'email.send' | trans }}">
 
-                </form>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

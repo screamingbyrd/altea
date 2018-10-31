@@ -97,10 +97,9 @@ class OfferController extends Controller
             $address = $offer->getLocation();
             if($address != ''){
                 $marker = $this->get('app.find_latlong')->geocode($address);
-                $marker[] = $this->get('translator')->trans($offer->getType());
-                $marker[] = ' url ';
+                $marker[] = $this->get('translator')->trans($offer->getType()).' - '. $offer->getLocation();
+                $marker[] = $this->generateUrl('show_offer', array('id' => $offer->getId()));
                 $marker[] = 'image';
-                $marker[] = '0123';
                 $locationArray[$offer->getId()] = $marker;
             }
         }
