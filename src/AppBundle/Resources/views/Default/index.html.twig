@@ -12,34 +12,37 @@
         <p>
         <form method="GET" action="{{ path('search_page') }}" id="search-offer-homepage">
             <div class="homepage-search-bar search-bar">
-                <div class="checkbox-home-container">
-                    <div style="display: flex;">
-                        <div class="div-sell-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="sell">{{ 'sell'|trans }}</div>
-                        <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="rent">{{ 'rent'|trans }}</div>
+                <div class="general-search">
+                    <div class="checkbox-home-container">
+                        <div style="display: flex;">
+                            <div class="div-sell-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="sell">{{ 'sell'|trans }}</div>
+                            <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="rent">{{ 'rent'|trans }}</div>
+                        </div>
                     </div>
-                    <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox"  value="1" name="new">{{ 'new'|trans }}</div>
-                </div>
 
-                <div class="select-home-container">
-                    <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
-                        <option value="" disabled selected>{{ 'offer.type'|trans }}</option>
-                        {% for type in types %}
-                            <option value="{{ type }}">{{ type|trans }}</option>
-                        {% endfor %}
-                    </select>
-                    <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
-                        <option value="" disabled selected>{{ 'offer.city'|trans }}</option>
-                        {% for city in cities %}
-                            <option value="{{ city }}">{{ city }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="select-home-container">
+                        <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
+                            <option value="" disabled selected>{{ 'offer.type'|trans }}</option>
+                            {% for type in types %}
+                                <option value="{{ type }}">{{ type|trans }}</option>
+                            {% endfor %}
+                        </select>
+                        <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
+                            <option value="" disabled selected>{{ 'offer.city'|trans }}</option>
+                            {% for city in cities %}
+                                <option value="{{ city }}">{{ city }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="altea-button button-advanced-search"><i class="fas fa-plus-circle"></i></button>
+                    <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
-
-                <div style="display: flex; margin-bottom: 10px; justify-content: center;">
-                    <div class="div-price-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
-                    <div class="div-price-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                <div class="advanced-search">
+                    <div style="display: flex; margin-bottom: 10px; justify-content: center;">
+                        <div class="div-price-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                        <div class="div-price-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                    </div>
                 </div>
-                <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
             </div>
         </form>
     </div>
@@ -203,7 +206,18 @@
             let checkbox = $(this).children('input');
             let checked = checkbox.attr('checked');
             checkbox.attr('checked', !checked);
-        })
+        });
+
+        $('.button-advanced-search').on('click', function (e) {
+            e.preventDefault();
+            if($(this).hasClass('expended')){
+                $(this).removeClass('expended');
+                $('.advanced-search').css('display', 'none');
+            }else {
+                $(this).addClass('expended');
+                $('.advanced-search').css('display', 'block');
+            }
+        });
     </script>
 
 {% endblock %}

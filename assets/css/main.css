@@ -166,7 +166,7 @@ body {
         margin-top: 40px;
     }
     .homepage-search-bar{
-        width: 80% !important;
+        width: 57% !important;
     }
     .choose-featured-offer{
         width: 35%;
@@ -414,8 +414,6 @@ legend{
     box-sizing: border-box;
 }
 .homepage-search-bar{
-    display: inline-flex;
-    height: 65px;
     justify-content: center;
 }
 .search-bar{
@@ -431,7 +429,22 @@ legend{
     padding-right: 10px;
     border-radius: 4px;
 }
-
+.general-search{
+    display: flex;
+    justify-content: center;
+}
+.advanced-search{
+    display: none;
+}
+.button-advanced-search{
+    min-width: 56px;
+    height: 44px;
+    line-height: inherit;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    border: 1px solid #000000;
+}
 .jumbotron{
     text-align: center;
     font-weight: 600 !important;
@@ -459,7 +472,7 @@ legend{
 @media screen and (max-width:1403px) and (min-width:494px){
     .homepage-search-bar{
         display: block;
-        height: 230px !important;
+        width: 95%;
     }
     .select-home-container{
         width: 100% !important;
@@ -540,7 +553,13 @@ legend{
     }
     .homepage-search-bar{
         display: block;
-        height: 340px;
+    }
+    .searchOffer-home{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .general-search{
+        display: block !important;
     }
     .select-home-container{
         width: 100% !important;
@@ -560,7 +579,7 @@ legend{
     }
     .homepage-jumbotron .searchOffer-home{
         margin-left: 0 !important;
-        width: 100%;
+        width: 75%;
     }
     .featured-offer.text-center{
         margin-bottom: 0 !important;
@@ -687,7 +706,7 @@ legend{
     width: 37%;
 }
 .select-home-container{
-    width: 40%;
+    width: 50%;
     display: flex;
 }
 .checkbox-home-container{
