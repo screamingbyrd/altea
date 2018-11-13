@@ -784,6 +784,9 @@ h3.post-offer{
     .compare-offers{
         display: none;
     }
+    .carac-row{
+        display: block !important;
+    }
 }
 
 .offers-button-menu{
@@ -811,4 +814,38 @@ h3.post-offer{
 .fist-time-info{
     padding: 15px;
     border-top: 1px solid #ddd;
+}
+
+.carac-container{
+    display: flow-root;
+}
+.carac-box{
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    width: 100%;
+}
+.carac-row{
+    display: flex;
+}
+.carac-row .col-md-6{
+    display: inline-grid;
+}
+.title-carac{
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.line-carac{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    width: 100%;
+}
+.name-carac{
+    float: left;
+}
+.value-carac{
+    float: right;
 }

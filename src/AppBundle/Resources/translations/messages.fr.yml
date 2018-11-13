@@ -240,6 +240,8 @@ offer:
   city: Ville
   from: De
   to: à
+  showMore: Voir tout
+  showLess: Voir moins
 
 candidate:
   delete:

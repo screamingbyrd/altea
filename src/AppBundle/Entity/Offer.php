@@ -67,9 +67,7 @@ class Offer
     private $old = 0;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -223,9 +221,9 @@ class Offer
     /**
      * @var int
      *
-     * @ORM\Column(name="terrase", type="integer", nullable=true)
+     * @ORM\Column(name="terrasse", type="integer", nullable=true)
      */
-    private $terrase = 0;
+    private $terrasse = 0;
 
     /**
      * @var int
@@ -272,9 +270,9 @@ class Offer
     /**
      * @var boolean
      *
-     * @ORM\Column(name="buannderie", type="boolean")
+     * @ORM\Column(name="buanderie", type="boolean")
      */
-    private $buannderie = 0;
+    private $buanderie = 0;
 
     /**
      * @var boolean
@@ -447,9 +445,9 @@ class Offer
     /**
      * @var boolean
      *
-     * @ORM\Column(name="dpeInPogress", type="boolean")
+     * @ORM\Column(name="dpeInrss", type="boolean")
      */
-    private $dpeInPogress = 0;
+    private $dpeInProgress = 0;
 
     /**
      * @var boolean
@@ -1105,18 +1103,18 @@ class Offer
     /**
      * @return int
      */
-    public function getTerrase()
+    public function getTerrasse()
     {
-        return $this->terrase;
+        return $this->terrasse;
     }
 
     /**
-     * @param int $terrase
+     * @param int $terrasse
      * @return Offer
      */
-    public function setTerrase($terrase)
+    public function setTerrase($terrasse)
     {
-        $this->terrase = $terrase;
+        $this->terrasse = $terrasse;
         return $this;
     }
 
@@ -1231,18 +1229,18 @@ class Offer
     /**
      * @return bool
      */
-    public function isBuannderie()
+    public function isBuanderie()
     {
-        return $this->buannderie;
+        return $this->buanderie;
     }
 
     /**
-     * @param bool $buannderie
+     * @param bool $buanderie
      * @return Offer
      */
-    public function setBuannderie($buannderie)
+    public function setBuanderie($buanderie)
     {
-        $this->buannderie = $buannderie;
+        $this->buanderie = $buanderie;
         return $this;
     }
 
@@ -1681,18 +1679,18 @@ class Offer
     /**
      * @return bool
      */
-    public function isDpeInPogress()
+    public function isDpeInProgress()
     {
-        return $this->dpeInPogress;
+        return $this->dpeInProgress;
     }
 
     /**
-     * @param bool $dpeInPogress
+     * @param bool $dpeInProgress
      * @return Offer
      */
-    public function setDpeInPogress($dpeInPogress)
+    public function setDpeInProgress($dpeInProgress)
     {
-        $this->dpeInPogress = $dpeInPogress;
+        $this->dpeInProgress = $dpeInProgress;
         return $this;
     }
 

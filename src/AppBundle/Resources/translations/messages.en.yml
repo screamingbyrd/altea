@@ -240,6 +240,8 @@ offer:
   city: City
   from: From
   to: to
+  showMore: Show more
+  showLess: Show less
 
 candidate:
   delete:
