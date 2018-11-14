@@ -695,8 +695,8 @@ legend{
     color: white;
     border-radius: 4px;
     height:43px;
-    width: 83px;
     display: flex;
+    width: auto;
 }
 .homepage-jumbotron .div-sell-input{
     margin-right: 1%;

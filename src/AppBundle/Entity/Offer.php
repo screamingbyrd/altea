@@ -72,6 +72,11 @@ class Offer
     private $description;
 
     /**
+     * @ORM\Column(name="descriptionEn", type="text")
+     */
+    private $descriptionEn;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
@@ -647,6 +652,24 @@ class Offer
     public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionEn()
+    {
+        return $this->descriptionEn;
+    }
+
+    /**
+     * @param mixed $descriptionEn
+     * @return Offer
+     */
+    public function setDescriptionEn($descriptionEn)
+    {
+        $this->descriptionEn = $descriptionEn;
         return $this;
     }
 

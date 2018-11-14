@@ -107,7 +107,7 @@ class ContactController extends Controller
             ->setFrom('altea@noreply.lu')
             ->setTo('arthur.regnault@altea.lu')
             ->setBody(
-                '<div>Nous avons été contacté</div><div>Sujet:'.$type.'</div><div>Email:'.$emailSender.'</div><div>Nom:'.$name.'</div><div>Message:'.$message.'</div>',
+                '<div>Nous avons été contacté</div><div>Sujet : '.$type.'</div><div>Offre : '. $this->generateUrl('show_offer', array('id' => $offerId)) .'</div><div>Email : '.$emailSender.'</div><div>Nom : '.$name.'</div><div>Message : '.$message.'</div>',
                 'text/html'
             )
         ;

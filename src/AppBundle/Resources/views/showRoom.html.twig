@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="shadow-box">
-                    <p class="description-show-pro">{{ offer.description |nl2br}}</p>
+                    <p class="description-show-pro">{% if app.request.locale == 'fr' %}{{ offer.description|nl2br }}{% else %}{{ offer.descriptionEn|nl2br }}{% endif %}</p>
                     <p class="show-button-container"><a class="show-description">{{ 'offer.showMore'|trans }}</a></p>
                 </div>
 

@@ -45,7 +45,7 @@
                         <div class="div-min-room-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input style="width: 45px;" class="form-control input-price-home" value="{{ fromRoom }}" name="fromRoom" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
                         <div class="div-other-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input style="width: 45px;" class="form-control input-price-home" value="{{ toRoom }}" name="toRoom" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> {{ 'offer.rooms'|trans }}</div></div>
                     </div>
-                    <div style="display: flex; margin: 10px; margin-left: 30px; justify-content: center;">
+                    <div style="display: flex; margin: 10px; margin-left: 40px; justify-content: center;">
                         <div class="div-other-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" value="{{ fromSurface }}" name="fromSurface" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
                         <div class="div-other-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" value="{{ toSurface }}" name="toSurface" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> m2</div></div>
                     </div>
@@ -131,7 +131,7 @@
                                             <div class="offer-element-details">
                                                 <div class="offer-element-title">{{ offer.type|trans }}</div>
                                                 <div class="offer-element-title">{{ offer.price }} €</div>
-                                                <div class="offer-element-description">{{ offer.description }}</div>
+                                                <div class="offer-element-description">{% if app.request.locale == 'fr' %}{{ offer.description }}{% else %}{{ offer.descriptionEn }}{% endif %}</div>
                                             </div>
                                         </div>
                                     </span>
