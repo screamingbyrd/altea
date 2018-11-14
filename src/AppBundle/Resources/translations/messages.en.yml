@@ -235,6 +235,8 @@ slot:
     title: Empty the slot
     success: The slot has been emptied
 
+at: at
+
 offer:
   type: Type offer
   city: City
@@ -242,6 +244,78 @@ offer:
   to: to
   showMore: Show more
   showLess: Show less
+  rooms: Rooms
+  noOffeer: Sorry but there is no offer for this search
+  new: New
+  carac: Caracteristics
+  sellDetails: Sell details
+  transaction: Transaction
+  price: Price
+  charge: Charge
+  general: General
+  surface: Surface
+  lift: Lift
+  nbrBedroom: Number of bedroom
+  renovated: Renovated
+  inside: Inside
+  hall: Hall
+  equiped: Equiped kitchen
+  open: Open kitchen
+  living: Living
+  doubleLiving: Double living
+  office: Office
+  loggia: Loggia
+  veranda: Verenda
+  nbrBathroom: Number of bathroom
+  nbrShower: Number of shower
+  separatedBathroom: Separated bathroom
+  internalParking: Internal parking
+  outside: Outside
+  terrasse: Terace
+  balcon: Balcony
+  garden: Garden
+  swimmingPool: Swimming pool
+  garage: Garage
+  externalParking: External parking
+  other: Other
+  cupboard: Cupboard
+  basement: Basement
+  attic: Attic
+  meuble: Furnished
+  pet: Pet allowed
+  caveVin: Wine cellar
+  antenna: Antenna
+  voletsRoul: Shutters
+  voletsElec: Electric shutters
+  handicape: Handicap access
+  porteBlindee: Porte blindée
+  parlophone: Reinforced door
+  videophone: Videophone
+  digicode: Digicode
+  alarme: Alarme
+  energy: Energy
+  energyClass: Energy class
+  energyValue: Energy value
+  gesClass: GES
+  gesValue: GES value
+  dpeCurrent: DPE in progress
+  dpeNot: DPE not applicable
+  dpeVirgin: DPE virgin
+  hotWater: Hot water
+  collectif: Collectif
+  gas: Gas
+  electric: Electric
+  chauffage: Heating
+  fuel: Fuel
+  coal: Coal
+  granules: Granules
+  clim: Climatisation
+  cheminee: Cheminee
+  insert: Insert
+  central: Central
+  radiateur: Radiator
+  visit: Visit
+  info: Information
 
 candidate:
   delete:

@@ -33,13 +33,21 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <button class="altea-button button-advanced-search"><i class="fas fa-plus-circle"></i></button>
+                    <button class="altea-button button-advanced-search {% if (from is defined and from != '') or (to is defined and to != '') or (fromRoom is defined and fromRoom != '') or (toRoom is defined and toRoom != '') or (fromSurface is defined and fromSurface != '') or (toSurface is defined and toSurface != '') %}expended{% endif %}"><i class="fas fa-plus-circle"></i></button>
                     <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
-                <div class="advanced-search">
-                    <div style="display: flex; margin-bottom: 10px; justify-content: center;">
+                <div class="advanced-search {% if (from is defined and from != '') or (to is defined and to != '') or (fromRoom is defined and fromRoom != '') or (toRoom is defined and toRoom != '') or (fromSurface is defined and fromSurface != '') or (toSurface is defined and toSurface != '') %}expended{% endif %}">
+                    <div style="display: flex; margin: 10px; justify-content: center;">
                         <div class="div-price-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" value="{{ from }}" name="from" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
                         <div class="div-price-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" value="{{ to }}" name="to" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> €</div></div>
+                    </div>
+                    <div style="display: flex; margin: 10px; justify-content: center;">
+                        <div class="div-min-room-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input style="width: 45px;" class="form-control input-price-home" value="{{ fromRoom }}" name="fromRoom" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                        <div class="div-other-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input style="width: 45px;" class="form-control input-price-home" value="{{ toRoom }}" name="toRoom" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> {{ 'offer.rooms'|trans }}</div></div>
+                    </div>
+                    <div style="display: flex; margin: 10px; margin-left: 30px; justify-content: center;">
+                        <div class="div-other-input"><div class="from-to">{{ 'offer.from'|trans }} </div><input class="form-control input-price-home" value="{{ fromSurface }}" name="fromSurface" type="text" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                        <div class="div-other-input"><div class="from-to"> {{ 'offer.to'|trans }} </div><input class="form-control input-price-home" value="{{ toSurface }}" name="toSurface" type="text" title="{{ 'form.offer.search.keyword' | trans }}"><div class="from-to"> m2</div></div>
                     </div>
                 </div>
             </div>
@@ -51,7 +59,7 @@
             <ul id="myUL">
                 {% if data is not defined or data|length == 0%}
                     <li class="no-offer search-result animated fadeIn">
-                        <div>Sorry but there is no pro for this search</div>
+                        <div>{{ 'offer.noOffer'|trans }}</div>
 
                     </li>
                 {% else %}
@@ -415,7 +423,8 @@
                     $('.advanced-search').css('display', 'none');
                 }else {
                     $(this).addClass('expended');
-                    $('.advanced-search').css('display', 'block');
+                    let style = detectmob()?'block':'flex';
+                    $('.advanced-search').css('display', style);
                 }
             });
         </script>

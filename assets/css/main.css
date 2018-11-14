@@ -435,6 +435,11 @@ legend{
 }
 .advanced-search{
     display: none;
+    justify-content: center;
+}
+
+.expended{
+    display: flex;
 }
 .button-advanced-search{
     min-width: 56px;
@@ -676,7 +681,21 @@ legend{
     color: white;
     border-radius: 4px;
     height:43px;
-    width: 170px;
+    width: 140px;
+    display: flex;
+}
+.div-other-input{
+    color: white;
+    border-radius: 4px;
+    height:43px;
+    width: 120px;
+    display: flex;
+}
+.div-min-room-input{
+    color: white;
+    border-radius: 4px;
+    height:43px;
+    width: 83px;
     display: flex;
 }
 .homepage-jumbotron .div-sell-input{
@@ -1264,6 +1283,9 @@ legend{
     }
     .navbar-nav .open .dropdown-menu a{
         color: white !important;
+    }
+    .expended{
+        display: block !important;
     }
 }
 @media (min-width: 600px){

@@ -54,7 +54,7 @@
             <div class="col-sm-8">
                 <div class="shadow-box">
                     <div class="offer-container-title">
-                        <h1>{{ offer.type|trans }} {% if offer.old == 0 %}Neuf{% endif %} {{ offer.nbrBedroom }} chambre à {{ offer.city }}</h1>
+                        <h1>{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }} {{ 'at'|trans }} {{ offer.city }}</h1>
                     </div>
                 </div>
 
@@ -65,24 +65,24 @@
 
                 <div class="shadow-box carac-container">
                     <div class="characteristic-offer-container">
-                        <h3>Charactéristique</h3>
+                        <h3>{{ 'offer.carac'|trans }}</h3>
                         <div class="carac-row">
                             <div class="col-md-6">
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
-                                        <div class="title-carac"><i class="fas fa-file-invoice-dollar"></i> Détails de la vente</div>
+                                        <div class="title-carac"><i class="fas fa-file-invoice-dollar"></i> {{ 'offer.sellDetails'|trans }}</div>
                                         <div class="line-carac">
-                                            <div class="name-carac">Transaction</div>
-                                            <div class="value-carac">{{ offer.transaction }}</div>
+                                            <div class="name-carac">{{ 'offer.transaction'|trans }}</div>
+                                            <div class="value-carac">{{ offer.transaction|trans }}</div>
                                         </div>
 
                                         <div class="line-carac">
-                                            <div class="name-carac">Prix de vente</div>
+                                            <div class="name-carac">{{ 'offer.price'|trans }}</div>
                                             <div class="value-carac">{{ offer.price }}</div>
                                         </div>
                                         {% if offer.charge is defined and offer.charge != 0 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Charge</div>
+                                                <div class="name-carac">{{ 'offer.charge'|trans }}</div>
                                                 <div class="value-carac">{{ offer.charge }}</div>
                                             </div>
                                         {% endif %}
@@ -92,26 +92,26 @@
                             <div class="col-md-6">
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
-                                        <div class="title-carac"><i class="fas fa-home"></i> Général</div>
+                                        <div class="title-carac"><i class="fas fa-home"></i> {{ 'offer.general'|trans }}</div>
                                         <div class="line-carac">
-                                            <div class="name-carac">Surface</div>
+                                            <div class="name-carac">{{ 'offer.surface'|trans }}</div>
                                             <div class="value-carac">{{ offer.surface }}</div>
                                         </div>
                                         {% if offer.lift %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Lift</div>
+                                                <div class="name-carac">{{ 'offer.lift'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.nbrBedroom is defined and offer.nbrBedroom > 0 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Nombre de chambre</div>
+                                                <div class="name-carac">{{ 'offer.nbrBedroom'|trans }}</div>
                                                 <div class="value-carac">{{ offer.nbrBedroom }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.renovated %}
                                         <div class="line-carac">
-                                            <div class="name-carac">Rénové</div>
+                                            <div class="name-carac">{{ 'offer.renovated'|trans }}</div>
                                             <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                         </div>
                                         {% endif %}
@@ -125,88 +125,88 @@
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
                                         {% set nbrInside = 0 %}
-                                        <div class="title-carac"><i class="fas fa-door-closed"></i> Intérieur</div>
+                                        <div class="title-carac"><i class="fas fa-door-closed"></i> {{ 'offer.inside'|trans }}</div>
                                         {% if offer.hall %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Hall d'entrée</div>
+                                                <div class="name-carac">{{ 'offer.hall'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.equiped %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Cuisine équipé</div>
+                                                <div class="name-carac">{{ 'offer.equiped'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.open %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Cuisine ouverte</div>
+                                                <div class="name-carac">{{ 'offer.open'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.living %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Salon</div>
+                                                <div class="name-carac">{{ 'offer.living'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.doubleLiving %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Salon double</div>
+                                                <div class="name-carac">{{ 'offer.doubleLiving'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.office %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Bureau</div>
+                                                <div class="name-carac">{{ 'offer.office'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.loggia is defined and offer.loggia > 0 %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Loggia</div>
+                                                <div class="name-carac">{{ 'offer.loggia'|trans }}</div>
                                                 <div class="value-carac">{{ offer.loggia }} m2</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.veranda is defined and offer.veranda > 0 %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Véranda</div>
+                                                <div class="name-carac">{{ 'offer.veranda'|trans }}</div>
                                                 <div class="value-carac">{{ offer.veranda }} m2</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.nbrBathroom is defined and offer.nbrBathroom > 0 %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Salle de bain</div>
+                                                <div class="name-carac">{{ 'offer.nbrBathroom'|trans }}</div>
                                                 <div class="value-carac">{{ offer.nbrBathroom }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.nbrShower is defined and offer.nbrShower > 0 %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Salle de douche</div>
+                                                <div class="name-carac">{{ 'offer.nbrShower'|trans }}</div>
                                                 <div class="value-carac">{{ offer.nbrShower }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.separatedBathroom %}
                                             {% set nbrInside = nbrInside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Wc séparé</div>
+                                                <div class="name-carac">{{ 'offer.separatedBathroom'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.internalParking is defined and offer.internalParking > 0 %}
 
                                             <div class="line-carac">
-                                                <div class="name-carac">Parking interieur</div>
+                                                <div class="name-carac">{{ 'offer.internalParking'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
@@ -220,46 +220,46 @@
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
                                         {% set nbrOutside = 0 %}
-                                        <div class="title-carac"><i class="fas fa-tree"></i> Extérieur</div>
+                                        <div class="title-carac"><i class="fas fa-tree"></i> {{ 'offer.outside'|trans }}</div>
                                         {% if offer.terrasse is defined and offer.terrasse > 0 %}
                                             {% set nbrOutside = nbrOutside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Terrasse</div>
+                                                <div class="name-carac">{{ 'offer.terrasse'|trans }}</div>
                                                 <div class="value-carac">{{ offer.terrasse }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.balcon is defined and offer.balcon > 0 %}
                                             {% set nbrOutside = nbrOutside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">balcon</div>
+                                                <div class="name-carac">{{ 'offer.balcon'|trans }}</div>
                                                 <div class="value-carac">{{ offer.balcon }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.garden is defined and offer.garden > 0 %}
                                             {% set nbrOutside = nbrOutside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">jardin</div>
+                                                <div class="name-carac">{{ 'offer.garden'|trans }}</div>
                                                 <div class="value-carac">{{ offer.garden }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.swimmingPool %}
                                             {% set nbrOutside = nbrOutside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Piscine</div>
+                                                <div class="name-carac">{{ 'offer.swimmingPool'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.garage is defined and offer.garage > 0 %}
                                             {% set nbrOutside = nbrOutside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Garage</div>
+                                                <div class="name-carac">{{ 'offer.garage'|trans }}</div>
                                                 <div class="value-carac">{{ offer.garage }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.externalParking is defined and offer.externalParking > 0 %}
                                             {% set nbrOutside = nbrOutside + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Place de parking</div>
+                                                <div class="name-carac">{{ 'offer.externalParking'|trans }}</div>
                                                 <div class="value-carac">{{ offer.externalParking }}</div>
                                             </div>
                                         {% endif %}
@@ -275,108 +275,108 @@
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
                                         {% set nbrOther = 0 %}
-                                        <div class="title-carac"><i class="far fa-list-alt"></i> Autre</div>
+                                        <div class="title-carac"><i class="far fa-list-alt"></i> {{ 'offer.other'|trans }}</div>
                                         {% if offer.cupboard %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Placard</div>
+                                                <div class="name-carac">{{ 'offer.cupboard'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.basement %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Cave</div>
+                                                <div class="name-carac">{{ 'offer.basement'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.attic %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Grenier</div>
+                                                <div class="name-carac">{{ 'offer.attic'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.meuble %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Meublé</div>
+                                                <div class="name-carac">{{ 'offer.meuble'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.pet %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Animaux autorisé</div>
+                                                <div class="name-carac">{{ 'offer.pet'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.caveVin %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Cave à vin</div>
+                                                <div class="name-carac">{{ 'offer.caveVin'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.antenna %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Antenne parabolique</div>
+                                                <div class="name-carac">{{ 'offer.antenna'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.voletsRoul %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Volets roulants</div>
+                                                <div class="name-carac">{{ 'offer.voletsRoul'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.voletsElec %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Volets electrique</div>
+                                                <div class="name-carac">{{ 'offer.voletsElec'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.handicape %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Accès handicapé</div>
+                                                <div class="name-carac">{{ 'offer.handicape'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.porteBlindee %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Porte blindée</div>
+                                                <div class="name-carac">{{ 'offer.porteBlindee'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.parlophone %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Parlophone</div>
+                                                <div class="name-carac">{{ 'offer.parlophone'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.videophone %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Videophone</div>
+                                                <div class="name-carac">{{ 'offer.videophone'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.digicode %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Digicode</div>
+                                                <div class="name-carac">{{ 'offer.digicode'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.alarme %}
                                             {% set nbrOther = nbrOther + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Alarme</div>
+                                                <div class="name-carac">{{ 'offer.alarme'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
@@ -390,141 +390,141 @@
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
                                         {% set nbrEnergy = 0 %}
-                                        <div class="title-carac"><i class="fas fa-chart-bar"></i> Energie</div>
+                                        <div class="title-carac"><i class="fas fa-chart-bar"></i> {{ 'offer.energy'|trans }}</div>
                                         {% if offer.energy is defined and offer.energy is not null %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Classe énergétique</div>
+                                                <div class="name-carac">{{ 'offer.energyClass'|trans }}</div>
                                                 <div class="value-carac">{{ offer.energy }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.energyValue is defined and offer.energyValue is not null %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Valeur énergétique</div>
+                                                <div class="name-carac">{{ 'offer.energyValue'|trans }}</div>
                                                 <div class="value-carac">{{ offer.energyValue }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.ges is defined and offer.ges is not null %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">GES</div>
+                                                <div class="name-carac">{{ 'offer.gesClass'|trans }}</div>
                                                 <div class="value-carac">{{ offer.ges }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.gesValue is defined and offer.gesValue is not null %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Valeur GES</div>
+                                                <div class="name-carac">{{ 'offer.gesValue'|trans }}</div>
                                                 <div class="value-carac">{{ offer.gesValue }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.dpeInProgress %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">DPE en cours</div>
+                                                <div class="name-carac">{{ 'offer.dpeCurrent'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.dpeNotApplicable %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">DPE non applicable</div>
+                                                <div class="name-carac">{{ 'offer.dpeNot'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.dpeVirgin %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">DPE vièrge</div>
+                                                <div class="name-carac">{{ 'offer.dpeVirgin'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.collectiveWater or offer.gazWater or offer.elecWater %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                         <div class="line-carac">
-                                            <div class="name-carac">Eau chaude</div>
-                                            <div class="value-carac">{% if offer.collectiveWater %}collectif{% elseif offer.gazWater %}gaz{% else %}Electricité{% endif %}</div>
+                                            <div class="name-carac">{{ 'offer.hotWater'|trans }}</div>
+                                            <div class="value-carac">{% if offer.collectiveWater %}{{ 'offer.collectif'|trans }}{% elseif offer.gazWater %}{{ 'offer.gas'|trans }}{% else %}{{ 'offer.electric'|trans }}{% endif %}</div>
                                         </div>
                                         {% endif %}
                                         {% if offer.gaz or offer.elec or offer.fuel or offer.collectif or offer.charbon or offer.granules or offer.clim or offer.cheminee or offer.insert or offer.central or offer.radiateur   %}
-                                        <div style="margin-top: 5px; margin-bottom: 10px;">Chauffage</div>
+                                        <div style="margin-top: 5px; margin-bottom: 10px;">{{ 'offer.chauffage'|trans }}</div>
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                         {% endif %}
                                         {% if offer.gaz %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Gas</div>
+                                                <div class="name-carac">{{ 'offer.gas'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.elec %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Electricité</div>
+                                                <div class="name-carac">{{ 'offer.electric'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.fuel %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Fuel</div>
+                                                <div class="name-carac">{{ 'offer.fuel'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.collectif %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Collectif</div>
+                                                <div class="name-carac">{{ 'offer.collectif'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.charbon %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Charbon</div>
+                                                <div class="name-carac">{{ 'offer.coal'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.granules %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Granules</div>
+                                                <div class="name-carac">{{ 'offer.granules'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.clim %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Climatisation</div>
+                                                <div class="name-carac">{{ 'offer.clim'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.cheminee %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Cheminée</div>
+                                                <div class="name-carac">{{ 'offer.cheminee'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.insert %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Insert</div>
+                                                <div class="name-carac">{{ 'offer.insert'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.central %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Central</div>
+                                                <div class="name-carac">{{ 'offer.central'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
                                         {% if offer.radiateur %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
-                                                <div class="name-carac">Radiateur</div>
+                                                <div class="name-carac">{{ 'offer.radiateur'|trans }}</div>
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
@@ -581,12 +581,12 @@
                             <div>
                                 <input type="radio" id="visit"
                                        name="type" value="visit" checked />
-                                <label for="visit">Visite</label>
+                                <label for="visit">{{ 'offer.visit'|trans }}</label>
                             </div>
                             <div>
                                 <input type="radio" id="info"
                                        name="type" value="info" />
-                                <label for="info">Infomation</label>
+                                <label for="info">{{ 'offer.info'|trans }}</label>
                             </div>
                         </div>
                         <table style="width: 100%;">

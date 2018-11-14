@@ -25,6 +25,10 @@ class OfferController extends Controller
         $city = $request->get('city');
         $from = $request->get('from');
         $to = $request->get('to');
+        $fromRoom = $request->get('fromRoom');
+        $toRoom = $request->get('toRoom');
+        $fromSurface = $request->get('fromSurface');
+        $toSurface = $request->get('toSurface');
         $rent = $request->get('rent');
         $rent = isset($rent)?1:0;
         $sell = $request->get('sell');
@@ -84,6 +88,22 @@ class OfferController extends Controller
             $searchArray['to'] = $to;
         }
 
+        if(isset($fromSurface) and $fromSurface != ''){
+            $searchArray['fromSurface'] = $fromSurface;
+        }
+
+        if(isset($toSurface) and $toSurface != ''){
+            $searchArray['toSurface'] = $toSurface;
+        }
+
+        if(isset($fromRoom) and $fromRoom != ''){
+            $searchArray['fromRoom'] = $fromRoom;
+        }
+
+        if(isset($toRoom) and $toRoom != ''){
+            $searchArray['toRoom'] = $toRoom;
+        }
+
         $finalData = $offerRepository->searchOffer($searchArray);
 
         $locationArray =array();
@@ -123,6 +143,10 @@ class OfferController extends Controller
                 'new' => $new,
                 'from' => $from,
                 'to' => $to,
+                'fromRoom' => $fromRoom,
+                'toRoom' => $toRoom,
+                'fromSurface' => $fromSurface,
+                'toSurface' => $toSurface,
             )
         );
     }

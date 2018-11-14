@@ -235,6 +235,8 @@ slot:
     title: Vider le slot
     success: Le slot à bien été vidé
 
+at: à
+
 offer:
   type: Type de bien
   city: Ville
@@ -242,6 +244,78 @@ offer:
   to: à
   showMore: Voir tout
   showLess: Voir moins
+  rooms: Chambres
+  noOffeer: Désolé, il n'y a pas d'offre correspondant à votre recherche
+  new: Neuf
+  carac: Charactéristique
+  sellDetails: Détails de la vente
+  transaction: Transaction
+  price: Prix
+  charge: Charge
+  general: Général
+  surface: Surface
+  lift: Ascenseur
+  nbrBedroom: Nombre de chambre
+  renovated: Rénové
+  inside: Intérieur
+  hall: Hall d'entrée
+  equiped: Cuisine équipé
+  open: Cuisine ouverte
+  living: Salon
+  doubleLiving: Salon double
+  office: Bureau
+  loggia: Loggia
+  veranda: Véranda
+  nbrBathroom: Salle de bain
+  nbrShower: Salle de douche
+  separatedBathroom: WC séparé
+  internalParking: Parking interieur
+  outside: Extérieur
+  terrasse: Terasse
+  balcon: Balcon
+  garden: Jardin
+  swimmingPool: Piscine
+  garage: Garage
+  externalParking: Place de parking
+  other: Autre
+  cupboard: Placard
+  basement: Cave
+  attic: Grenier
+  meuble: Meublé
+  pet: Animaux autorisé
+  caveVin: Cave à vin
+  antenna: Antenne parabolique
+  voletsRoul: Volets roulants
+  voletsElec: Volets electrique
+  handicape: Accès handicapé
+  porteBlindee: Porte blindée
+  parlophone: Parlophone
+  videophone: Videophone
+  digicode: Digicode
+  alarme: Alarme
+  energy: Energie
+  energyClass: Classe énergétique
+  energyValue: Valeur énergétique
+  gesClass: GES
+  gesValue: Valeur GES
+  dpeCurrent: DPE en cours
+  dpeNot: DPE non applicable
+  dpeVirgin: DPE vièrge
+  hotWater: Eau chaude
+  collectif: Collectif
+  gas: Gas
+  electric: Electricité
+  chauffage: Chauffage
+  fuel: Fuel
+  coal: Charbon
+  granules: Granules
+  clim: Climatisation
+  cheminee: Cheminée
+  insert: Insert
+  central: Central
+  radiateur: Radiateur
+  visit: Visite
+  info: Information
 
 candidate:
   delete:

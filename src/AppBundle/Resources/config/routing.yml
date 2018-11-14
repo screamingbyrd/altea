@@ -35,8 +35,8 @@ search_page:
     defaults: { _controller: AppBundle:Offer:searchPage }
 show_offer:
     locales:
-        en: "/offer"
-        fr: "/offre"
+        en: "/offer/{id}"
+        fr: "/offre/{id}"
     defaults: { _controller: AppBundle:Offer:show }
 contact_us:
     locales:

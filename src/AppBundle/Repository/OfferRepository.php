@@ -33,6 +33,24 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             $query->andWhere('o.price < :to');
             $query->setParameter('to', $params['to']);
         }
+        if(isset($params['fromSurface'])){
+            $query->andWhere('o.surface >= :fromSurface');
+            $query->setParameter('fromSurface', $params['fromSurface']);
+        }
+
+        if(isset($params['toSurface'])){
+            $query->andWhere('o.surface < :toSurface');
+            $query->setParameter('toSurface', $params['toSurface']);
+        }
+        if(isset($params['fromRoom'])){
+            $query->andWhere('o.nbrBedroom >= :fromRoom');
+            $query->setParameter('fromRoom', $params['fromRoom']);
+        }
+
+        if(isset($params['toRoom'])){
+            $query->andWhere('o.nbrBedroom < :toRoom');
+            $query->setParameter('toRoom', $params['toRoom']);
+        }
 
         if(isset($params['transaction'])){
             $query->andWhere('o.transaction IN (:array)');
