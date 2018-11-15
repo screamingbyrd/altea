@@ -570,7 +570,7 @@
             </div>
             <div class="col-sm-4 reservation-container">
                 <div class="offer-container-price shadow-box">
-                    <h2>{{ offer.price }}€ (All-in/Month)</h2>
+                    <h2>{{ offer.price }}€ {% if offer.transaction == 'rent' %}(All-in/Month){% endif %}</h2>
                     <div>Ref. {{ offer.reference }}</div>
                 </div>
                 <div class="shadow-box">

@@ -231,11 +231,11 @@
 
         $('.button-advanced-search').on('click', function (e) {
             e.preventDefault();
-            if($(this).hasClass('expended')){
-                $(this).removeClass('expended');
+            if($(this).hasClass('extended')){
+                $(this).removeClass('extended');
                 $('.advanced-search').css('display', 'none');
             }else {
-                $(this).addClass('expended');
+                $(this).addClass('extended');
                 let style = detectmob()?'block':'flex';
                 $('.advanced-search').css('display', style);
             }

@@ -33,7 +33,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <button class="altea-button button-advanced-search {% if (from is defined and from != '') or (to is defined and to != '') or (fromRoom is defined and fromRoom != '') or (toRoom is defined and toRoom != '') or (fromSurface is defined and fromSurface != '') or (toSurface is defined and toSurface != '') %}expended{% endif %}"><i class="fas fa-plus-circle"></i></button>
+                    <button class="altea-button button-advanced-search {% if (from is defined and from != '') or (to is defined and to != '') or (fromRoom is defined and fromRoom != '') or (toRoom is defined and toRoom != '') or (fromSurface is defined and fromSurface != '') or (toSurface is defined and toSurface != '') %}extended{% endif %}"><i class="fas fa-plus-circle"></i></button>
                     <input type="submit" class="altea-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
                 <div class="advanced-search {% if (from is defined and from != '') or (to is defined and to != '') or (fromRoom is defined and fromRoom != '') or (toRoom is defined and toRoom != '') or (fromSurface is defined and fromSurface != '') or (toSurface is defined and toSurface != '') %}expended{% endif %}">
@@ -418,11 +418,11 @@
 
             $('.button-advanced-search').on('click', function (e) {
                 e.preventDefault();
-                if($(this).hasClass('expended')){
-                    $(this).removeClass('expended');
+                if($(this).hasClass('extended')){
+                    $(this).removeClass('extended');
                     $('.advanced-search').css('display', 'none');
                 }else {
-                    $(this).addClass('expended');
+                    $(this).addClass('extended');
                     let style = detectmob()?'block':'flex';
                     $('.advanced-search').css('display', style);
                 }

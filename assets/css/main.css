@@ -1287,6 +1287,9 @@ legend{
     .expended{
         display: block !important;
     }
+    .carac-row .col-md-6{
+        width: 100% !important;
+    }
 }
 @media (min-width: 600px){
     .faq-button{
