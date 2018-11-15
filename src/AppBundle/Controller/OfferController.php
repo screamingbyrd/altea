@@ -182,98 +182,131 @@ class OfferController extends Controller
 
     public function processOffersAction(){
 
+        $API_URL = "https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2/getAnnonces";
+        $headers = [
+            'token: 3e73d2ef7312614d6d0216cba72b81a2',
+        ];
+        try {
+            $ch = curl_init($API_URL);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_FORBID_REUSE, true );
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($ch);
+            $info = curl_getinfo($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $result = json_decode($result, true);
+            var_dump($result['data'][0]);exit;
+            If ( $httpcode !== 200 )
+                echo ( 'Error with httpcode ' .$httpcode );
+            if ( $result['status'] != 200 )
+                echo ('Error with message ' .$result['error'] );
+
+        } catch(\Exception $e) {}
+
         $em = $this->getDoctrine()->getManager();
 
-        $offer = new Offer();
+        foreach ($result['data'] as $data){
+            $offer = new Offer();
 
-        $offer->setType('type.house');
-        $offer->setDescription('C\'est une description');
-        $offer->setDescriptionEn('This is a description');
-        $offer->setCity('Luxembourg');
-        $offer->setPrice(40000);
-        $offer->setTransaction('sell');
-        $offer->setLocation('221 route d\'esch, Luxembourg');
-        $offer->setReference('B.O.B.');
-        $offer->setEntryDate(new \datetime());
-        $offer->setOld(false);
-        $offer->setZipcode('L-1547');
-        $offer->setCountry('Luxembourg');
-        $offer->setCharge(null);
-        $offer->setShowPrice(true);
-        $offer->setHall(true);
-        $offer->setKitchen(true);
-        $offer->setEquiped(true);
-        $offer->setOpen(true);
-        $offer->setLiving(true);
-        $offer->setDoubleLiving(true);
-        $offer->setOffice(true);
-        $offer->setNbrShower(4);
-        $offer->setNbrBathroom(2);
-        $offer->setSeparatedBathroom(1);
-        $offer->setCupboard(true);
-        $offer->setBasement(true);
-        $offer->setNbrBedroom(2);
-        $offer->setSurface(200);
-        $offer->setTerrase(200);
-        $offer->setBalcon(200);
-        $offer->setGarden(200);
-        $offer->setVeranda(200);
-        $offer->setLoggia(200);
-        $offer->setSwimmingPool(true);
-        $offer->setAttic(11);
-        $offer->setBuanderie(true);
-        $offer->setRenovated(true);
-        $offer->setMeuble(true);
-        $offer->setPet(true);
-        $offer->setCaveVin(true);
-        $offer->setNbrFloor(5);
-        $offer->setFloor('4');
-        $offer->setLastFloor(false);
-        $offer->setExternalParking(1);
-        $offer->setInternalParking(1);
-        $offer->setGarage(1);
-        $offer->setLift(true);
-        $offer->setAntenna(true);
-        $offer->setVoletsRoul(true);
-        $offer->setVoletsElec(true);
-        $offer->setHandicape(true);
-        $offer->setPorteBlindee(true);
-        $offer->setParlophone(true);
-        $offer->setVideophone(true);
-        $offer->setDigicode(true);
-        $offer->setAlarme(true);
-        $offer->setEnergy('A');
-        $offer->setEnergyValue('4000');
-        $offer->setGes('B');
-        $offer->setGesValue('3000');
-        $offer->setDpeInProgress(true);
-        $offer->setDpeNotApplicable(true);
-        $offer->setDpeVirgin(true);
-        $offer->setGaz(true);
-        $offer->setElec(true);
-        $offer->setFuel(true);
-        $offer->setCollectif(true);
-        $offer->setCharbon(true);
-        $offer->setGranules(true);
-        $offer->setClim(true);
-        $offer->setCheminee(true);
-        $offer->setInsertHeat(true);
-        $offer->setCentral(true);
-        $offer->setRadiateur(true);
-        $offer->setCollectiveWater(true);
-        $offer->setGazWater(true);
-        $offer->setElecWater(true);
+            $offer->setType($data['info']['nature']);
+            $offer->setDescription($data['description']['description_fr']);
+            $offer->setDescriptionEn($data['description']['description_en']);
+            $offer->setCity($data['localisation']['ville']);
+            $offer->setPrice($data['prix']['budget']);
+            $offer->setTransaction($data['info']['vente_location']=='location'?'rent':'sell');
+            $offer->setLocation($data['localisation']['adresse']);
+            $offer->setReference($data['info']['reference']);
+            $offer->setEntryDate(new \datetime($data['info']['date_entree']));
+            $offer->setOld($data['info']['achat_type']=='ancien'?true:false);
+            $offer->setZipcode($data['localisation']['code_postal']);
+            $offer->setCountry($data['localisation']['pays']);
+            $offer->setCharge($data['prix']['charges_mensuelles']);
+            $offer->setShowPrice($data['prix']['cacher_prix']);
+            $offer->setHall($data['pieces']['hall']);
+            $offer->setKitchen($data['pieces']['cuisine']);
+            $offer->setEquiped($data['pieces']['cuisine_equipee']);
+            $offer->setOpen($data['pieces']['cuisine_independante']);
+            $offer->setLiving($data['pieces']['sejour']);
+            $offer->setDoubleLiving($data['pieces']['sejour_double']);
+            $offer->setOffice($data['pieces']['bureau']);
+            $offer->setNbrShower($data['pieces']['salle_de_douche']);
+            $offer->setNbrBathroom($data['pieces']['salles_de_bain']);
+            $offer->setSeparatedBathroom($data['pieces']['wc_separe']);
+            $offer->setCupboard($data['pieces']['placard']);
+            $offer->setBasement($data['pieces']['cave']);
+            $offer->setNbrBedroom($data['info']['nombre_chambres']);
+            $offer->setSurface($data['info']['surface']);
+            $offer->setTerrase($data['exterieur']['surface_terrasse']);
+            $offer->setBalcon($data['exterieur']['surface_balcon']);
+            $offer->setGarden($data['exterieur']['surface_jardin']);
+            $offer->setVeranda($data['exterieur']['surface_veranda']);
+            $offer->setLoggia(200);
+            $offer->setSwimmingPool($data['exterieur']['piscine']);
+            $offer->setAttic($data['interieur']['surface_grenier']);
+            $offer->setBuanderie($data['interieur']['buanderie']);
+            $offer->setRenovated($data['interieur']['renove']);
+            $offer->setMeuble($data['interieur']['meuble']);
+            $offer->setPet($data['interieur']['animaux_acceptes']);
+            $offer->setCaveVin($data['interieur']['cave_a_vin']);
+            $offer->setNbrFloor($data['localisation']['nombre_etage']);
+            $offer->setFloor($data['localisation']['numero_etage']);
+//            $offer->setLastFloor(false);
+            $offer->setExternalParking($data['parking']['parking_ouvert']);
+            $offer->setInternalParking($data['parking']['parking_souterrain']);
+            $offer->setGarage($data['parking']['garages']);
+            $offer->setLift($data['confort']['ascenseur']);
+            $offer->setAntenna($data['confort']['antenne_satellite']);
+            $offer->setVoletsRoul($data['confort']['volets_roulants']);
+            $offer->setVoletsElec($data['confort']['volets_electriques']);
+            $offer->setHandicape($data['confort']['installation_handicapes']);
+            $offer->setPorteBlindee($data['securite']['porte_blindee']);
+            $offer->setParlophone($data['securite']['parlophone']);
+            $offer->setVideophone($data['securite']['videophone']);
+            $offer->setDigicode($data['securite']['digicode']);
+            $offer->setAlarme($data['securite']['alarme']);
+            $offer->setEnergy($data['energie']['indice_energetique']);
+            $offer->setEnergyValue($data['energie']['valeur_indice_energetique']);
+            $offer->setGes($data['energie']['indice_isolation']);
+            $offer->setGesValue($data['energie']['valeur_indice_isolation']);
+            $offer->setDpeInProgress($data['energie']['dpe_en_cours']);
+//            $offer->setDpeNotApplicable(true);
+//            $offer->setDpeVirgin(true);
+            $offer->setGaz($data['chauffage']['chauffage_gaz']);
+            $offer->setElec($data['chauffage']['chauffage_elect']);
+            $offer->setFuel($data['chauffage']['chauffage_mazout']);
+            $offer->setCollectif($data['chauffage']['chauffage_col']);
+            $offer->setCharbon($data['chauffage']['charbon']);
+            $offer->setGranules($data['chauffage']['granules']);
+            $offer->setClim($data['chauffage']['climatisation']);
+            $offer->setCheminee($data['chauffage']['cheminee']);
+            $offer->setInsertHeat($data['chauffage']['insert_cheminee']);
+//            $offer->setCentral(false);
+            $offer->setRadiateur($data['chauffage']['radiateurs']);
+//            $offer->setCollectiveWater(true);
+//            $offer->setGazWater(true);
+//            $offer->setElecWater(true);
 
-        $image = new Image();
+            foreach ($data['photos'] as $photo){
+                $image = new Image();
 
-        $image->setImageName('download.jpg');
-//        $image->setImageFile('uploads/images/offer/download.jpg');
-        $image->setOffer($offer);
-        $image->setUpdatedAt(new \datetime());
+                $img = '/uploads/images/offer/'.$photo['name'];
+                file_put_contents($img, file_get_contents('https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2'.$photo['hash']));
 
-        $offer->addImage($image);
+                $image->setImageName($photo['name']);
+                $image->setOffer($offer);
+                $image->setUpdatedAt(new \datetime());
 
-        $em->persist($offer);
+                $offer->addImage($image);
+            }
+
+
+
+            $em->persist($offer);
+            $em->flush();
+            exit;
+        }
+
         $em->flush();
 
         return new Response();
