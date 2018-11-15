@@ -8,6 +8,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
+use AppBundle\Entity\Offer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -176,6 +178,105 @@ class OfferController extends Controller
                 'location' => $location
             )
         );
+    }
+
+    public function processOffersAction(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $offer = new Offer();
+
+        $offer->setType('type.house');
+        $offer->setDescription('C\'est une description');
+        $offer->setDescriptionEn('This is a description');
+        $offer->setCity('Luxembourg');
+        $offer->setPrice(40000);
+        $offer->setTransaction('sell');
+        $offer->setLocation('221 route d\'esch, Luxembourg');
+        $offer->setReference('B.O.B.');
+        $offer->setEntryDate(new \datetime());
+        $offer->setOld(false);
+        $offer->setZipcode('L-1547');
+        $offer->setCountry('Luxembourg');
+        $offer->setCharge(null);
+        $offer->setShowPrice(true);
+        $offer->setHall(true);
+        $offer->setKitchen(true);
+        $offer->setEquiped(true);
+        $offer->setOpen(true);
+        $offer->setLiving(true);
+        $offer->setDoubleLiving(true);
+        $offer->setOffice(true);
+        $offer->setNbrShower(4);
+        $offer->setNbrBathroom(2);
+        $offer->setSeparatedBathroom(1);
+        $offer->setCupboard(true);
+        $offer->setBasement(true);
+        $offer->setNbrBedroom(2);
+        $offer->setSurface(200);
+        $offer->setTerrase(200);
+        $offer->setBalcon(200);
+        $offer->setGarden(200);
+        $offer->setVeranda(200);
+        $offer->setLoggia(200);
+        $offer->setSwimmingPool(true);
+        $offer->setAttic(11);
+        $offer->setBuanderie(true);
+        $offer->setRenovated(true);
+        $offer->setMeuble(true);
+        $offer->setPet(true);
+        $offer->setCaveVin(true);
+        $offer->setNbrFloor(5);
+        $offer->setFloor('4');
+        $offer->setLastFloor(false);
+        $offer->setExternalParking(1);
+        $offer->setInternalParking(1);
+        $offer->setGarage(1);
+        $offer->setLift(true);
+        $offer->setAntenna(true);
+        $offer->setVoletsRoul(true);
+        $offer->setVoletsElec(true);
+        $offer->setHandicape(true);
+        $offer->setPorteBlindee(true);
+        $offer->setParlophone(true);
+        $offer->setVideophone(true);
+        $offer->setDigicode(true);
+        $offer->setAlarme(true);
+        $offer->setEnergy('A');
+        $offer->setEnergyValue('4000');
+        $offer->setGes('B');
+        $offer->setGesValue('3000');
+        $offer->setDpeInProgress(true);
+        $offer->setDpeNotApplicable(true);
+        $offer->setDpeVirgin(true);
+        $offer->setGaz(true);
+        $offer->setElec(true);
+        $offer->setFuel(true);
+        $offer->setCollectif(true);
+        $offer->setCharbon(true);
+        $offer->setGranules(true);
+        $offer->setClim(true);
+        $offer->setCheminee(true);
+        $offer->setInsertHeat(true);
+        $offer->setCentral(true);
+        $offer->setRadiateur(true);
+        $offer->setCollectiveWater(true);
+        $offer->setGazWater(true);
+        $offer->setElecWater(true);
+
+        $image = new Image();
+
+        $image->setImageName('download.jpg');
+//        $image->setImageFile('uploads/images/offer/download.jpg');
+        $image->setOffer($offer);
+        $image->setUpdatedAt(new \datetime());
+
+        $offer->addImage($image);
+
+        $em->persist($offer);
+        $em->flush();
+
+        return new Response();
     }
 
 }

@@ -6,13 +6,13 @@
 
 {% block body %}
 
-    {% if (offer.frontImages.first is defined and offer.frontImages.first != false and offer.frontImages.first.imageName is not null and offer.frontImages|length > 1) %}
+    {% if (offer.images.first is defined and offer.images.first != false and offer.images.first.imageName is not null and offer.images|length > 1) %}
 
         <div id="myCarousel-{{ offer.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 {% set i = 0 %}
-                {% for image in offer.frontImages %}
+                {% for image in offer.images %}
                     <li data-target="#myCarousel-{{ offer.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>
                     {% set i = i + 1 %}
                 {% endfor %}
@@ -21,9 +21,9 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 {% set i = 0 %}
-                {% for image in offer.frontImages %}
+                {% for image in offer.images %}
                     <div class="carousel-item {% if i == 0 %}active{% endif %}">
-                        <img class="image-room-show" src="{{ asset('uploads/images' ~ vich_uploader_asset(image, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage')) }}">
+                        <img class="image-room-show" src="{{ asset('uploads/' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
                     </div>
                     {% set i = i + 1 %}
                 {% endfor %}
@@ -40,8 +40,8 @@
             </a>
         </div>
     {% else %}
-        {% if offer.frontImages.first is defined and offer.frontImages.first != false and offer.frontImages.first.imageName is not null %}
-            {% set image =  'uploads/images' ~ vich_uploader_asset(offer.frontImages.first, 'imageFile', 'AI\\GestionBundle\\Entity\\FrontImage') %}
+        {% if offer.images.first is defined and offer.images.first != false and offer.images.first.imageName is not null %}
+            {% set image =  'uploads/' ~ vich_uploader_asset(offer.images.first, 'imageFile', 'AppBundle\\Entity\\Image') %}
         {% else %}
             {% set image = 'images/default_cover_image6.jpg' %}
         {% endif %}
@@ -447,7 +447,7 @@
                                             <div class="value-carac">{% if offer.collectiveWater %}{{ 'offer.collectif'|trans }}{% elseif offer.gazWater %}{{ 'offer.gas'|trans }}{% else %}{{ 'offer.electric'|trans }}{% endif %}</div>
                                         </div>
                                         {% endif %}
-                                        {% if offer.gaz or offer.elec or offer.fuel or offer.collectif or offer.charbon or offer.granules or offer.clim or offer.cheminee or offer.insert or offer.central or offer.radiateur   %}
+                                        {% if offer.gaz or offer.elec or offer.fuel or offer.collectif or offer.charbon or offer.granules or offer.clim or offer.cheminee or offer.insertHeat or offer.central or offer.radiateur   %}
                                         <div style="margin-top: 5px; margin-bottom: 10px;">{{ 'offer.chauffage'|trans }}</div>
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                         {% endif %}
@@ -507,7 +507,7 @@
                                                 <div class="value-carac">{{ 'yes'|trans|capitalize }}</div>
                                             </div>
                                         {% endif %}
-                                        {% if offer.insert %}
+                                        {% if offer.insertHeat %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
                                                 <div class="name-carac">{{ 'offer.insert'|trans }}</div>

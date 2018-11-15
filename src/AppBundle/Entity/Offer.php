@@ -527,9 +527,9 @@ class Offer
     /**
      * @var boolean
      *
-     * @ORM\Column(name="insert", type="boolean")
+     * @ORM\Column(name="insertHeat", type="boolean")
      */
-    private $insert = 0;
+    private $insertHeat = 0;
 
     /**
      * @var boolean
@@ -1900,18 +1900,18 @@ class Offer
     /**
      * @return bool
      */
-    public function isInsert()
+    public function isInsertHeat()
     {
-        return $this->insert;
+        return $this->insertHeat;
     }
 
     /**
-     * @param bool $insert
+     * @param bool $insertHeat
      * @return Offer
      */
-    public function setInsert($insert)
+    public function setInsertHeat($insertHeat)
     {
-        $this->insert = $insert;
+        $this->insertHeat = $insertHeat;
         return $this;
     }
 

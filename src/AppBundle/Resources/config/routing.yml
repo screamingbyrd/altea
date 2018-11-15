@@ -38,6 +38,11 @@ show_offer:
         en: "/offer/{id}"
         fr: "/offre/{id}"
     defaults: { _controller: AppBundle:Offer:show }
+process_offer:
+    locales:
+        en: "/process-offer"
+        fr: "/traiter-offre"
+    defaults: { _controller: AppBundle:Offer:processOffers }
 contact_us:
     locales:
         en: "/contact-us"
