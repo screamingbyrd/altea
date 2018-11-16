@@ -253,6 +253,7 @@ offer:
   charge: Charge
   general: Général
   surface: Surface
+  surfaceTerrain: Surface du terrain
   lift: Ascenseur
   nbrBedroom: Nombre de chambre
   renovated: Rénové
@@ -584,3 +585,5 @@ type:
   warehouse: Entrepot
   hotel: Restauration / Hotellerie
   business: Fond de commerce
+
+advertismentText: Notre équipe de professionnels de l'immobilier vous propose de réaliser une estimation gratuite de votre bien, facilement et sans engagement.

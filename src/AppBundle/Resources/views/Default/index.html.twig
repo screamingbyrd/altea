@@ -66,7 +66,7 @@
                         <ol class="carousel-indicators">
                             {% set i = 0 %}
                             {% for image in offer.images %}
-                                <li data-target="#myCarousel-{{ offer.id }}" data-slide-to="{{ i }}" class="dot-of-carousel {% if i == 0 %}active{% endif %}"></li>
+                                {% if i <= 9 %}<li data-target="#myCarousel-{{ offer.id }}" data-slide-to="{{ i }}" class="dot-of-carousel {% if i == 0 %}active{% endif %}"></li>{% endif %}
                                 {% set i = i + 1 %}
                             {% endfor %}
                         </ol>
@@ -75,9 +75,11 @@
                         <div class="carousel-inner">
                             {% set i = 0 %}
                             {% for image in offer.images %}
-                                <div class="item {% if i == 0 %}active{% endif %}">
-                                    <img class="image-search-pro" src="{{ asset('uploads' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
-                                </div>
+                                {% if i <= 9 %}
+                                    <div class="item {% if i == 0 %}active{% endif %}">
+                                        <img class="image-search-pro" src="{{ asset('uploads' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
+                                    </div>
+                                {% endif %}
                                 {% set i = i + 1 %}
                             {% endfor %}
                         </div>
@@ -103,9 +105,9 @@
                 {% endif %}
                 <div class="offer-search-element">
                     <div class="offer-element-details">
-                        <div class="offer-element-title">{{ offer.type|trans }}</div>
+                        <div class="offer-element-title">{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</div>
                         <div class="offer-element-title">{{ offer.price }} €</div>
-                        <div class="offer-element-description">{% if app.request.locale == 'fr' %}{{ offer.description }}{% else %}{{ offer.descriptionEn }}{% endif %}</div>
+                        <div class="offer-element-description">{% if app.request.locale == 'fr' or offer.descriptionEn == '' %}{{ offer.description|raw }}{% else %}{{ offer.descriptionEn|raw }}{% endif %}</div>
                     </div>
                 </div>
             </span>
@@ -129,6 +131,12 @@
     </div>
 
     <style>
+        .offer-element{
+            height: 438px !important;
+        }
+        .offer-element-description {
+            height: 8.5em !important;
+        }
         .ads-list-hompeage{
             list-style-type: none;
             margin-top: 20px;
@@ -208,7 +216,7 @@
         }
 
         $(document).on("click",".offer-element",function(e) {
-            if(!($(e.target).hasClass('carousel-control') || $(e.target).hasClass('glyphicon ') || $(e.target).hasClass('dot-of-carousel'))){
+            if(!($(e.target).hasClass('carousel-control') || $(e.target).hasClass('glyphicon') || $(e.target).hasClass('dot-of-carousel'))){
                 window.location.href = $(this).data('href');
             }
         });

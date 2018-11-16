@@ -226,6 +226,13 @@ class Offer
     /**
      * @var int
      *
+     * @ORM\Column(name="surfaceTerrain", type="integer", nullable=true)
+     */
+    private $surfaceTerrain = 0;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="terrasse", type="integer", nullable=true)
      */
     private $terrasse = 0;
@@ -1120,6 +1127,24 @@ class Offer
     public function setSurface($surface)
     {
         $this->surface = $surface;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSurfaceTerrain()
+    {
+        return $this->surfaceTerrain;
+    }
+
+    /**
+     * @param int $surfaceTerrain
+     * @return Offer
+     */
+    public function setSurfaceTerrain($surfaceTerrain)
+    {
+        $this->surfaceTerrain = $surfaceTerrain;
         return $this;
     }
 

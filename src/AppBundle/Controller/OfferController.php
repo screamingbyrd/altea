@@ -24,7 +24,7 @@ class OfferController extends Controller
 
     public function searchPageAction(Request $request){
         $type = $request->get('type');
-        $city = $request->get('city');
+        $currentCity = $request->get('city');
         $from = $request->get('from');
         $to = $request->get('to');
         $fromRoom = $request->get('fromRoom');
@@ -40,7 +40,7 @@ class OfferController extends Controller
         $currentPage = $request->get('row');
         $currentPage = isset($currentPage)?$currentPage:1;
         $numberOfItem =  $request->get('number');
-        $numberOfItem = isset($numberOfItem)?$numberOfItem:50;
+        $numberOfItem = isset($numberOfItem)?$numberOfItem:9;
 
         $offerRepository = $this
             ->getDoctrine()
@@ -63,8 +63,8 @@ class OfferController extends Controller
         if(isset($type) and $type != ''){
             $searchArray['type'] = $type;
         }
-        if(isset($city) and $city != ''){
-            $searchArray['city'] = $city;
+        if(isset($currentCity) and $currentCity != ''){
+            $searchArray['city'] = $currentCity;
         }
 
         if($sell or $rent or $new){
@@ -116,12 +116,23 @@ class OfferController extends Controller
         $finalArray = array_slice($finalData, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
         foreach ($finalArray as $offer){
-            $address = $offer->getLocation();
+            $location = $offer->getLocation();
+            $city = $offer->getCity();
+            $country = $offer->getCountry();
+
+            $address = '';
+            if(isset($location) && $location !='' && strpos($location, '') == false){
+                $address = $location . ', ';
+            }
+            if (isset($city) && $city != '' and isset($country) and $country != ''){
+                $address = $address . $city . ', ' . $country;
+            }
+
             if($address != ''){
                 $marker = $this->get('app.find_latlong')->geocode($address);
-                $marker[] = $this->get('translator')->trans($offer->getType()).' - '. $offer->getLocation();
+                $marker[] = $this->get('translator')->trans($offer->getType()).' - '. $location .' '.$city;
                 $marker[] = $this->generateUrl('show_offer', array('id' => $offer->getId()));
-                $marker[] = 'image';
+                $marker[] = ($offer->getImages()->first()?$offer->getImages()->first():'image');
                 $locationArray[$offer->getId()] = $marker;
             }
         }
@@ -138,7 +149,7 @@ class OfferController extends Controller
                 'location' => $locationArray,
                 'cities' => $cityArray,
                 'types' => $typeArray,
-                'givenCity' => $city,
+                'givenCity' => $currentCity,
                 'givenType' => $type,
                 'rent' => $rent,
                 'sell' => $sell,
@@ -170,21 +181,32 @@ class OfferController extends Controller
             return $this->redirectToRoute('altea_home');
         }
 
-        $location = $this->get('app.find_latlong')->geocode($offer->getLocation());
+        $location = $offer->getLocation();
+        $city = $offer->getCity();
+        $country = $offer->getCountry();
+
+        $address = '';
+        if(isset($location) && $location !='' && strpos($location, '') == false){
+            $address = $location . ', ';
+        }
+        if (isset($city) && $city != '' and isset($country) and $country != ''){
+            $address = $address . $city . ', ' . $country;
+        }
 
         return $this->render('AppBundle::showRoom.html.twig',
             array(
                 'offer' => $offer,
-                'location' => $location
+                'location' => $this->get('app.find_latlong')->geocode($address)
             )
         );
     }
 
     public function processOffersAction(){
 
-        $API_URL = "https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2/getAnnonces";
+        $API_URL = "https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2/getToken";
         $headers = [
-            'token: 3e73d2ef7312614d6d0216cba72b81a2',
+            'login: ALTEAGROUP',
+            'password: 5MCk5df'
         ];
         try {
             $ch = curl_init($API_URL);
@@ -196,7 +218,32 @@ class OfferController extends Controller
             $info = curl_getinfo($ch);
             $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $result = json_decode($result, true);
-            var_dump($result['data'][0]);exit;
+
+            If ( $httpcode !== 200 )
+                echo ( 'Error with httpcode ' .$httpcode );
+            if ( $result['status'] != 200 )
+                echo ('Error with message ' .$result['error'] );
+
+        } catch(\Exception $e) {}
+
+        $token = $result['data']['token'];
+
+        $API_URL = "https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2/getAnnonces";
+        $headers = [
+            'token: '.$token,
+            'urlphotos: 1'
+        ];
+        try {
+            $ch = curl_init($API_URL);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_FORBID_REUSE, true );
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($ch);
+            $info = curl_getinfo($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $result = json_decode($result, true);
+//            var_dump($result['data'][0]);exit;
             If ( $httpcode !== 200 )
                 echo ( 'Error with httpcode ' .$httpcode );
             if ( $result['status'] != 200 )
@@ -205,6 +252,43 @@ class OfferController extends Controller
         } catch(\Exception $e) {}
 
         $em = $this->getDoctrine()->getManager();
+
+        if(empty($result['data'])){
+            return 'empty request';
+        }
+
+        $connection = $em->getConnection();
+        $dbPlatform = $connection->getDatabasePlatform();
+        $connection->beginTransaction();
+        try {
+            $connection->query('SET FOREIGN_KEY_CHECKS=0');
+            $q = $dbPlatform->getTruncateTableSql('Image');
+            $connection->executeUpdate($q);
+            $connection->query('SET FOREIGN_KEY_CHECKS=1');
+            $connection->commit();
+        }
+        catch (\Exception $e) {
+            $connection->rollback();
+        }
+        $connection = $em->getConnection();
+        $dbPlatform = $connection->getDatabasePlatform();
+        $connection->beginTransaction();
+        try {
+            $connection->query('SET FOREIGN_KEY_CHECKS=0');
+            $q = $dbPlatform->getTruncateTableSql('Offer');
+            $connection->executeUpdate($q);
+            $connection->query('SET FOREIGN_KEY_CHECKS=1');
+            $connection->commit();
+        }
+        catch (\Exception $e) {
+            $connection->rollback();
+        }
+
+        $files = glob( __DIR__ . '/../../../web/uploads/images/offer/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
 
         foreach ($result['data'] as $data){
             $offer = new Offer();
@@ -237,11 +321,12 @@ class OfferController extends Controller
             $offer->setBasement($data['pieces']['cave']);
             $offer->setNbrBedroom($data['info']['nombre_chambres']);
             $offer->setSurface($data['info']['surface']);
-            $offer->setTerrase($data['exterieur']['surface_terrasse']);
-            $offer->setBalcon($data['exterieur']['surface_balcon']);
-            $offer->setGarden($data['exterieur']['surface_jardin']);
-            $offer->setVeranda($data['exterieur']['surface_veranda']);
-            $offer->setLoggia(200);
+            $offer->setSurfaceTerrain($data['info']['surface_terrain_ares']);
+            $offer->setTerrase((int)$data['exterieur']['surface_terrasse']);
+            $offer->setBalcon((int)$data['exterieur']['surface_balcon']);
+            $offer->setGarden((int)$data['exterieur']['surface_jardin']);
+            $offer->setVeranda((int)$data['exterieur']['surface_veranda']);
+//            $offer->setLoggia(200);
             $offer->setSwimmingPool($data['exterieur']['piscine']);
             $offer->setAttic($data['interieur']['surface_grenier']);
             $offer->setBuanderie($data['interieur']['buanderie']);
@@ -265,11 +350,11 @@ class OfferController extends Controller
             $offer->setVideophone($data['securite']['videophone']);
             $offer->setDigicode($data['securite']['digicode']);
             $offer->setAlarme($data['securite']['alarme']);
-            $offer->setEnergy($data['energie']['indice_energetique']);
-            $offer->setEnergyValue($data['energie']['valeur_indice_energetique']);
-            $offer->setGes($data['energie']['indice_isolation']);
-            $offer->setGesValue($data['energie']['valeur_indice_isolation']);
-            $offer->setDpeInProgress($data['energie']['dpe_en_cours']);
+            $offer->setEnergy(array_key_exists ('indice_energetique',$data['energie'])?$data['energie']['indice_energetique']:0);
+            $offer->setEnergyValue(array_key_exists ('valeur_indice_energetique',$data['energie'])?$data['energie']['valeur_indice_energetique']:0);
+            $offer->setGes(array_key_exists ('indice_isolation',$data['energie'])?$data['energie']['indice_isolation']:0);
+            $offer->setGesValue(array_key_exists ('valeur_indice_isolation',$data['energie'])?$data['energie']['valeur_indice_isolation']:0);
+            $offer->setDpeInProgress(array_key_exists ('dpe_en_cours',$data['energie'])?$data['energie']['dpe_en_cours']:0);
 //            $offer->setDpeNotApplicable(true);
 //            $offer->setDpeVirgin(true);
             $offer->setGaz($data['chauffage']['chauffage_gaz']);
@@ -287,24 +372,28 @@ class OfferController extends Controller
 //            $offer->setGazWater(true);
 //            $offer->setElecWater(true);
 
-            foreach ($data['photos'] as $photo){
-                $image = new Image();
+            if(!empty($data['photos'])){
+                foreach ($data['photos'] as $photo){
+                    if($photo != ''){
+                        $image = new Image();
 
-                $img = '/uploads/images/offer/'.$photo['name'];
-                file_put_contents($img, file_get_contents('https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2'.$photo['hash']));
+                        $uid = md5(uniqid());
 
-                $image->setImageName($photo['name']);
-                $image->setOffer($offer);
-                $image->setUpdatedAt(new \datetime());
+                        $img =  __DIR__ . '/../../../web/uploads/images/offer/'.$uid.$photo['name'];
+                        file_put_contents($img, file_get_contents($photo['url']));
 
-                $offer->addImage($image);
+                        $image->setImageName($uid.$photo['name']);
+                        $image->setOffer($offer);
+                        $image->setUpdatedAt(new \datetime());
+
+                        $offer->addImage($image);
+                    }
+
+                }
             }
 
 
-
             $em->persist($offer);
-            $em->flush();
-            exit;
         }
 
         $em->flush();

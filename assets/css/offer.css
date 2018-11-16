@@ -27,6 +27,9 @@
 }
 
 #myUL li .offer-element {
+    height: 450px;
+    overflow: hidden;
+    display: block;
     cursor: pointer;
     border: 1px solid #ddd;
     background-color: white;
@@ -183,7 +186,7 @@
     padding: 5px;
 }
 .offer-element-description{
-    height: 5.5em;
+    height: 7.5em;
     overflow: hidden;
 }
 .offer-item-experience{
@@ -499,6 +502,9 @@
         padding-left: 15px !important;
         padding-right: 15px !important;
     }
+    .offer-element-description{
+        height: 8.5em !important;
+    }
 }
 
 #employer-input{
@@ -550,7 +556,7 @@
 }
 
 .background-show-offer{
-    min-height: 650px;
+    height: 650px;
     width: 100%;
     position: relative;
     display: flex;
@@ -723,9 +729,11 @@ h3.post-offer{
     text-overflow: ellipsis;
 }
 .search-map{
-    padding: 10px;
-    border: 1px solid #ddd;
     margin-bottom: 20px;
+}
+
+.altea-ad{
+    width: 100%;
 }
 .map-offer-container{
     max-height: 80px;
@@ -749,6 +757,9 @@ h3.post-offer{
     }
     .container.post-offer{
         width: 60% !important;
+    }
+    .image-room-show{
+        height: 650px !important;
     }
 }
 @media (max-width: 991px) {
@@ -785,6 +796,12 @@ h3.post-offer{
     }
     .carac-row{
         display: block !important;
+    }
+    .background-show-offer{
+        height: 340px !important;
+    }
+    .image-room-show{
+        height: 340px !important;
     }
 }
 

@@ -29,7 +29,7 @@ a{
 
 
 body {
-    padding-top: 102px;
+    padding-top: 88px;
     padding-bottom: 0px;
     font-family: myFirstFont;
     font-size: 18px !important;
@@ -489,7 +489,7 @@ legend{
     }
     body{
         padding-bottom: 0;
-        padding-top: 74px !important;
+        padding-top: 60px !important;
     }
     .thumbnail{
         margin-left: 10px;

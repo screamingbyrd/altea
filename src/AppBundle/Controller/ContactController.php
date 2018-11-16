@@ -21,7 +21,7 @@ class ContactController extends Controller
         $name = $request->get('name');
         $emailSender = $request->get('email');
         $emailTo = $request->get('emailTo');
-        $emailTo = isset($emailTo)?$emailTo:'contact@furnished.lu';
+        $emailTo = isset($emailTo)?$emailTo:'contact@altea.lu';
         $message = $request->get('message');
         $type = $request->get('type');
         $type = isset($type)?$type:'contactUs';
@@ -105,7 +105,7 @@ class ContactController extends Controller
 
         $message = (new \Swift_Message('Sujet: '.$type. ' - '.$offerId .' '.$this->get('translator')->trans($offer->getType()).' '.$offer->getCity()))
             ->setFrom('altea@noreply.lu')
-            ->setTo('arthur.regnault@altea.lu')
+            ->setTo('contact@altea.lu')
             ->setBody(
                 '<div>Nous avons été contacté</div><div>Sujet : '.$type.'</div><div>Offre : '. $this->generateUrl('show_offer', array('id' => $offerId)) .'</div><div>Email : '.$emailSender.'</div><div>Nom : '.$name.'</div><div>Message : '.$message.'</div>',
                 'text/html'

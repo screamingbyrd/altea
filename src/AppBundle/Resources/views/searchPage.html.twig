@@ -119,17 +119,33 @@
                                         {% endif %}
                                         <div class="offer-search-element">
                                             <div class="offer-element-details">
-                                                <div class="offer-element-title">{{ offer.type|trans }}</div>
+                                                <div class="offer-element-title">{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</div>
                                                 <div class="offer-element-title">{{ offer.price }} €</div>
-                                                <div class="offer-element-description">{% if app.request.locale == 'fr' %}{{ offer.description }}{% else %}{{ offer.descriptionEn }}{% endif %}</div>
+                                                <div class="offer-element-description">{% if app.request.locale == 'fr' or offer.descriptionEn == '' %}{{ offer.description|raw }}{% else %}{{ offer.descriptionEn|raw }}{% endif %}</div>
                                             </div>
                                         </div>
                                     </span>
                                 </li>
                             {% endfor %}
+                            <div id="paginator-offer">
+                                {% if total > 0 %}
+                                    {% for i in 1..total %}
+                                        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'row': i})) }}" class="offer-page-link {% if page == i %}selected-page{% endif %}">{{ i }}</a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="search-map shadow-box col-md-4 animated fadeIn">
-                            <div id="map"></div>
+                        <div class="search-map col-md-4 animated fadeIn">
+                            <div class="shadow-box">
+                                <div id="map"></div>
+                            </div>
+                            
+                            <div class="shadow-box" id="advert-container" style="cursor:pointer">
+                                <img class="altea-ad" src="{{asset('images/estimimmo_banner.png')}}">
+                                <div style="margin-top: 10px; margin-bottom: -10px;">
+                                    <div>{{ 'advertismentText'|trans }}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -154,9 +170,9 @@
                                     google.maps.event.addListener(marker, 'click', (function(marker) {
                                         return function() {
                                             {% if position[5] != 'image' %}
-                                            {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                                {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AppBundle\\Entity\\Image') %}
                                             {% else %}
-                                            {% set image = 'images/default_cover_image6.jpg' %}
+                                                {% set image = 'images/default_cover_image6.jpg' %}
                                             {% endif %}
 
                                             var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>';
@@ -193,7 +209,7 @@
                             width: 200px;
                         }
                         #map {
-                            height: 400px;  /* The height is 400 pixels */
+                            height: 500px;  /* The height is 400 pixels */
                             width: 100%;  /* The width is the width of the web page */
                         }
                     </style>
@@ -208,7 +224,7 @@
                     });
 
                     $(document).on("click",".offer-element",function(e) {
-                        if(!($(e.target).hasClass('carousel-control-prev') || $(e.target).hasClass('carousel-control-next') || $(e.target).hasClass('carousel-control-next-icon')|| $(e.target).hasClass('carousel-control-prev-icon')|| $(e.target).hasClass('carousel-dot'))){
+                        if(!($(e.target).hasClass('carousel-control') || $(e.target).hasClass('glyphicon') || $(e.target).hasClass('dot-of-carousel'))){
                             window.location.href = $(this).data('href');
                         }
                     });
@@ -266,16 +282,6 @@
                 </script>
 
             </ul>
-
-
-        <div id="paginator-offer">
-            {% if total > 0 %}
-                {% for i in 1..total %}
-                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'row': i})) }}" class="offer-page-link {% if page == i %}selected-page{% endif %}">{{ i }}</a>
-                {% endfor %}
-            {% endif %}
-        </div>
-
 
         <style>
             .homepage-jumbotron::after{
@@ -416,6 +422,11 @@
                     let style = detectmob()?'block':'flex';
                     $('.advanced-search').css('display', style);
                 }
+            });
+
+            $(document).on("click","#advert-container",function(e) {
+                var win = window.open('https://www.estimimmo.lu', '_blank');
+                win.focus();
             });
         </script>
     </div>

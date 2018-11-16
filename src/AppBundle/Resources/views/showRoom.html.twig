@@ -54,12 +54,12 @@
             <div class="col-sm-8">
                 <div class="shadow-box">
                     <div class="offer-container-title">
-                        <h1>{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }} {{ 'at'|trans }} {{ offer.city }}</h1>
+                        <h1>{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</h1>
                     </div>
                 </div>
 
                 <div class="shadow-box">
-                    <p class="description-show-pro">{% if app.request.locale == 'fr' %}{{ offer.description|nl2br }}{% else %}{{ offer.descriptionEn|nl2br }}{% endif %}</p>
+                    <p class="description-show-pro">{% if app.request.locale == 'fr' or offer.descriptionEn =='' %}{{ offer.description|raw}}{% else %}{{ offer.descriptionEn|raw }}{% endif %}</p>
                     <p class="show-button-container"><a class="show-description">{{ 'offer.showMore'|trans }}</a></p>
                 </div>
 
@@ -78,7 +78,7 @@
 
                                         <div class="line-carac">
                                             <div class="name-carac">{{ 'offer.price'|trans }}</div>
-                                            <div class="value-carac">{{ offer.price }}</div>
+                                            <div class="value-carac">{{ offer.price }} €</div>
                                         </div>
                                         {% if offer.charge is defined and offer.charge != 0 %}
                                             <div class="line-carac">
@@ -93,10 +93,18 @@
                                 <div class="carac-box">
                                     <div class="inside-carac-box">
                                         <div class="title-carac"><i class="fas fa-home"></i> {{ 'offer.general'|trans }}</div>
-                                        <div class="line-carac">
-                                            <div class="name-carac">{{ 'offer.surface'|trans }}</div>
-                                            <div class="value-carac">{{ offer.surface }}</div>
-                                        </div>
+                                        {% if offer.surface > 0 %}
+                                            <div class="line-carac">
+                                                <div class="name-carac">{{ 'offer.surface'|trans }}</div>
+                                                <div class="value-carac">{{ offer.surface }} m2</div>
+                                            </div>
+                                        {% endif %}
+                                        {% if offer.surfaceTerrain > 0 %}
+                                            <div class="line-carac">
+                                                <div class="name-carac">{{ 'offer.surfaceTerrain'|trans }}</div>
+                                                <div class="value-carac">{{ offer.surfaceTerrain }} ares</div>
+                                            </div>
+                                        {% endif %}
                                         {% if offer.lift %}
                                             <div class="line-carac">
                                                 <div class="name-carac">{{ 'offer.lift'|trans }}</div>
@@ -391,28 +399,28 @@
                                     <div class="inside-carac-box">
                                         {% set nbrEnergy = 0 %}
                                         <div class="title-carac"><i class="fas fa-chart-bar"></i> {{ 'offer.energy'|trans }}</div>
-                                        {% if offer.energy is defined and offer.energy is not null %}
+                                        {% if offer.energy is defined and offer.energy is not null and offer.energy != '0' %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
                                                 <div class="name-carac">{{ 'offer.energyClass'|trans }}</div>
                                                 <div class="value-carac">{{ offer.energy }}</div>
                                             </div>
                                         {% endif %}
-                                        {% if offer.energyValue is defined and offer.energyValue is not null %}
+                                        {% if offer.energyValue is defined and offer.energyValue is not null and offer.energyValue != '0' %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
                                                 <div class="name-carac">{{ 'offer.energyValue'|trans }}</div>
                                                 <div class="value-carac">{{ offer.energyValue }}</div>
                                             </div>
                                         {% endif %}
-                                        {% if offer.ges is defined and offer.ges is not null %}
+                                        {% if offer.ges is defined and offer.ges is not null and offer.ges != '0' %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
                                                 <div class="name-carac">{{ 'offer.gesClass'|trans }}</div>
                                                 <div class="value-carac">{{ offer.ges }}</div>
                                             </div>
                                         {% endif %}
-                                        {% if offer.gesValue is defined and offer.gesValue is not null %}
+                                        {% if offer.gesValue is defined and offer.gesValue is not null and offer.gesValue != '0' %}
                                             {% set nbrEnergy = nbrEnergy + 1 %}
                                             <div class="line-carac">
                                                 <div class="name-carac">{{ 'offer.gesValue'|trans }}</div>
@@ -570,7 +578,7 @@
             </div>
             <div class="col-sm-4 reservation-container">
                 <div class="offer-container-price shadow-box">
-                    <h2>{{ offer.price }}€ {% if offer.transaction == 'rent' %}(All-in/Month){% endif %}</h2>
+                    <h2>{{ offer.price }} € {% if offer.transaction == 'rent' %}(All-in/Month){% endif %}</h2>
                     <div>Ref. {{ offer.reference }}</div>
                 </div>
                 <div class="shadow-box">
@@ -620,6 +628,16 @@
                     </form>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+        <div class="modal-dialog modal-offer-image modal-bg">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                <img id="modal-image" src="#">
             </div>
         </div>
     </div>
@@ -680,8 +698,36 @@
             }
         });
 
+        $(".image-room-show").on("click", function(e){
+            if(!detectmob()){
+                $('#modal-image').attr("src", $(this).prop('src'));
+                $("#mi-modal").modal('show');
+            }
+
+        });
+
+        $("#modal-btn-no").on("click", function(e){
+            e.preventDefault();
+            $("#mi-modal").modal('hide');
+            $("#archive-modal").modal('hide');
+        });
+
     </script>
     <style>
+        .modal-offer-image{
+            width: max-content;
+            max-width: 95% !important;
+        }
+        .close span{
+            position: absolute;
+            top: 1px;
+            right: 6px;
+            font-size: 23px;
+            color: black;
+        }
+        .modal-content{
+            padding: 20px;
+        }
         .td-contact-us{
             width: 57% !important;
         }
@@ -701,6 +747,9 @@
         .show-button-container a{
             cursor: pointer;
             text-decoration: initial !important;
+        }
+        .image-room-show{
+            cursor: pointer;
         }
     </style>
 

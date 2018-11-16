@@ -253,6 +253,7 @@ offer:
   charge: Charge
   general: General
   surface: Surface
+  surfaceTerrain: Ground surface
   lift: Lift
   nbrBedroom: Number of bedroom
   renovated: Renovated
@@ -586,3 +587,6 @@ type:
   warehouse: Warehouse
   hotel: Catering / Hospitality
   business: Business
+
+
+advertismentText: Our team of real estate professionals is happy to make a free estimation of your property, easily and without commitment.
