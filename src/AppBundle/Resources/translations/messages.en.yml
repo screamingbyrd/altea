@@ -316,6 +316,7 @@ offer:
   radiateur: Radiator
   visit: Visit
   info: Information
+  noOffer: There is no offer matching you research
 
 candidate:
   delete:
