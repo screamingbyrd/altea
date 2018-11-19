@@ -288,7 +288,7 @@ class OfferController extends Controller
             $connection->commit();
         }
         catch (\Exception $e) {
-            return $e;
+            return Response($e);
             $connection->rollback();
         }
         $connection = $em->getConnection();
@@ -302,7 +302,7 @@ class OfferController extends Controller
             $connection->commit();
         }
         catch (\Exception $e) {
-            return $e;
+            return Response($e);
             $connection->rollback();
         }
 
