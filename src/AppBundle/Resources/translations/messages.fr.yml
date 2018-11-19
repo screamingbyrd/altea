@@ -317,7 +317,7 @@ offer:
   visit: Visite
   info: Information
   noOffer: Il n'y a aucune offre correspondant à votre recherche
-  show: Détaille
+  show: Détails
 
 candidate:
   delete:
