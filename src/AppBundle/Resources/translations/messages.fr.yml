@@ -10,8 +10,8 @@ new: Bien neufs
 job: Emploi
 
 title:
-  home: Emplois, jobs, stages et missions d'intérim au Luxembourg
-  listEmployer: Répertoire des entreprise
+  home: sdg
+
 
 homepage:
   title: Bienvenue chez Altea
@@ -317,6 +317,7 @@ offer:
   visit: Visite
   info: Information
   noOffer: Il n'y a aucune offre correspondant à votre recherche
+  show: Détaille
 
 candidate:
   delete:

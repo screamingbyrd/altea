@@ -122,6 +122,7 @@
                                                 <div class="offer-element-title">{% if offer.sousType in ['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'] %}{{ offer.sousType|trans }}{% else %}{{ offer.type|trans }}{% endif %} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</div>
                                                 <div class="offer-element-title">{{ offer.price }} €</div>
                                                 <div class="offer-element-description">{% if app.request.locale == 'fr' or offer.descriptionEn == '' %}{{ offer.description|raw }}{% else %}{{ offer.descriptionEn|raw }}{% endif %}</div>
+                                                <button class="btn btn-primary btn-show-offer">{{ 'offer.show'|trans }}</button>
                                             </div>
                                         </div>
                                     </span>
@@ -254,21 +255,21 @@
                     var featuredOfferTop = $('.search-map').offset().top;
                     var featuredOfferLeft = $('.search-map').offset().left;
                     var featuredOfferWidth = $('.search-map').outerWidth();
-                    $(window).scroll(function() {
-                        var currentScroll = $(window).scrollTop();
-                        if (currentScroll +105 >= featuredOfferTop && detectmob() == false) {
-                            $('.search-map').css({
-                                position: 'fixed',
-                                top: '105px',
-                                left: featuredOfferLeft,
-                                width: featuredOfferWidth,
-                            });
-                        } else {
-                            $('.search-map').css({
-                                position: 'static'
-                            });
-                        }
-                    });
+                    // $(window).scroll(function() {
+                    //     var currentScroll = $(window).scrollTop();
+                    //     if (currentScroll +105 >= featuredOfferTop && detectmob() == false) {
+                    //         $('.search-map').css({
+                    //             position: 'fixed',
+                    //             top: '105px',
+                    //             left: featuredOfferLeft,
+                    //             width: featuredOfferWidth,
+                    //         });
+                    //     } else {
+                    //         $('.search-map').css({
+                    //             position: 'static'
+                    //         });
+                    //     }
+                    // });
 
                     window.onload = function() {
                         if(detectmob()){

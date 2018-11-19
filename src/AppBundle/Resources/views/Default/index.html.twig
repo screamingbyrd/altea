@@ -1,7 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {{ 'title.home'|trans }}
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -108,6 +108,7 @@
                         <div class="offer-element-title">{% if offer.sousType in ['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'] %}{{ offer.sousType|trans }}{% else %}{{ offer.type|trans }}{% endif %} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</div>
                         <div class="offer-element-title">{{ offer.price }} €</div>
                         <div class="offer-element-description">{% if app.request.locale == 'fr' or offer.descriptionEn == '' %}{{ offer.description|raw }}{% else %}{{ offer.descriptionEn|raw }}{% endif %}</div>
+                        <button class="btn btn-primary btn-show-offer">{{ 'offer.show'|trans }}</button>
                     </div>
                 </div>
             </span>
@@ -131,9 +132,6 @@
     </div>
 
     <style>
-        .offer-element{
-            height: 438px !important;
-        }
         .offer-element-description {
             height: 8.5em !important;
         }
@@ -156,7 +154,7 @@
         }
         .about-us-container{
             background-color: #272f3b;
-            margin-top: 40px;
+            margin-top: 15px;
         }
         .homepage-href-row{
             padding: 10px;
@@ -181,6 +179,7 @@
         .homepage-jumbotron{
 
             background:rgba(0,0,0,0.5) !important;
+            margin-bottom: 25px;
         }
 
 

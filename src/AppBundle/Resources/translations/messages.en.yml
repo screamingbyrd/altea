@@ -317,6 +317,7 @@ offer:
   visit: Visit
   info: Information
   noOffer: There is no offer matching you research
+  show: Details
 
 candidate:
   delete:

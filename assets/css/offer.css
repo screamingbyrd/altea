@@ -27,7 +27,7 @@
 }
 
 #myUL li .offer-element {
-    height: 450px;
+    height: 318px;
     overflow: hidden;
     display: block;
     cursor: pointer;
@@ -504,6 +504,9 @@
     }
     .offer-element-description{
         height: 8.5em !important;
+    }
+    .#myUL li .offer-element {
+        height: 450px !important;
     }
 }
 
