@@ -58,6 +58,13 @@ class Offer
      */
     private $type;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sousType", type="string", length=255, nullable=true)
+     */
+    private $sousType;
+
 
     /**
      * @var boolean
@@ -641,6 +648,24 @@ class Offer
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSousType()
+    {
+        return $this->sousType;
+    }
+
+    /**
+     * @param string $sousType
+     * @return Offer
+     */
+    public function setSousType($sousType)
+    {
+        $this->sousType = $sousType;
         return $this;
     }
 

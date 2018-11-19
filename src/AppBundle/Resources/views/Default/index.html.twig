@@ -105,7 +105,7 @@
                 {% endif %}
                 <div class="offer-search-element">
                     <div class="offer-element-details">
-                        <div class="offer-element-title">{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</div>
+                        <div class="offer-element-title">{% if offer.sousType in ['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'] %}{{ offer.sousType|trans }}{% else %}{{ offer.type|trans }}{% endif %} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</div>
                         <div class="offer-element-title">{{ offer.price }} €</div>
                         <div class="offer-element-description">{% if app.request.locale == 'fr' or offer.descriptionEn == '' %}{{ offer.description|raw }}{% else %}{{ offer.descriptionEn|raw }}{% endif %}</div>
                     </div>

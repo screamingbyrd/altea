@@ -573,17 +573,15 @@ bill:
   downloadEstimation: Télécharger un devis
   estimation: Devis
 
-type:
-  flat: Appartement
-  house: Maison
-  ground: Terrain
-  property: Immeuble de rapport
-  garage: Garage
-  residence: Residence
-  commerce: Commerce
-  office: Bureau
-  warehouse: Entrepot
-  hotel: Restauration / Hotellerie
-  business: Fond de commerce
+Appartement: Appartement
+Maison: Maison
+Terrain: Terrain
+property: Immeuble de rapport
+Garage: Garage - Place de parking
+Bureau: Bureau
+
+GARAGE: Garage
+EMPLACEMENT DE PARKING: Place de parking
+PARKING: Parking
 
 advertismentText: Notre équipe de professionnels de l'immobilier vous propose de réaliser une estimation gratuite de votre bien, facilement et sans engagement.

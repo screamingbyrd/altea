@@ -45,7 +45,7 @@
         {% else %}
             {% set image = 'images/default_cover_image6.jpg' %}
         {% endif %}
-        <div class="background-show-offer" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+        <div class="background-show-offer" data-src="{{ asset(image) }}" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
         </div>
     {% endif %}
 
@@ -54,7 +54,7 @@
             <div class="col-sm-8">
                 <div class="shadow-box">
                     <div class="offer-container-title">
-                        <h1>{{ offer.type|trans }} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</h1>
+                        <h1>{% if offer.sousType in ['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'] %}{{ offer.sousType|trans }}{% else %}{{ offer.type|trans }}{% endif %} {% if offer.old == 0 %}{{ 'offer.new'|trans }}{% endif %} {% if offer.nbrBedroom > 0 %}{{ offer.nbrBedroom }} {{ 'offer.rooms'|trans }}{% endif %} {{ 'at'|trans }} {{ offer.city }}</h1>
                     </div>
                 </div>
 
@@ -703,7 +703,13 @@
                 $('#modal-image').attr("src", $(this).prop('src'));
                 $("#mi-modal").modal('show');
             }
+        });
 
+        $(".background-show-offer").on("click", function(e){
+            if(!detectmob()){
+                $('#modal-image').attr("src", $(this).data('src'));
+                $("#mi-modal").modal('show');
+            }
         });
 
         $("#modal-btn-no").on("click", function(e){
@@ -748,7 +754,7 @@
             cursor: pointer;
             text-decoration: initial !important;
         }
-        .image-room-show{
+        .image-room-show, .background-show-offer{
             cursor: pointer;
         }
     </style>

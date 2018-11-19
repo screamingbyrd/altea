@@ -20,6 +20,10 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             $query->andWhere('o.type = :type');
             $query->setParameter('type', $params['type']);
         }
+        if(isset($params['sousType'])){
+            $query->andWhere('o.sousType in (:sousType)');
+            $query->setParameter('sousType', $params['sousType']);
+        }
         if(isset($params['city'])){
             $query->andWhere('o.city = :city');
             $query->setParameter('city', $params['city']);

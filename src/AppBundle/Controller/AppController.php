@@ -32,14 +32,20 @@ class AppController extends Controller
 
         $offers = $offerRepository->findAll();
 
-        $typeArray = $cityArray = array();
+        $typeArray = $cityArray = $sousTypeArray = array();
 
         foreach ($offers as $offer){
             $typeArray[$offer->getType()][] = 1;
+            $sousTypeArray[$offer->getSousType()][] = 1;
             $cityArray[$offer->getCity()][] = 1;
         }
         $typeArray = array_keys($typeArray);
         $cityArray = array_keys($cityArray);
+        $sousTypeArray = array_keys($sousTypeArray);
+
+        if(!empty(array_intersect (['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'], $sousTypeArray))){
+            $typeArray[] = 'Garage';
+        }
 
         $offerRepository = $this
             ->getDoctrine()

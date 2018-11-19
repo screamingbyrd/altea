@@ -49,19 +49,32 @@ class OfferController extends Controller
         ;
         $offers = $offerRepository->findAll();
 
-        $typeArray = $cityArray = array();
+        $typeArray = $sousTypeArray = $cityArray = array();
 
         foreach ($offers as $offer){
             $typeArray[$offer->getType()][] = 1;
+            $sousTypeArray[$offer->getSousType()][] = 1;
             $cityArray[$offer->getCity()][] = 1;
         }
         $typeArray = array_keys($typeArray);
         $cityArray = array_keys($cityArray);
 
+        $sousTypeArray = array_keys($sousTypeArray);
+
+        if(!empty(array_intersect (['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'], $sousTypeArray))){
+            $typeArray[] = 'Garage';
+        }
+
         $searchArray = array();
 
         if(isset($type) and $type != ''){
-            $searchArray['type'] = $type;
+            if($type == 'Garage'){
+                $searchArray['sousType'] = array('GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING');
+            }else{
+                $searchArray['type'] = $type;
+
+            }
+
         }
         if(isset($currentCity) and $currentCity != ''){
             $searchArray['city'] = $currentCity;
@@ -189,8 +202,15 @@ class OfferController extends Controller
         if(isset($location) && $location !='' && strpos($location, '') == false){
             $address = $location . ', ';
         }
-        if (isset($city) && $city != '' and isset($country) and $country != ''){
-            $address = $address . $city . ', ' . $country;
+        if (isset($city) && $city != '' && strpos($city, '') == false){
+            $address = $address . $city;
+
+            if($city == 'Luxembourg' && $country == ''){
+                $address.= ', Luxembourg';
+            }
+        }
+        if (isset($country) && $country != '' && strpos($country, '') == false){
+            $address = $address . ', ' .$country;
         }
 
         return $this->render('AppBundle::showRoom.html.twig',
@@ -294,6 +314,7 @@ class OfferController extends Controller
             $offer = new Offer();
 
             $offer->setType($data['info']['nature']);
+            $offer->setSousType($data['info']['sous_nature']);
             $offer->setDescription($data['description']['description_fr']);
             $offer->setDescriptionEn($data['description']['description_en']);
             $offer->setCity($data['localisation']['ville']);

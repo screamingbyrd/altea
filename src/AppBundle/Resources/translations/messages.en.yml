@@ -573,20 +573,14 @@ bill:
   downloadEstimation: Download a quote
   estimation: Quote
 
+Appartement: Flat
+Maison: House
+Terrain: Ground
+Garage: Garage - Parking
+Bureau: Office
 
-
-type:
-  flat: Flat
-  house: House
-  ground: Ground
-  property: Building
-  garage: Garage
-  residence: Residence
-  commerce: Commerce
-  office: Office
-  warehouse: Warehouse
-  hotel: Catering / Hospitality
-  business: Business
-
+GARAGE: Garage
+EMPLACEMENT DE PARKING: Parking spot
+PARKING: Parking
 
 advertismentText: Our team of real estate professionals is happy to make a free estimation of your property, easily and without commitment.
