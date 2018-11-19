@@ -282,7 +282,7 @@ class OfferController extends Controller
         $connection->beginTransaction();
         try {
             $connection->query('SET FOREIGN_KEY_CHECKS=0');
-            $q = $dbPlatform->getTruncateTableSql('Image');
+            $q = $dbPlatform->getTruncateTableSql('image');
             $connection->executeUpdate($q);
             $connection->query('SET FOREIGN_KEY_CHECKS=1');
             $connection->commit();
@@ -296,7 +296,7 @@ class OfferController extends Controller
         $connection->beginTransaction();
         try {
             $connection->query('SET FOREIGN_KEY_CHECKS=0');
-            $q = $dbPlatform->getTruncateTableSql('Offer');
+            $q = $dbPlatform->getTruncateTableSql('offer');
             $connection->executeUpdate($q);
             $connection->query('SET FOREIGN_KEY_CHECKS=1');
             $connection->commit();
