@@ -52,7 +52,7 @@ class ContactController extends Controller
 
         $translated = $this->get('translator')->trans('email.contacted');
         $message = (new \Swift_Message($translated))
-            ->setFrom($data['emailSender'])
+            ->setFrom('altea@noreply.lu')
             ->setTo($email)
             ->setBody(
                 $this->renderView(
