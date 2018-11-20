@@ -40,6 +40,11 @@ show_offer:
     defaults: { _controller: AppBundle:Offer:show }
     requirements:
         url:    .*
+delete_all:
+    locales:
+        en: "/delete-all"
+        fr: "/effacer-tout"
+    defaults: { _controller: AppBundle:Offer:deleteAll }
 process_offer:
     locales:
         en: "/process-offer"

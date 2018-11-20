@@ -232,6 +232,41 @@ class OfferController extends Controller
         );
     }
 
+    public function deleteAllAction(){
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $dbPlatform = $connection->getDatabasePlatform();
+        $connection->beginTransaction();
+        try {
+            $connection->query('SET FOREIGN_KEY_CHECKS=0');
+            $q = $dbPlatform->getTruncateTableSql('image');
+            $connection->executeUpdate($q);
+            $connection->query('SET FOREIGN_KEY_CHECKS=1');
+            $connection->commit();
+        }
+        catch (\Exception $e) {
+            return new Response($e);
+            $connection->rollback();
+        }
+        $connection = $em->getConnection();
+        $dbPlatform = $connection->getDatabasePlatform();
+        $connection->beginTransaction();
+        try {
+            $connection->query('SET FOREIGN_KEY_CHECKS=0');
+            $q = $dbPlatform->getTruncateTableSql('offer');
+            $connection->executeUpdate($q);
+            $connection->query('SET FOREIGN_KEY_CHECKS=1');
+            $connection->commit();
+        }
+        catch (\Exception $e) {
+            return new Response($e);
+            $connection->rollback();
+        }
+
+        return new Response();
+    }
+
+
     public function processOffersAction(){
 
         $API_URL = "https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2/getToken";
@@ -286,35 +321,6 @@ class OfferController extends Controller
 
         if(empty($result['data'])){
             return 'empty request';
-        }
-
-        $connection = $em->getConnection();
-        $dbPlatform = $connection->getDatabasePlatform();
-        $connection->beginTransaction();
-        try {
-            $connection->query('SET FOREIGN_KEY_CHECKS=0');
-            $q = $dbPlatform->getTruncateTableSql('image');
-            $connection->executeUpdate($q);
-            $connection->query('SET FOREIGN_KEY_CHECKS=1');
-            $connection->commit();
-        }
-        catch (\Exception $e) {
-            return new Response($e);
-            $connection->rollback();
-        }
-        $connection = $em->getConnection();
-        $dbPlatform = $connection->getDatabasePlatform();
-        $connection->beginTransaction();
-        try {
-            $connection->query('SET FOREIGN_KEY_CHECKS=0');
-            $q = $dbPlatform->getTruncateTableSql('offer');
-            $connection->executeUpdate($q);
-            $connection->query('SET FOREIGN_KEY_CHECKS=1');
-            $connection->commit();
-        }
-        catch (\Exception $e) {
-            return new Response($e);
-            $connection->rollback();
         }
 
         $files = glob( __DIR__ . '/../../../web/uploads/images/offer/*'); // get all file names
