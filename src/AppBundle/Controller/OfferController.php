@@ -263,6 +263,12 @@ class OfferController extends Controller
             $connection->rollback();
         }
 
+        $files = glob( __DIR__ . '/../../../web/uploads/images/offer/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
+
         return new Response();
     }
 
@@ -321,12 +327,6 @@ class OfferController extends Controller
 
         if(empty($result['data'])){
             return 'empty request';
-        }
-
-        $files = glob( __DIR__ . '/../../../web/uploads/images/offer/*'); // get all file names
-        foreach($files as $file){ // iterate files
-            if(is_file($file))
-                unlink($file); // delete file
         }
 
         foreach ($result['data'] as $data){
