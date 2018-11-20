@@ -317,6 +317,7 @@ class OfferController extends Controller
             $connection->rollback();
         }
 
+        return new Response();
         $files = glob( __DIR__ . '/../../../web/uploads/images/offer/*'); // get all file names
         foreach($files as $file){ // iterate files
             if(is_file($file))
