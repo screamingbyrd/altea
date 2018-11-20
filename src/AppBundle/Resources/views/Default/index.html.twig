@@ -58,7 +58,7 @@
     <div class="container container-home-offer">
         <ul id="myUL">
         {% for offer in offerArray %}
-            <li class="search-result col-md-3">
+            <li class="search-result col-md-3 col-sm-6">
             <span class='offer-element' data-href="{{ path('show_offer', {'id':offer.id, 'url':offer.offerUrl}) }}">
                 {% if (offer.images.first != false and offer.images.first.imageName is not null and offer.images|length > 1) %}
                     <div id="myCarousel-{{ offer.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
