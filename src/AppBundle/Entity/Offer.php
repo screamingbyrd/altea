@@ -580,6 +580,8 @@ class Offer
      */
     private $elecWater = 0;
 
+    private $offerUrl;
+
     /**
      * Get id
      *
@@ -2055,6 +2057,22 @@ class Offer
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOfferUrl()
+    {
+        return $this->offerUrl;
+    }
 
+    /**
+     * @param mixed $offerUrl
+     * @return Offer
+     */
+    public function setOfferUrl($offerUrl)
+    {
+        $this->offerUrl = $offerUrl;
+        return $this;
+    }
 
 }

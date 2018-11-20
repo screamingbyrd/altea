@@ -32,46 +32,11 @@ class SitemapController extends Controller
         ];
 
         $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('fos_user_security_login',array('_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-        $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('altea_credit',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-        $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('contact_us_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-//        $urls[] = ['loc' =>
-//            'https://altea.lu' . $this->get('router')->generate('about_us',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-//        ];
-        $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('faq_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-
-//        $urls[] = ['loc' =>
-//            'https://altea.lu' . $this->get('router')->generate('privacy_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-//        ];
-//
-//        $urls[] = ['loc' =>
-//            'https://altea.lu' . $this->get('router')->generate('legal_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-//        ];
-        
-        //CandidateBundle routing
-
-        $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('create_candidate',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-
-        //EmployerBundle routing
-        $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('create_employer',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+            'https://altea.lu' . $this->get('router')->generate('contact_us',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
 
         $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('list_employer',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-
-        $urls[] = ['loc' =>
-            'https://altea.lu' . $this->get('router')->generate('search_page_offer',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+            'https://altea.lu' . $this->get('router')->generate('search_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
 
         // Then, we will find all our articles stored in the database
@@ -79,14 +44,14 @@ class SitemapController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Offer');
-        $offers = $offerRepository->getActiveOffers();
+        $offers = $offerRepository->findAll();
 
         $generateUrlService = $this->get('app.offer_generate_url');
 
         // We loop on them
         foreach ($offers as $offer) {
             $urls[] = ['loc' =>
-                'https://altea.lu' . $this->get('router')->generate('show_offer',array('locale' => $locale, '_locale' => $locale, 'id' => $offer->getId(), 'url' => $generateUrlService->generateOfferUrl($offer))), 'changefreq' => 'weekly', 'priority' => '1.0'
+                'https://altea.lu' . $this->get('router')->generate('show_offer',array('locale' => $locale, '_locale' => $locale, 'id' => $offer->getId(), 'url' => $generateUrlService->generateOfferUrl($offer))), 'changefreq' => 'daily', 'priority' => '1.0'
             ];
         }
 

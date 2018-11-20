@@ -23,7 +23,7 @@
                 {% set i = 0 %}
                 {% for image in offer.images %}
                     <div class="item {% if i == 0 %}active{% endif %}">
-                        <img class="image-room-show" src="{{ asset('uploads/' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
+                        <img class="image-room-show" data-id="{{ i }}" src="{{ asset('uploads/' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
                     </div>
                     {% set i = i + 1 %}
                 {% endfor %}
@@ -637,7 +637,48 @@
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                <img id="modal-image" src="#">
+                {% if (offer.images.first is defined and offer.images.first != false and offer.images.first.imageName is not null and offer.images|length > 1) %}
+
+                    <div id="modal-carousel-{{ offer.id }}" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            {% set i = 0 %}
+                            {% for image in offer.images %}
+                                <li data-target="#modal-carousel-{{ offer.id }}" data-slide-to="{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            {% set i = 0 %}
+                            {% for image in offer.images %}
+                                <div  id="{{ i }}" class="item">
+                                    <img  class="image-modal-show" src="{{ asset('uploads/' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
+                                </div>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#modal-carousel-{{ offer.id }}" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#modal-carousel-{{ offer.id }}" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                {% else %}
+                    {% if offer.images.first is defined and offer.images.first != false and offer.images.first.imageName is not null %}
+                        {% set image =  'uploads/' ~ vich_uploader_asset(offer.images.first, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                    {% else %}
+                        {% set image = 'images/default_cover_image6.jpg' %}
+                    {% endif %}
+                <img class="image-modal-show" src="{{ asset(image) }}">
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -700,7 +741,8 @@
 
         $(".image-room-show").on("click", function(e){
             if(!detectmob()){
-                $('#modal-image').attr("src", $(this).prop('src'));
+                $('#mi-modal .active').removeClass('active');
+                $('#'+$(this).data('id')).addClass('active');
                 $("#mi-modal").modal('show');
             }
         });
@@ -720,6 +762,11 @@
 
     </script>
     <style>
+        .image-modal-show{
+            max-width: 100vh;
+            overflow: auto;
+            max-height: 80vh
+        }
         .modal-offer-image{
             width: max-content;
             max-width: 95% !important;

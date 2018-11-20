@@ -34,10 +34,14 @@ class AppController extends Controller
 
         $typeArray = $cityArray = $sousTypeArray = array();
 
+
+        $generateUrlService = $this->get('app.offer_generate_url');
+
         foreach ($offers as $offer){
             $typeArray[$offer->getType()][] = 1;
             $sousTypeArray[$offer->getSousType()][] = 1;
             $cityArray[$offer->getCity()][] = 1;
+            $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
         }
         $typeArray = array_keys($typeArray);
         $cityArray = array_keys($cityArray);
@@ -46,13 +50,6 @@ class AppController extends Controller
         if(!empty(array_intersect (['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'], $sousTypeArray))){
             $typeArray[] = 'Garage';
         }
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-        $offers = $offerRepository->findAll();
 
         shuffle($offers);
 

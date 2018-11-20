@@ -128,6 +128,8 @@ class OfferController extends Controller
 
         $finalArray = array_slice($finalData, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
+        $generateUrlService = $this->get('app.offer_generate_url');
+
         foreach ($finalArray as $offer){
             $location = $offer->getLocation();
             $city = $offer->getCity();
@@ -137,14 +139,23 @@ class OfferController extends Controller
             if(isset($location) && $location !='' && strpos($location, '') == false){
                 $address = $location . ', ';
             }
-            if (isset($city) && $city != '' and isset($country) and $country != ''){
-                $address = $address . $city . ', ' . $country;
+            if (isset($city) && $city != '' && strpos($city, '') == false){
+                $address = $address . $city;
+
+                if($city == 'Luxembourg' && $country == ''){
+                    $address.= ', Luxembourg';
+                }
             }
+            if (isset($country) && $country != '' && strpos($country, '') == false){
+                $address = $address . ', ' .$country;
+            }
+
+            $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
 
             if($address != ''){
                 $marker = $this->get('app.find_latlong')->geocode($address);
                 $marker[] = $this->get('translator')->trans($offer->getType()).' - '. $location .' '.$city;
-                $marker[] = $this->generateUrl('show_offer', array('id' => $offer->getId()));
+                $marker[] = $this->generateUrl('show_offer', array('id' => $offer->getId(), 'url' => $offer->getOfferUrl()));
                 $marker[] = ($offer->getImages()->first()?$offer->getImages()->first():'image');
                 $locationArray[$offer->getId()] = $marker;
             }

@@ -35,9 +35,11 @@ search_page:
     defaults: { _controller: AppBundle:Offer:searchPage }
 show_offer:
     locales:
-        en: "/offer/{id}"
-        fr: "/offre/{id}"
+        en: "/offer/{url}/{id}"
+        fr: "/offre/{url}/{id}"
     defaults: { _controller: AppBundle:Offer:show }
+    requirements:
+        url:    .*
 process_offer:
     locales:
         en: "/process-offer"
@@ -58,3 +60,7 @@ offer_contact:
         en: "/offer-contact"
         fr: "/offre-contacter"
     defaults: { _controller: AppBundle:Contact:contactOffer }
+altea_sitemap:
+    path: "/sitemap.xml"
+    defaults: { _controller: AppBundle:Sitemap:sitemap }
+    requirements: {_format: "xml"}
