@@ -105,7 +105,7 @@ class ContactController extends Controller
 
         $message = (new \Swift_Message('Sujet: '.$type. ' - '.$offerId .' '.$this->get('translator')->trans($offer->getType()).' '.$offer->getCity()))
             ->setFrom('altea@noreply.lu')
-            ->setTo('arthur.regnault@altea.lu')
+            ->setTo('contact@altea.lu')
             ->setBody(
                 '<div>Nous avons été contacté</div><div>Sujet : '.$type.'</div><div>Offre : '. '<a href="https://alea.lu'.$this->generateUrl('show_offer', array('id' => $offerId, 'url' => '')) .'">offre</a></div><div>Email : '.$emailSender.'</div><div>Nom : '.$name.'</div><div>Message : '.$message.'</div>',
                 'text/html'
