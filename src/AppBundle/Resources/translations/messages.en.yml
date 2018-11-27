@@ -52,6 +52,9 @@ header:
     privacy: Privacy policy
     terms: Terms and conditions
 
+media:
+  title: Media
+
 form:
   registration:
     title:

@@ -1,0 +1,55 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Contact
+{% endblock %}
+
+{% block body %}
+    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+    {% endif %}
+    <div class="jumbotron homepage-jumbotron">
+        <h2>{{ 'media.title' | trans }}</h2>
+    </div>
+    <div class="container altea-container">
+        <div class="row" style="margin-top: 50px">
+            <div class="col-md-6 picture-container">
+                bob
+            </div>
+            <div class="col-md-6">
+                labla
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/7_web.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+            background-position: center center;
+        }
+        .location-info{
+            text-align: center;
+            font-size: 17px;
+            margin-top: 25px;
+        }
+        .picture-container{
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+

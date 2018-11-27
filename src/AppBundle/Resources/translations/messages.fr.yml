@@ -51,6 +51,9 @@ header:
     privacy: Politique de confidentialité
     terms: Mentions légales
 
+media:
+  title: Média
+
 form:
   registration:
     title:

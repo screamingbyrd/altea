@@ -19,6 +19,11 @@ legal_page:
         en: "/legal"
         fr: "/legale"
     defaults: { _controller: AppBundle:App:legalPage }
+media_page:
+    locales:
+        en: "/media"
+        fr: "/medias"
+    defaults: { _controller: AppBundle:App:mediaPage }
 altea_sitemap:
     path: "/sitemap.xml"
     defaults: { _controller: AppBundle:Sitemap:sitemap }

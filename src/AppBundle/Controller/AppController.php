@@ -98,5 +98,12 @@ class AppController extends Controller
 
     }
 
+    public function mediaPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:media.html.twig');
+
+    }
+
 
 }
