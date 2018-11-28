@@ -7,6 +7,10 @@ sell: Vente
 rent: Location
 new: Bien neufs
 furnished: Meublé
+redirect:
+  estimation: "Acceptez vous d'être redirigé vers notre site d'estimation en ligne: ESTIMIMMO ?"
+  furnished: "Acceptez vous d'être redirigé vers notre site de colocation meublé: Furnished ?"
+
 estimation: Estimation
 
 job: Emploi

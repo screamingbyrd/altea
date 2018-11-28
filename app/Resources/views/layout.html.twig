@@ -95,8 +95,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('search_page', {'sell':1}) }}"  role="button" aria-haspopup="true" aria-expanded="false">{{ 'sell'|trans }}</a></li>
                 <li><a href="{{ path('search_page', {'rent':1}) }}"   role="button" aria-haspopup="true" aria-expanded="false">{{ 'rent'|trans }}</a></li>
-                <li><a href="https://www.furnished.lu" target="_blank" role="button" aria-haspopup="true" aria-expanded="false">{{ 'furnished'|trans }}</a></li>
-                <li><a href="https://www.estimimmo.lu/" target="_blank" role="button" aria-haspopup="true" aria-expanded="false">{{ 'estimation'|trans }}</a></li>
+                <li><a data-href="https://www.furnished.lu" data-text="{{ 'redirect.furnished'|trans }}" href="#" class="redirect-link" role="button" aria-haspopup="true" aria-expanded="false">{{ 'furnished'|trans }}</a></li>
+                <li><a data-href="https://www.estimimmo.lu/" data-text="{{ 'redirect.estimation'|trans }}" href="#" class="redirect-link" role="button" aria-haspopup="true" aria-expanded="false">{{ 'estimation'|trans }}</a></li>
                 {#<li><a href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ 'header.about.title'|trans }}</a></li>#}
                 <li><a href="{{ path('contact_us') }}" role="button" aria-haspopup="true" aria-expanded="false">{{ 'contact.us.title'|trans }}</a></li>
                 <li><a href="{{ path('media_page') }}" role="button" aria-haspopup="true" aria-expanded="false">{{ 'media.title'|trans }}</a></li>
@@ -155,6 +155,24 @@
 </nav>
 
 </body>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-bg">
+        <div class="modal-content">
+            <div class="modal-header">
+                Redirection<button type="button" class="close" data-dismiss="mobut" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div  style="padding: 20px">
+                <div class="summary-information">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-no">{{ 'no'|trans }}</button>
+                <a href="#" class="btn btn-primary" id="modal-btn-yes">{{ 'yes'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
 
 <style>
@@ -167,3 +185,16 @@
     }
 
 </style>
+
+<script>
+    $(".redirect-link").on("click", function(e){
+        e.preventDefault();
+        $('#modal-btn-yes').prop('href', $(this).data('href'));
+        $('.summary-information').html($(this).data('text'));
+        $("#mi-modal").modal('show');
+    });
+
+    $(".close").on("click", function(){
+        $("#mi-modal").modal('hide');
+    });
+</script>

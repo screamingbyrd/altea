@@ -8,6 +8,9 @@ rent: Rent
 new: New
 furnished: Furnished
 estimation: Estimation
+redirect:
+  estimation: 'Do you accept to be redirected to our estimation site: ESTIMIMMO ?'
+  furnished: 'Do you accept to be redirected to our furnished colocation site: Furnished ?'
 
 job: Job
 
