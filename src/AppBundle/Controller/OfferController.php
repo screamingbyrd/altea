@@ -52,13 +52,22 @@ class OfferController extends Controller
         $typeArray = $sousTypeArray = $cityArray = array();
 
         foreach ($offers as $offer){
-            $typeArray[$offer->getType()][] = 1;
-            $sousTypeArray[$offer->getSousType()][] = 1;
-            $cityArray[$offer->getCity()][] = 1;
+            if(($rent == 0 and $sell == 0) or ($rent == 1 and $sell == 1)){
+                $typeArray[$offer->getType()][] = 1;
+                $sousTypeArray[$offer->getSousType()][] = 1;
+                $cityArray[$offer->getCity()][] = 1;
+            }else{
+                $transaction = $rent!=1?'sell':'rent';
+                if($offer->getTransaction() == $transaction){
+                    $typeArray[$offer->getType()][] = 1;
+                    $sousTypeArray[$offer->getSousType()][] = 1;
+                    $cityArray[$offer->getCity()][] = 1;
+                }
+            }
         }
+
         $typeArray = array_keys($typeArray);
         $cityArray = array_keys($cityArray);
-
         $sousTypeArray = array_keys($sousTypeArray);
 
         if(!empty(array_intersect (['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'], $sousTypeArray))){
@@ -454,9 +463,6 @@ class OfferController extends Controller
         $offers = $offerRepository->findAll();
 
         $typeArray = $cityArray = $sousTypeArray = array();
-
-
-        $generateUrlService = $this->get('app.offer_generate_url');
 
         foreach ($offers as $offer){
             if((!isset($rent) and !isset($sell)) or ($rent == 'checked' and $sell == 'checked')){

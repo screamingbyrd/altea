@@ -14,19 +14,19 @@
                 <div class="general-search">
                     <div class="checkbox-home-container">
                         <div style="display: flex;">
-                            <div class="div-sell-input checkbox-div"><input class="checkbox-input-search" type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell">{{ 'sell'|trans }}</div>
-                            <div class="div-rent-input checkbox-div"><input class="checkbox-input-search" type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent">{{ 'rent'|trans }}</div>
+                            <div class="div-sell-input checkbox-div"><input id="sell-checkbox" class="checkbox-input-search" type="checkbox" value="1" {% if sell %}checked{% endif %} name="sell">{{ 'sell'|trans }}</div>
+                            <div class="div-rent-input checkbox-div"><input id="rent-checkbox" class="checkbox-input-search" type="checkbox" value="1" {% if rent %}checked{% endif %} name="rent">{{ 'rent'|trans }}</div>
                         </div>
                     </div>
 
                     <div class="select-home-container">
-                        <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag" >
+                        <select title="Category" id="tags-input" name="type"  class="selectpicker homepage-tag type-select" >
                             <option value="" selected>{{ 'offer.type'|trans }}</option>
                             {% for type in types %}
                                 <option value="{{ type }}" {% if type == givenType %}selected{% endif %}>{{ type|trans }}</option>
                             {% endfor %}
                         </select>
-                        <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag">
+                        <select title="Category" id="tags-input" name="city"  class="selectpicker homepage-tag city-select">
                             <option value="" selected>{{ 'offer.city'|trans }}</option>
                             {% for city in cities %}
                                 <option value="{{ city }}" {% if city == givenCity %}selected{% endif %}>{{ city }}</option>
@@ -234,6 +234,27 @@
                         let checkbox = $(this).children('input');
                         let checked = checkbox.attr('checked');
                         checkbox.attr('checked', !checked);
+                        url = "{{ path('get_search_element') }}";
+                        $.ajax({
+                            url: url,
+                            data: {sell:$('#sell-checkbox').attr('checked'), rent:$('#rent-checkbox').attr('checked')}
+                        }).done(function( data ) {
+                            var data = JSON.parse(data);
+                            var type = "<option value='' disabled selected>{{ 'offer.type'|trans }}</option>";
+                            var index;
+                            for (index = 0; index < data['types'].length; ++index) {
+                                var selectedType = '{{ givenType }}' == data['types'][index][0]?"selected":"";
+                                type += "<option "+selectedType+" value='"+data['types'][index][0]+"'>"+data['types'][index][1]+"</option>";
+                            }
+                            $('.type-select').html(type);
+                            var city = "<option value='' disabled selected>{{ 'offer.city'|trans }}</option>";
+                            var index;
+                            for (index = 0; index < data['cities'].length; ++index) {
+                                var selectedCity = '{{ givenCity }}' == data['cities'][index]?"selected":"";
+                                city += "<option "+selectedCity+" value='"+data['cities'][index]+"'>"+data['cities'][index]+"</option>";
+                            }
+                            $('.city-select').html(city);
+                        });
                     });
 
                     function detectmob() {
