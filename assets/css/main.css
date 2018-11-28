@@ -684,6 +684,18 @@ legend{
     }
 }
 
+.media-element [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+@media (max-width: 992px){
+    .media-element [class*="col-"] {
+        display: block !important;
+    }
+}
+
 
 .panel p{
     padding-top: 6px;
