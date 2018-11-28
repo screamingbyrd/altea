@@ -156,7 +156,7 @@
 
 </body>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="redirect-modal">
     <div class="modal-dialog modal-bg">
         <div class="modal-content">
             <div class="modal-header">
@@ -191,10 +191,10 @@
         e.preventDefault();
         $('#modal-btn-yes').prop('href', $(this).data('href'));
         $('.summary-information').html($(this).data('text'));
-        $("#mi-modal").modal('show');
+        $("#redirect-modal").modal('show');
     });
 
     $(".close").on("click", function(){
-        $("#mi-modal").modal('hide');
+        $("#redirect-modal").modal('hide');
     });
 </script>
