@@ -55,6 +55,11 @@ process_offer:
         en: "/process-offer"
         fr: "/traiter-offre"
     defaults: { _controller: AppBundle:Offer:processOffers }
+get_search_element:
+    locales:
+        en: "/get-search-element"
+        fr: "/chercher-element-recherche"
+    defaults: { _controller: AppBundle:Offer:getSearchElement }
 contact_us:
     locales:
         en: "/contact-us"

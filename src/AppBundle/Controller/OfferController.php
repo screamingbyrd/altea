@@ -441,4 +441,55 @@ class OfferController extends Controller
         return new Response();
     }
 
+    public function getSearchElementAction(Request $request){
+        $rent = $request->get('rent');
+        $sell = $request->get('sell');
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        $offers = $offerRepository->findAll();
+
+        $typeArray = $cityArray = $sousTypeArray = array();
+
+
+        $generateUrlService = $this->get('app.offer_generate_url');
+
+        foreach ($offers as $offer){
+            if((!isset($rent) and !isset($sell)) or ($rent == 'checked' and $sell == 'checked')){
+                $typeArray[$offer->getType()][] = 1;
+                $sousTypeArray[$offer->getSousType()][] = 1;
+                $cityArray[$offer->getCity()][] = 1;
+            }else{
+                $transaction = $rent!='checked'?'sell':'rent';
+                if($offer->getTransaction() == $transaction){
+                    $typeArray[$offer->getType()][] = 1;
+                    $sousTypeArray[$offer->getSousType()][] = 1;
+                    $cityArray[$offer->getCity()][] = 1;
+                }
+            }
+        }
+
+        $typeArray = array_keys($typeArray);
+        $cityArray = array_keys($cityArray);
+        $sousTypeArray = array_keys($sousTypeArray);
+
+        if(!empty(array_intersect (['GARAGE', 'EMPLACEMENT DE PARKING', 'PARKING'], $sousTypeArray))){
+            $typeArray[] = 'Garage';
+        }
+
+        $finalTypeArray = array();
+        foreach ($typeArray as $type){
+            $finalTypeArray[] = array($type,$this->get('translator')->trans($type));
+        }
+
+        return new Response(json_encode([
+            'cities' => $cityArray,
+            'types' => $finalTypeArray
+        ]));
+    }
+
 }
