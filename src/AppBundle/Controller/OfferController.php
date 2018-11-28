@@ -57,7 +57,7 @@ class OfferController extends Controller
                 $sousTypeArray[$offer->getSousType()][] = 1;
                 $cityArray[$offer->getCity()][] = 1;
             }else{
-                $transaction = $rent!=1?'sell':'rent';
+                $transaction = $rent!=0?'sell':'rent';
                 if($offer->getTransaction() == $transaction){
                     $typeArray[$offer->getType()][] = 1;
                     $sousTypeArray[$offer->getSousType()][] = 1;
