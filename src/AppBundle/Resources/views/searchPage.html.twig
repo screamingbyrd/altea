@@ -72,9 +72,9 @@
 
                     <div class="row">
                         <div class="col-md-8  composition-list">
-                            {% for offer in data %}
+                            {% for key, offer in data %}
                                 <li class="search-result col-md-4">
-                                    <span class='offer-element' data-href="{{ path('show_offer', {'id':offer.id, 'url':offer.offerUrl}) }}">
+                                    <span onmouseenter="myClick({{ key }});" class='offer-element' data-href="{{ path('show_offer', {'id':offer.id, 'url':offer.offerUrl}) }}">
                                         {% if (offer.images.first != false and offer.images.first.imageName is not null and offer.images|length > 1) %}
 
                                             <div id="myCarousel-{{ offer.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
@@ -151,6 +151,7 @@
                     </div>
 
                     <script>
+                        var markers = [];
 
                         {% if location|length > 0 %}
 
@@ -181,12 +182,17 @@
                                             infoWindow.open(map, marker);
                                         }
                                     })(marker));
+                                    markers.push(marker);
                                     bounds.extend({lat: {{ position[0] }}, lng: {{ position[1] }}});
                                 {% endif %}
                             {% endfor %}
                             {% if location|length > 1 %}
                                 map.fitBounds(bounds);
                             {% endif %}
+                        }
+
+                        function myClick(id){
+                            google.maps.event.trigger(markers[id], 'click');
                         }
 
                         {% endif %}
