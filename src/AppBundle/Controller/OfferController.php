@@ -233,6 +233,16 @@ class OfferController extends Controller
             $address = $address . ', ' .$country;
         }
 
+        $seoPage = $this->container->get('sonata.seo.page');
+
+        $seoPage
+            ->addMeta('property', 'og:title', $this->get('translator')->trans($offer->getType()).' '.($offer->isOld() == 0?$this->get('translator')->trans('offer.new').' ':'').($offer->getNbrBedroom() > 0?$offer->getNbrBedroom() . ' ' . $this->get('translator')->trans('offer.rooms') . ' ':'') . $this->get('translator')->trans('at') . ' ' . $offer->getCity())
+            ->addMeta('property', 'og:type', 'website')
+            ->addMeta('property', 'og:image', 'https://altea.lu/uploads//images/offer/'.$offer->getImages()->first()->getImageName())
+            ->addMeta('property', 'og:description', $offer->getDescription())
+            ->addMeta('property', 'og:url', $request->getUri())
+            ->addMeta('property', 'og:site_name', 'Altea');
+
         return $this->render('AppBundle::showRoom.html.twig',
             array(
                 'offer' => $offer,
