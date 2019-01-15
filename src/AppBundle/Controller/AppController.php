@@ -67,7 +67,7 @@ class AppController extends Controller
         $seoPage
             ->addMeta('property', 'og:title', 'Votre agence immobilière à Luxembourg')
             ->addMeta('property', 'og:type', 'website')
-            ->addMeta('property', 'og:image', 'https://altea.lu/images/7_web.jpg')
+            ->addMeta('property', 'og:image', 'https://altea.lu/images/background')
             ->addMeta('property', 'og:description', 'Votre agence immobilière au Luxembourg')
             ->addMeta('property', 'og:url', $request->getUri())
             ->addMeta('property', 'og:site_name', 'Altea');
