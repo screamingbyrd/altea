@@ -407,7 +407,7 @@ email:
       comment: Commentaire / Lettre de motivation :
       download: Télécharger le CV
       downloadCoverLetter: Télécharger la lettre de motivation
-  contact: Demande de contact altea : %name%
+  contact: Demande de contact altea - %name%
   contactedUs: Demande de contact altea
   message: Message
   hasBeenModified: a été modifié, allez vérifier
