@@ -415,8 +415,8 @@ email:
       comment: Comment/ motivation letter:
       download: Download CV
       downloadCoverLetter: Download cover letter
-  contact: You have received a message from %name%
-  contactedUs: Somebody contacted us
+  contact: Contact altea from %name%
+  contactedUs: Contact from altea
   message: Message
   hasBeenModified: has been modified, go check it
   deleted: Your account has been successfully deleted.

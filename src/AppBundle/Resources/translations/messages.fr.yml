@@ -407,8 +407,8 @@ email:
       comment: Commentaire / Lettre de motivation :
       download: Télécharger le CV
       downloadCoverLetter: Télécharger la lettre de motivation
-  contact: Vous avre reçu un message de %name%
-  contactedUs: Quelqu'un vous a contacté
+  contact: Demande de contact altea : %name%
+  contactedUs: Demande de contact altea :
   message: Message
   hasBeenModified: a été modifié, allez vérifier
   deleted: Votre compte a été supprimé
