@@ -149,6 +149,9 @@ class OfferController extends Controller
                 $address = $location . ', ';
             }
             if (isset($city) && $city != '' && strpos($city, '') == false){
+                if($city == 'Luxembourg-Centre' && $location == ''){
+                    $city = 'Luxembourg';
+                }
                 $address = $address . $city;
 
                 if($city == 'Luxembourg' && $country == ''){
@@ -223,6 +226,10 @@ class OfferController extends Controller
             $address = $location . ', ';
         }
         if (isset($city) && $city != '' && strpos($city, '') == false){
+            if($city == 'Luxembourg-Centre' && $location == ''){
+                $city = 'Luxembourg';
+            }
+
             $address = $address . $city;
 
             if($city == 'Luxembourg' && $country == ''){
