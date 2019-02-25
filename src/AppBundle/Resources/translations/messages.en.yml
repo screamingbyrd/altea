@@ -442,6 +442,7 @@ email:
     title: A friend shared this with you
     shared: %sendFrom% shared this offer with you
     seeOffer: See this offer
+  captcha: Please sign in the captcha
 
 contact:
   form: Contact form

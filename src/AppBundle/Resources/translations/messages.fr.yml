@@ -434,6 +434,7 @@ email:
     title: Un ami a partagé cette offre avec vous
     shared: %sendFrom% à partagé cette offre avec vous
     seeOffer: Voir cette offre
+  captcha: Veuillez cocher le captcha !
 
 contact:
   form: Formulaire de contact

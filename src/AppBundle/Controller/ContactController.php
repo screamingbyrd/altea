@@ -41,7 +41,8 @@ class ContactController extends Controller
             // should return JSON with success as true
             if($responseKeys["success"]) {
             } else {
-                $session->getFlashBag()->add('info', 'Please fill in the captcha');
+                $translated = $this->get('translator')->trans('email.captcha');
+                $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('contact_us');
             }
@@ -121,9 +122,10 @@ class ContactController extends Controller
         // should return JSON with success as true
         if($responseKeys["success"]) {
         } else {
-            $session->getFlashBag()->add('info', 'Please fill in the captcha');
+            $translated = $this->get('translator')->trans('email.captcha');
+            $session->getFlashBag()->add('info', $translated);
 
-            return $this->redirectToRoute('contact_us');
+            return $this->redirectToRoute('show_offer', array('id' => $offerId, 'url' => ''));
         }
 
         $mailer = $this->container->get('swiftmailer.mailer');
