@@ -6,6 +6,7 @@
 
 {% block body %}
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     {% if (offer.images.first is defined and offer.images.first != false and offer.images.first.imageName is not null and offer.images|length > 1) %}
 
         <div id="myCarousel-{{ offer.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
@@ -623,6 +624,8 @@
                                 </td>
                             </tr>
                         </table>
+
+                        <div class="g-recaptcha" data-sitekey="6LcKtZMUAAAAAJ1WV2roeqF_7mWOV7OtDNE-tkzo"></div>
                         <input type="submit" class="altea-button send-contact" value="{{ 'email.send' | trans }}">
 
                     </form>
@@ -803,6 +806,11 @@
         }
         .image-room-show, .background-show-offer{
             cursor: pointer;
+        }
+        .g-recaptcha{
+            display: flex;
+            justify-content: center;
+            margin-top: 7px;
         }
     </style>
 

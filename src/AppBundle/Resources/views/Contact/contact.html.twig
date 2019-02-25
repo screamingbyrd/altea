@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('altea_contact') }}" class="form-horizontal clearfix">
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <input type="hidden" value="{{ type }}" name="type" id="type-input">
     <input type="hidden" value="{{ emailTo }}" name="emailTo" id="emailTo-input">
     <table style="width: 100%;">
@@ -28,7 +28,21 @@
             </td>
         </tr>
     </table>
-    <input type="submit" class="altea-button send-contact" value="{{ 'email.send' | trans }}">
+    <div class="submit-contact-conatainer">
+        <div class="g-recaptcha" data-sitekey="6LcKtZMUAAAAAJ1WV2roeqF_7mWOV7OtDNE-tkzo"></div>
+        <input type="submit" class="altea-button send-contact" value="{{ 'email.send' | trans }}">
+    </div>
+
+    <style>
+        .submit-contact-conatainer{
+            display: inline-block;
+            width: 100%;
+        }
+        .g-recaptcha{
+            float: left;
+            margin-top: 10px;
+        }
+    </style>
 
 </form>
 
