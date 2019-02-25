@@ -30,6 +30,22 @@ class ContactController extends Controller
         $data = array('name' => $name, 'emailSender' => $emailSender, 'message' => $message);
 
         if ($request->isMethod('POST')) {
+            if(isset($_POST['g-recaptcha-response'])){
+                $captcha=$_POST['g-recaptcha-response'];
+            }
+            $secretKey = "6LcKtZMUAAAAAKlZIggzWtGkvTiWuHWUAkvEi7ID";
+            // post request to server
+            $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+            $response = file_get_contents($url);
+            $responseKeys = json_decode($response,true);
+            // should return JSON with success as true
+            if($responseKeys["success"]) {
+            } else {
+                $session->getFlashBag()->add('info', 'Please fill in the captcha');
+
+                return $this->redirectToRoute('contact_us');
+            }
+
             // Send mail
             if($this->sendEmail($emailTo,$data, $type)){
 
@@ -93,6 +109,22 @@ class ContactController extends Controller
         $message = $request->get('message');
         $offerId = $request->get('offerId');
         $type = $request->get('type');
+
+        if(isset($_POST['g-recaptcha-response'])){
+            $captcha=$_POST['g-recaptcha-response'];
+        }
+        $secretKey = "6LcKtZMUAAAAAKlZIggzWtGkvTiWuHWUAkvEi7ID";
+        // post request to server
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+        $response = file_get_contents($url);
+        $responseKeys = json_decode($response,true);
+        // should return JSON with success as true
+        if($responseKeys["success"]) {
+        } else {
+            $session->getFlashBag()->add('info', 'Please fill in the captcha');
+
+            return $this->redirectToRoute('contact_us');
+        }
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
