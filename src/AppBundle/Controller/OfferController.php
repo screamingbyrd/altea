@@ -303,8 +303,8 @@ class OfferController extends Controller
 
         $API_URL = "https://www.easy-serveur14.com/altea4488/easy2pilot/soft/api/v2/getToken";
         $headers = [
-            'login: ALTEAGROUP',
-            'password: 5MCk5df'
+            'login: ' . $login,
+            'password: ' . $password
         ];
         try {
             $ch = curl_init($API_URL);
